@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee File - Dhruvil Raval</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;700&display=swap');
+        
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background-color: #fff;
+            color: #000;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .elevator {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background: #000;
+            color: #fff;
+        }
+        .elevator button {
+            background: #fff;
+            color: #000;
+            border: 2px solid black;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .elevator button:hover {
+            background: #000;
+            color: #fff;
+        }
+        .container {
+            display: none;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f8f8f8;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid black;
+        }
+    </style>
+    <script>
+        function goToFloor(floor) {
+            document.querySelector('.elevator').style.display = 'none';
+            document.querySelector('.container').style.display = 'block';
+            document.querySelector('h1').innerText = 'Welcome to ' + floor + " Floor";
+            document.getElementById("floor-content").innerHTML = document.getElementById(floor.toLowerCase()).innerHTML;
+        }
+    </script>
+</head>
+<body>
+    <div class="elevator">
+        <h1>Select Your Floor</h1>
+        <button onclick="goToFloor('Recruiter')">Recruiter Floor</button>
+        <button onclick="goToFloor('Founder')">Founder Floor</button>
+        <button onclick="goToFloor('Stalker')">Stalker Floor</button>
+    </div>
+    
+    <div class="container">
+        <header>
+            <h1>Welcome, Employee #DR001</h1>
+            <p>You are not authorized to remember your previous life.</p>
+        </header>
+        <section id="floor-content"></section>
+    </div>
+    
+    <div id="recruiter" style="display: none;">
+        <h2>Recruiter Floor</h2>
+        <p><strong>Work Experience</strong></p>
+        <p>NatWest Bank - Associate Product Management Intern</p>
+        <p>Sweetmans and Partners - UX Research Intern</p>
+        <p>Cardiff University - Product Design Intern</p>
+        <p>Shoreditch Repairs - Product Strategy Intern</p>
+        <p>Castle Coch - Product Engineering Intern</p>
+        <p>Share Oxford - Technical Business Analyst Intern</p>
+        <p>Cardiff Business School - Quantitative Research Assistant</p>
+        <p>Google - Associate Product Manager (Final Round)</p>
+        <p>Skills: Jira, Figma, Python, SQL, Java</p>
+    </div>
+    
+    <div id="founder" style="display: none;">
+        <h2>Founder Floor</h2>
+        <p><strong>Entrepreneurial & Leadership</strong></p>
+        <p>YouTube Channel Manager - 75M Views</p>
+        <p>Business Awards - 1st at Transport for Wales Product Speedathon</p>
+        <p>Technology Awards - 1st Airbus CTF, 2nd Huawei Arena</p>
+        <p>Advisory Roles - swsh (Peter Thiel Fellowship Fund), Vance (YC W22)</p>
+        <p>Portfolio Management - Conducting strategic investments</p>
+        <p>Project Leadership - Ecofriendly Pet App, Night Time Economy App</p>
+    </div>
+    
+    <div id="stalker" style="display: none;">
+        <h2>Stalker Floor</h2>
+        <p><strong>Certifications & More</strong></p>
+        <p>JPMorgan Chase Venture Capital, AWS Solution Architecture</p>
+        <p>BCG Strategy Consulting, Technical Product Planning</p>
+        <p>Filmmaking - Best Short Film Award</p>
+        <p>Dancing - Choreographed an original musical</p>
+        <p>Quantum Computing Research - Error Reduction using Logic Gates</p>
+        <p><strong>Hobbies & Interests</strong></p>
+        <p>"Auty Likes To": Filmmaking, Dancing, Choreography, Market Research</p>
+        <p>Teaching - CS Tutoring, Physics Teacher, Language Mentor</p>
+        <p>Business Awards & Competitions - Hackathons, Startup Pitches</p>
+    </div>
+</body>
+</html>
