@@ -1,30 +1,29 @@
-/* Basic Reset & Severance Font */
+/* Basic Reset */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+/* Apply Fonts & Basic Body */
 body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #f0f2f5; /* Light grey background */
-    color: #333;
+    font-family: 'Roboto', sans-serif; /* Readability for body */
+    background-color: #ffffff; /* Pure white background */
+    color: #111111; /* Near black text */
     line-height: 1.6;
-    /* Prevent scrollbars initially */
-    overflow: hidden;
+    overflow: hidden; /* Prevent scrollbars initially */
 }
 
-/* Severance Color Palette */
+/* MDR Color Palette (Minimalist) */
 :root {
-    --lumon-blue: #0077c8;
-    --lumon-green: #00a98f;
-    --lumon-white: #ffffff;
-    --lumon-offwhite: #f8f9fa;
-    --lumon-grey: #d1d5db;
-    --lumon-dark-grey: #6b7280;
-    --text-color: #212529;
-    --header-color: #1a3b5d; /* A slightly corporate dark blue */
-    --outie-bg: #fdfdfd; /* Slightly warmer for outie */
+    --mdr-text: #111111;
+    --mdr-background: #ffffff;
+    --mdr-border: #cccccc; /* Light grey border */
+    --mdr-accent-light: #e0e0e0; /* Very light grey for subtle backgrounds */
+    --mdr-header-font: 'Rajdhani', sans-serif; /* Thematic font */
+    --mdr-body-font: 'Roboto', sans-serif;
+    --interactive-green: #00a98f; /* Keep for hover states if needed */
+    --interactive-blue: #0077c8;
 }
 
 /* Phase 1: Elevator Screen */
@@ -34,7 +33,7 @@ body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: var(--lumon-white);
+    background-color: var(--mdr-background);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -42,29 +41,33 @@ body {
     z-index: 100;
     opacity: 1;
     transition: opacity 0.8s ease-out;
-    /* visibility: visible;
-    transition: opacity 0.8s ease-out, visibility 0s linear 0s; */
 }
 
 #elevator-screen:not(.active) {
     opacity: 0;
-    pointer-events: none; /* Allow clicking through when faded */
-     /* visibility: hidden;
-    transition: opacity 0.8s ease-out, visibility 0s linear 0.8s; */
+    pointer-events: none;
 }
 
-
-.elevator-content h1 {
-    color: var(--header-color);
-    margin-bottom: 10px;
+.mdr-logo {
+    margin-bottom: 20px;
+    font-family: var(--mdr-header-font);
+    font-size: 1.8em; /* Adjust size as needed */
     font-weight: 700;
+    color: var(--mdr-text);
     letter-spacing: 1px;
 }
 
+.mdr-logo .logo-bar {
+    display: inline-block;
+    margin-right: 10px; /* Space between bar and text */
+    font-weight: bold;
+}
+
 .elevator-content .subtitle {
-    color: var(--lumon-dark-grey);
+    color: #555555; /* Slightly lighter grey */
     margin-bottom: 40px;
     font-size: 1.1em;
+    font-family: var(--mdr-body-font);
 }
 
 .elevator-buttons {
@@ -75,58 +78,50 @@ body {
 }
 
 .elevator-button {
-    padding: 15px 30px;
-    font-size: 1em;
+    padding: 12px 25px;
+    font-size: 0.9em;
     font-weight: 700;
-    border: 2px solid;
-    background-color: transparent;
+    font-family: var(--mdr-header-font); /* Use header font for buttons */
+    border: 2px solid var(--mdr-text); /* Black border */
+    background-color: var(--mdr-background); /* White background */
+    color: var(--mdr-text); /* Black text */
     cursor: pointer;
     transition: all 0.3s ease;
     min-width: 250px;
+    letter-spacing: 0.5px;
 }
 
-.elevator-button.recruiter {
-    border-color: var(--lumon-green);
-    color: var(--lumon-green);
+.elevator-button:hover {
+    background-color: var(--mdr-text); /* Black background on hover */
+    color: var(--mdr-background); /* White text on hover */
 }
+/* Optional: Keep subtle color hints on hover if desired */
+/*
+.elevator-button.recruiter:hover { background-color: var(--interactive-green); border-color: var(--interactive-green); color: white;}
+.elevator-button.visitor:hover { background-color: var(--interactive-blue); border-color: var(--interactive-blue); color: white;}
+*/
 
-.elevator-button.recruiter:hover {
-    background-color: var(--lumon-green);
-    color: var(--lumon-white);
-    box-shadow: 0 0 10px var(--lumon-green);
-}
-
-.elevator-button.visitor {
-    border-color: var(--lumon-blue);
-    color: var(--lumon-blue);
-}
-
-.elevator-button.visitor:hover {
-    background-color: var(--lumon-blue);
-    color: var(--lumon-white);
-    box-shadow: 0 0 10px var(--lumon-blue);
-}
 
 /* Main Portfolio Container */
 #portfolio-container {
-    max-width: 900px;
+    max-width: 850px; /* Slightly narrower for MDR feel */
     margin: 40px auto;
-    padding: 20px;
-    background-color: var(--lumon-offwhite);
-    border: 1px solid var(--lumon-grey);
+    padding: 30px 40px;
+    background-color: var(--mdr-background);
+    border: 1px solid var(--mdr-border);
     opacity: 0; /* Hidden initially */
     transition: opacity 0.8s ease-in;
-    display: none; /* Use JS to change to block/flex */
+    display: none;
 }
 
 #portfolio-container.visible {
-    display: block; /* Or flex, grid etc. */
+    display: block;
     opacity: 1;
 }
 
 /* General Portfolio View Styling */
 .portfolio-view {
-    display: none; /* Hidden by default, shown by JS */
+    display: none;
 }
 
 .portfolio-view.active {
@@ -134,63 +129,96 @@ body {
 }
 
 section {
-    margin-bottom: 30px;
-    padding-bottom: 20px;
-    border-bottom: 1px dashed var(--lumon-grey);
+    margin-bottom: 35px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid var(--mdr-border); /* Lighter border */
 }
 
 section:last-child {
     border-bottom: none;
+    margin-bottom: 10px; /* Reduce margin on last section */
+}
+
+h1, h2, h3 {
+    font-family: var(--mdr-header-font);
+    color: var(--mdr-text);
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-size: 1.6em; /* Adjust as needed */
+    text-align: center;
+    letter-spacing: 1px;
 }
 
 h2 {
-    color: var(--header-color);
-    margin-bottom: 15px;
-    font-weight: 700;
-    border-bottom: 2px solid var(--lumon-blue);
+    font-size: 1.3em;
+    letter-spacing: 0.5px;
     padding-bottom: 5px;
-    display: inline-block;
+    /* border-bottom: 2px solid var(--mdr-text); */ /* Simple underline */
+    display: flex; /* For aligning bar */
+    align-items: center;
 }
 
+.section-bar {
+    font-size: 1.5em; /* Make bar taller */
+    font-weight: bold;
+    margin-right: 10px; /* Space between bar and text */
+    line-height: 1; /* Adjust vertical alignment if needed */
+}
+
+
 h3 {
-    color: var(--lumon-dark-grey);
-    margin-bottom: 8px;
-    font-weight: 700;
+    font-size: 1.1em;
+    font-weight: 600; /* Slightly less bold */
+    color: #333333; /* Slightly lighter than main text */
+    margin-bottom: 10px;
 }
 
 p, li {
     margin-bottom: 8px;
-    color: var(--text-color);
+    color: var(--mdr-text);
+    font-family: var(--mdr-body-font); /* Ensure body font */
+    font-size: 0.95em;
+    font-weight: 400;
 }
 
 ul {
-    list-style-position: inside;
-    padding-left: 10px; /* Adjust as needed */
+    list-style: none; /* Remove default bullets */
+    padding-left: 5px;
 }
 
 strong {
-    font-weight: 700;
+    font-weight: 700; /* Roboto bold */
+}
+
+.intro-phrase {
+    font-style: italic;
+    color: #555555;
+    text-align: center;
+    margin: -10px 0 30px 0; /* Position it after header, before first section */
+    font-size: 1em;
 }
 
 /* Innie Specific Styles */
-#innie-view {
-    /* Add any specific innie styles if needed */
-}
-
 .innie-header {
-    text-align: center;
     margin-bottom: 30px;
     padding-bottom: 15px;
-    border-bottom: 1px solid var(--lumon-grey);
+    border-bottom: 1px solid var(--mdr-border);
 }
-.innie-header h1 {
-    color: var(--header-color);
-    font-size: 1.8em;
-    margin-bottom: 5px;
-}
-.innie-header p {
+.innie-header .file-id {
+    text-align: center;
     font-size: 0.9em;
-    color: var(--lumon-dark-grey);
+    color: #666;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+.innie-header .compliance-note {
+    text-align: center;
+    font-size: 0.85em;
+    color: #777777;
+    line-height: 1.4;
 }
 
 
@@ -201,60 +229,93 @@ strong {
 .skill-category {
     margin-bottom: 20px;
     padding: 15px;
-    border-left: 4px solid var(--lumon-green); /* Accent color */
-    background-color: var(--lumon-white);
-     box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+    border: 1px solid var(--mdr-border); /* Simple border */
+    background-color: var(--mdr-background); /* Ensure white background */
+    box-shadow: none; /* Remove shadows for flat look */
 }
 .skill-category{
-     border-left: 4px solid var(--lumon-blue);
+     border-left: 3px solid #444; /* Subtle left border */
+     padding-left: 12px;
 }
 
 .date-range {
-    font-style: italic;
-    font-size: 0.9em;
-    color: var(--lumon-dark-grey);
+    font-style: normal; /* Less emphasis */
+    font-size: 0.85em;
+    color: #555555;
     margin-bottom: 10px;
+    font-family: var(--mdr-header-font); /* Use header font for dates */
+    font-weight: 600;
 }
+
+.directives {
+    padding-left: 10px;
+}
+
+.directive-marker {
+    margin-right: 8px;
+    color: #666; /* Grey marker */
+    font-weight: bold;
+}
+
+.innie-footer {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 0.85em;
+    color: #888888;
+    font-style: italic;
+}
+
 
 /* Outie Specific Styles */
-#outie-view {
-    background-color: var(--outie-bg); /* Slightly different background */
-}
-
 .outie-header {
     text-align: center;
     margin-bottom: 30px;
-    padding: 20px;
-    background-color: var(--lumon-blue); /* Use a warmer accent */
-    color: var(--lumon-white);
-    border-radius: 5px;
+    padding: 15px;
+    border-bottom: 1px solid var(--mdr-border);
 }
 .outie-header h1 {
-    margin-bottom: 10px;
+    font-size: 1.8em;
+    margin-bottom: 5px;
 }
 .outie-header p {
-    color: var(--lumon-offwhite);
+    color: #444;
+    font-size: 1em;
+    line-height: 1.5;
 }
 
 
-#outie-view h2 {
-     border-bottom: 2px solid var(--lumon-green); /* Different accent for outie */
+#outie-view h2 .section-bar {
+    /* Optional: different accent for outie, but sticking to black/white is more MDR */
+     color: var(--mdr-text);
 }
 
 .passion-item,
 .community-item,
 .journey-item {
      margin-bottom: 15px;
-     padding: 10px;
-     border-bottom: 1px solid var(--lumon-grey);
+     padding-bottom: 15px;
+     border-bottom: 1px dashed var(--mdr-border); /* Dashed divider */
 }
 .passion-item:last-child,
 .community-item:last-child,
 .journey-item:last-child {
     border-bottom: none;
 }
+#outie-explorations .project-list-outie {
+     list-style-type: none;
+     padding-left: 0;
+ }
 
-#outie-explorations ul {
-    list-style-type: disc; /* More conventional list */
-    padding-left: 25px;
-}
+ #outie-explorations .project-list-outie li::before {
+     content: "»"; /* Use a different marker for outie projects */
+     margin-right: 8px;
+     color: #555;
+ }
+
+
+.outie-footer {
+     margin-top: 30px;
+     text-align: center;
+     font-size: 0.9em;
+     color: #666;
+ }
