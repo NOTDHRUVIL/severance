@@ -1,321 +1,329 @@
-/* Basic Reset */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+/* --- CORE RESETS & VARIABLES --- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* Apply Fonts & Basic Body */
+html { scroll-behavior: smooth; } /* For potential future nav */
+
 body {
-    font-family: 'Roboto', sans-serif; /* Readability for body */
-    background-color: #ffffff; /* Pure white background */
-    color: #111111; /* Near black text */
-    line-height: 1.6;
-    overflow: hidden; /* Prevent scrollbars initially */
+    font-family: 'Roboto', sans-serif;
+    background-color: #ffffff;
+    color: #1a1a1a; /* Very dark grey, not pure black */
+    line-height: 1.5;
+    overflow: hidden; /* Critical for initial states */
+    -webkit-font-smoothing: antialiased; /* Better font rendering */
+    -moz-osx-font-smoothing: grayscale;
 }
 
-/* MDR Color Palette (Minimalist) */
 :root {
-    --mdr-text: #111111;
-    --mdr-background: #ffffff;
-    --mdr-border: #cccccc; /* Light grey border */
-    --mdr-accent-light: #e0e0e0; /* Very light grey for subtle backgrounds */
-    --mdr-header-font: 'Rajdhani', sans-serif; /* Thematic font */
-    --mdr-body-font: 'Roboto', sans-serif;
-    --interactive-green: #00a98f; /* Keep for hover states if needed */
-    --interactive-blue: #0077c8;
+    /* Lumon Core Palette */
+    --lumon-white: #ffffff;
+    --lumon-offwhite: #f8f9fa; /* Subtle variation */
+    --lumon-lightgrey: #e9ecef;
+    --lumon-midgrey: #ced4da;
+    --lumon-darkgrey: #6c757d;
+    --lumon-black: #1a1a1a;
+    --lumon-blue: #0d6efd; /* Standard Lumon blue */
+    --lumon-green: #198754; /* Standard Lumon green */
+
+    /* Fonts */
+    --font-header: 'Rajdhani', sans-serif;
+    --font-body: 'Roboto', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace; /* Key for MDR */
+
+    /* Transitions */
+    --transition-speed: 0.6s;
+    --transition-timing: cubic-bezier(0.4, 0, 0.2, 1); /* Smooth ease-out */
 }
 
-/* Phase 1: Elevator Screen */
-#elevator-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: var(--mdr-background);
+/* --- PHASE 0: ACCESS POINT --- */
+#access-point {
+    position: fixed; inset: 0;
+    background-color: var(--lumon-black);
+    color: var(--lumon-offwhite);
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    z-index: 100;
+    z-index: 300;
     opacity: 1;
-    transition: opacity 0.8s ease-out;
+    transition: opacity calc(var(--transition-speed) / 2) ease-out;
+}
+#access-point:not(.active) { opacity: 0; pointer-events: none; }
+
+.access-content { max-width: 500px; padding: 20px; }
+
+.lumon-logo-minimal {
+    font-family: var(--font-header);
+    font-size: 3em;
+    font-weight: 700;
+    letter-spacing: 5px;
+    color: var(--lumon-offwhite);
+    margin-bottom: 20px;
+    border: 2px solid var(--lumon-offwhite);
+    padding: 10px 20px;
+    display: inline-block;
 }
 
-#elevator-screen:not(.active) {
+.status-text {
+    font-family: var(--font-mono);
+    font-size: 1.1em;
+    color: var(--lumon-midgrey);
+    margin-bottom: 40px;
+    height: 1.5em; /* Prevent layout shift from cursor */
+}
+
+.blinking-cursor {
+    display: inline-block;
+    width: 10px;
+    height: 1.1em; /* Match font size */
+    background-color: var(--lumon-midgrey);
+    animation: blink 1s step-end infinite;
+    vertical-align: bottom; /* Align with text baseline */
+    margin-left: 2px;
+}
+
+@keyframes blink { 50% { opacity: 0; } }
+
+.access-buttons { display: flex; flex-direction: column; gap: 15px; }
+
+.access-button {
+    padding: 15px 20px;
+    font-family: var(--font-header);
+    font-size: 1em;
+    font-weight: 600;
+    border: 2px solid;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    letter-spacing: 1px;
+}
+.access-button.innie-style { color: var(--lumon-green); border-color: var(--lumon-green); }
+.access-button.innie-style:hover { background-color: var(--lumon-green); color: var(--lumon-black); }
+
+.access-button.outie-style { color: var(--lumon-blue); border-color: var(--lumon-blue); }
+.access-button.outie-style:hover { background-color: var(--lumon-blue); color: var(--lumon-offwhite); }
+
+/* --- PHASE 1: TRANSITION SCREEN --- */
+#transition-screen {
+    position: fixed; inset: 0;
+    background-color: var(--lumon-white);
+    color: var(--lumon-black);
+    display: flex; /* Hidden by default via JS */
+    justify-content: center;
+    align-items: center;
+    z-index: 200;
     opacity: 0;
     pointer-events: none;
+    transition: opacity calc(var(--transition-speed) / 2) ease-in-out;
 }
+#transition-screen.active { opacity: 1; pointer-events: auto; display: flex; }
 
-.mdr-logo {
-    margin-bottom: 20px;
-    font-family: var(--mdr-header-font);
-    font-size: 1.8em; /* Adjust size as needed */
-    font-weight: 700;
-    color: var(--mdr-text);
-    letter-spacing: 1px;
+.transition-content { text-align: center; }
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--lumon-lightgrey);
+    border-top-color: var(--lumon-blue); /* Or green for innie? */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px auto;
 }
+@keyframes spin { to { transform: rotate(360deg); } }
 
-.mdr-logo .logo-bar {
-    display: inline-block;
-    margin-right: 10px; /* Space between bar and text */
-    font-weight: bold;
+#transition-text { font-family: var(--font-mono); font-size: 1em; color: var(--lumon-darkgrey); }
+
+/* --- MAIN INTERFACE CONTAINER --- */
+#interface-container {
+    max-width: 950px; /* Wider for terminal feel */
+    margin: 0 auto; /* Center it */
+    padding-top: 60px; /* Space below fixed header */
+    padding-bottom: 60px; /* Space above fixed footer */
+    opacity: 0;
+    transition: opacity var(--transition-speed) var(--transition-timing);
+    display: none; /* Managed by JS */
+    position: relative; /* Needed if using absolute footers/headers within */
 }
+#interface-container.visible { display: block; opacity: 1; }
 
-.elevator-content .subtitle {
-    color: #555555; /* Slightly lighter grey */
-    margin-bottom: 40px;
-    font-size: 1.1em;
-    font-family: var(--mdr-body-font);
-}
+/* --- General View Styles --- */
+.interface-view { display: none; /* Active state managed by JS */ }
+.interface-view.active { display: block; }
 
-.elevator-buttons {
+.content-area { padding: 20px 30px; }
+
+/* --- INNIE VIEW STYLING (MDR Extreme) --- */
+.lumon-header, .lumon-footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    background-color: var(--lumon-offwhite);
+    border-color: var(--lumon-midgrey);
+    border-style: solid;
+    border-width: 1px 0;
+    padding: 8px 20px;
+    font-family: var(--font-mono);
+    font-size: 0.8em;
+    color: var(--lumon-darkgrey);
+    z-index: 100;
     display: flex;
-    flex-direction: column;
-    gap: 15px;
-    align-items: center;
+    justify-content: space-between;
 }
+.lumon-header { top: 0; border-bottom-width: 1px; }
+.lumon-footer { bottom: 0; border-top-width: 1px; }
 
-.elevator-button {
-    padding: 12px 25px;
+#innie-view .content-area { background-color: var(--lumon-white); }
+
+.compliance-directive {
+    font-family: var(--font-mono);
     font-size: 0.9em;
-    font-weight: 700;
-    font-family: var(--mdr-header-font); /* Use header font for buttons */
-    border: 2px solid var(--mdr-text); /* Black border */
-    background-color: var(--mdr-background); /* White background */
-    color: var(--mdr-text); /* Black text */
-    cursor: pointer;
-    transition: all 0.3s ease;
-    min-width: 250px;
-    letter-spacing: 0.5px;
-}
-
-.elevator-button:hover {
-    background-color: var(--mdr-text); /* Black background on hover */
-    color: var(--mdr-background); /* White text on hover */
-}
-/* Optional: Keep subtle color hints on hover if desired */
-/*
-.elevator-button.recruiter:hover { background-color: var(--interactive-green); border-color: var(--interactive-green); color: white;}
-.elevator-button.visitor:hover { background-color: var(--interactive-blue); border-color: var(--interactive-blue); color: white;}
-*/
-
-
-/* Main Portfolio Container */
-#portfolio-container {
-    max-width: 850px; /* Slightly narrower for MDR feel */
-    margin: 40px auto;
-    padding: 30px 40px;
-    background-color: var(--mdr-background);
-    border: 1px solid var(--mdr-border);
-    opacity: 0; /* Hidden initially */
-    transition: opacity 0.8s ease-in;
-    display: none;
-}
-
-#portfolio-container.visible {
-    display: block;
-    opacity: 1;
-}
-
-/* General Portfolio View Styling */
-.portfolio-view {
-    display: none;
-}
-
-.portfolio-view.active {
-    display: block;
-}
-
-section {
-    margin-bottom: 35px;
-    padding-bottom: 25px;
-    border-bottom: 1px solid var(--mdr-border); /* Lighter border */
-}
-
-section:last-child {
-    border-bottom: none;
-    margin-bottom: 10px; /* Reduce margin on last section */
-}
-
-h1, h2, h3 {
-    font-family: var(--mdr-header-font);
-    color: var(--mdr-text);
-    font-weight: 700;
-    margin-bottom: 15px;
-}
-
-h1 {
-    font-size: 1.6em; /* Adjust as needed */
+    color: var(--lumon-blue); /* Alert color */
+    background-color: var(--lumon-lightgrey);
+    padding: 10px;
+    margin: 0 -30px 30px -30px; /* Span width */
+    border-bottom: 1px solid var(--lumon-midgrey);
     text-align: center;
-    letter-spacing: 1px;
 }
 
-h2 {
-    font-size: 1.3em;
-    letter-spacing: 0.5px;
-    padding-bottom: 5px;
-    /* border-bottom: 2px solid var(--mdr-text); */ /* Simple underline */
-    display: flex; /* For aligning bar */
-    align-items: center;
+.data-cluster {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px dotted var(--lumon-midgrey); /* Subtle separator */
 }
+.data-cluster:last-child { border-bottom: none; }
 
-.section-bar {
-    font-size: 1.5em; /* Make bar taller */
-    font-weight: bold;
-    margin-right: 10px; /* Space between bar and text */
-    line-height: 1; /* Adjust vertical alignment if needed */
-}
-
-
-h3 {
+#innie-view h2 {
+    font-family: var(--font-header);
     font-size: 1.1em;
-    font-weight: 600; /* Slightly less bold */
-    color: #333333; /* Slightly lighter than main text */
-    margin-bottom: 10px;
+    font-weight: 700;
+    color: var(--lumon-black);
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--lumon-black);
+    display: inline-block;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
-p, li {
-    margin-bottom: 8px;
-    color: var(--mdr-text);
-    font-family: var(--mdr-body-font); /* Ensure body font */
-    font-size: 0.95em;
-    font-weight: 400;
-}
+.cluster-marker { margin-right: 8px; color: var(--lumon-darkgrey); }
 
-ul {
-    list-style: none; /* Remove default bullets */
-    padding-left: 5px;
-}
-
-strong {
-    font-weight: 700; /* Roboto bold */
-}
-
-.intro-phrase {
-    font-style: italic;
-    color: #555555;
-    text-align: center;
-    margin: -10px 0 30px 0; /* Position it after header, before first section */
-    font-size: 1em;
-}
-
-/* Innie Specific Styles */
-.innie-header {
-    margin-bottom: 30px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid var(--mdr-border);
-}
-.innie-header .file-id {
-    text-align: center;
+.record-block, .assignment-block, .project-block {
+    font-family: var(--font-mono);
     font-size: 0.9em;
-    color: #666;
-    margin-top: -10px;
-    margin-bottom: 10px;
-}
-.innie-header .compliance-note {
-    text-align: center;
-    font-size: 0.85em;
-    color: #777777;
-    line-height: 1.4;
-}
-
-
-.record-item,
-.assignment-item,
-.project-item,
-.recognition-category,
-.skill-category {
-    margin-bottom: 20px;
+    line-height: 1.7;
+    border: 1px solid var(--lumon-lightgrey);
     padding: 15px;
-    border: 1px solid var(--mdr-border); /* Simple border */
-    background-color: var(--mdr-background); /* Ensure white background */
-    box-shadow: none; /* Remove shadows for flat look */
+    margin-bottom: 15px;
+    background-color: var(--lumon-offwhite); /* Slight contrast */
 }
-.skill-category{
-     border-left: 3px solid #444; /* Subtle left border */
-     padding-left: 12px;
-}
+.assignment-block, .project-block { padding: 10px 15px; }
 
-.date-range {
-    font-style: normal; /* Less emphasis */
+.field-label { color: var(--lumon-darkgrey); font-weight: 500; margin-right: 5px; }
+
+.status-active { color: var(--lumon-green); font-weight: 500; }
+.status-pending { color: var(--lumon-blue); font-weight: 500; } /* Example */
+
+.grid-skills {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 10px;
+}
+.grid-skills p { margin-bottom: 0; } /* Remove extra space in grid */
+
+.assignment-header, .project-header {
     font-size: 0.85em;
-    color: #555555;
-    margin-bottom: 10px;
-    font-family: var(--mdr-header-font); /* Use header font for dates */
-    font-weight: 600;
+    margin-bottom: 8px;
+    padding-bottom: 5px;
+    border-bottom: 1px dotted var(--lumon-midgrey);
+    color: var(--lumon-darkgrey);
+}
+.project-objective { font-size: 0.9em; margin-top: 8px; }
+
+.directive-list { list-style: none; padding-left: 0; margin-top: 5px; }
+.directive-list li { font-size: 0.9em; margin-bottom: 5px; }
+.directive-id { color: var(--lumon-darkgrey); margin-right: 8px; }
+
+/* Subtle flicker effect on hover for data blocks */
+.record-block:hover, .assignment-block:hover, .project-block:hover {
+    animation: flicker 0.1s infinite alternate;
+    border-color: var(--lumon-midgrey);
+}
+@keyframes flicker {
+  0% { opacity: 1; }
+  50% { opacity: 0.98; }
+  100% { opacity: 1; }
 }
 
-.directives {
-    padding-left: 10px;
-}
-
-.directive-marker {
-    margin-right: 8px;
-    color: #666; /* Grey marker */
-    font-weight: bold;
-}
-
-.innie-footer {
-    margin-top: 30px;
+/* --- OUTIE VIEW STYLING (Surface Contrast) --- */
+.surface-header, .surface-footer {
+    padding: 15px 20px;
     text-align: center;
-    font-size: 0.85em;
-    color: #888888;
-    font-style: italic;
+    background-color: var(--lumon-offwhite); /* Shared offwhite */
+    border-bottom: 1px solid var(--lumon-lightgrey);
 }
+.surface-footer { border-top: 1px solid var(--lumon-lightgrey); border-bottom: none; margin-top: 30px;}
 
-
-/* Outie Specific Styles */
-.outie-header {
-    text-align: center;
-    margin-bottom: 30px;
-    padding: 15px;
-    border-bottom: 1px solid var(--mdr-border);
-}
-.outie-header h1 {
+.surface-header h1 {
+    font-family: var(--font-body); /* More personal font */
     font-size: 1.8em;
+    font-weight: 400; /* Lighter weight */
+    color: var(--lumon-black);
     margin-bottom: 5px;
 }
-.outie-header p {
-    color: #444;
+.surface-header p { color: var(--lumon-darkgrey); font-size: 1em; }
+.surface-header .contact-info { font-size: 0.9em; margin-top: 10px; }
+
+#outie-view .content-area { background-color: var(--lumon-white); }
+
+.outie-intro-phrase {
+    text-align: center;
+    font-style: italic;
+    color: var(--lumon-darkgrey);
+    margin-bottom: 30px;
     font-size: 1em;
-    line-height: 1.5;
 }
 
-
-#outie-view h2 .section-bar {
-    /* Optional: different accent for outie, but sticking to black/white is more MDR */
-     color: var(--mdr-text);
+#outie-view h2 {
+    font-family: var(--font-body); /* Body font for headers */
+    font-size: 1.3em;
+    font-weight: 400;
+    color: var(--lumon-blue); /* Outie accent color */
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--lumon-lightgrey); /* Lighter border */
 }
 
-.passion-item,
-.community-item,
-.journey-item {
-     margin-bottom: 15px;
-     padding-bottom: 15px;
-     border-bottom: 1px dashed var(--mdr-border); /* Dashed divider */
+.outie-list {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 20px;
 }
-.passion-item:last-child,
-.community-item:last-child,
-.journey-item:last-child {
-    border-bottom: none;
+.outie-list li {
+    margin-bottom: 10px;
+    font-size: 0.95em;
+    line-height: 1.6;
 }
-#outie-explorations .project-list-outie {
-     list-style-type: none;
-     padding-left: 0;
- }
+.list-marker { color: var(--lumon-blue); margin-right: 8px; font-weight: bold;}
 
- #outie-explorations .project-list-outie li::before {
-     content: "»"; /* Use a different marker for outie projects */
-     margin-right: 8px;
-     color: #555;
- }
+#outie-view section {
+     margin-bottom: 30px;
+     padding-bottom: 20px;
+     border-bottom: 1px dashed var(--lumon-lightgrey); /* Dashed separator */
+}
+#outie-view section:last-child { border-bottom: none; }
 
+.outie-list.project-focus li { margin-bottom: 8px; } /* Tighter list for projects */
+#outie-leadership p { font-size: 0.95em; }
 
-.outie-footer {
-     margin-top: 30px;
-     text-align: center;
-     font-size: 0.9em;
-     color: #666;
- }
+/* --- RESPONSIVENESS (Basic Example) --- */
+@media (max-width: 768px) {
+    .lumon-header, .lumon-footer { font-size: 0.7em; padding: 6px 10px; }
+    #interface-container { padding-top: 50px; padding-bottom: 50px; }
+    .content-area { padding: 15px; }
+    .compliance-directive { margin: 0 -15px 20px -15px; font-size: 0.8em; }
+    #innie-view h2 { font-size: 1em; }
+    .field-label { display: block; margin-bottom: 2px; } /* Stack labels */
+    .grid-skills { grid-template-columns: 1fr; } /* Single column on mobile */
+    .assignment-header, .project-header { font-size: 0.8em; line-height: 1.4; }
+    .directive-list li, #outie-view li { font-size: 0.9em; }
+    .surface-header h1 { font-size: 1.5em; }
+}
