@@ -1,37 +1,37 @@
 /* --- CORE RESETS & VARIABLES --- */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; } /* For potential future nav */
+html { scroll-behavior: smooth; }
 
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #ffffff;
-    color: #1a1a1a; /* Very dark grey, not pure black */
+    background-color: #ffffff; /* Start with white, might be covered */
+    color: #1a1a1a;
     line-height: 1.5;
     overflow: hidden; /* Critical for initial states */
-    -webkit-font-smoothing: antialiased; /* Better font rendering */
+    -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
 :root {
     /* Lumon Core Palette */
     --lumon-white: #ffffff;
-    --lumon-offwhite: #f8f9fa; /* Subtle variation */
+    --lumon-offwhite: #f8f9fa;
     --lumon-lightgrey: #e9ecef;
     --lumon-midgrey: #ced4da;
     --lumon-darkgrey: #6c757d;
     --lumon-black: #1a1a1a;
-    --lumon-blue: #0d6efd; /* Standard Lumon blue */
-    --lumon-green: #198754; /* Standard Lumon green */
+    --lumon-blue: #0d6efd; /* Primary Accent for Outie */
+    --lumon-green: #198754; /* Primary Accent for Innie */
 
     /* Fonts */
     --font-header: 'Rajdhani', sans-serif;
     --font-body: 'Roboto', sans-serif;
-    --font-mono: 'IBM Plex Mono', monospace; /* Key for MDR */
+    --font-mono: 'IBM Plex Mono', monospace;
 
     /* Transitions */
     --transition-speed: 0.6s;
-    --transition-timing: cubic-bezier(0.4, 0, 0.2, 1); /* Smooth ease-out */
+    --transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* --- PHASE 0: ACCESS POINT --- */
@@ -57,57 +57,60 @@ body {
     font-weight: 700;
     letter-spacing: 5px;
     color: var(--lumon-offwhite);
-    margin-bottom: 20px;
+    margin-bottom: 30px; /* Increased margin */
     border: 2px solid var(--lumon-offwhite);
     padding: 10px 20px;
     display: inline-block;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1); /* Subtle glow */
 }
 
 .status-text {
     font-family: var(--font-mono);
     font-size: 1.1em;
     color: var(--lumon-midgrey);
-    margin-bottom: 40px;
-    height: 1.5em; /* Prevent layout shift from cursor */
+    margin-bottom: 50px; /* Increased margin */
+    height: 1.5em;
 }
 
 .blinking-cursor {
     display: inline-block;
     width: 10px;
-    height: 1.1em; /* Match font size */
+    height: 1.1em;
     background-color: var(--lumon-midgrey);
     animation: blink 1s step-end infinite;
-    vertical-align: bottom; /* Align with text baseline */
+    vertical-align: bottom;
     margin-left: 2px;
 }
 
 @keyframes blink { 50% { opacity: 0; } }
 
-.access-buttons { display: flex; flex-direction: column; gap: 15px; }
+.access-buttons { display: flex; flex-direction: column; gap: 20px; /* Increased gap */ }
 
 .access-button {
-    padding: 15px 20px;
+    padding: 18px 25px; /* Slightly larger buttons */
     font-family: var(--font-header);
-    font-size: 1em;
+    font-size: 1.05em; /* Slightly larger font */
     font-weight: 600;
     border: 2px solid;
     background-color: transparent;
     cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    letter-spacing: 1px;
+    transition: all 0.25s ease-in-out;
+    letter-spacing: 1.5px; /* More spacing */
+    text-transform: uppercase; /* Make it feel official */
 }
 .access-button.innie-style { color: var(--lumon-green); border-color: var(--lumon-green); }
-.access-button.innie-style:hover { background-color: var(--lumon-green); color: var(--lumon-black); }
+.access-button.innie-style:hover { background-color: rgba(25, 135, 84, 0.1); color: #63f2b3; border-color: #63f2b3; box-shadow: 0 0 8px rgba(25, 135, 84, 0.5); } /* Subtle hover glow */
 
 .access-button.outie-style { color: var(--lumon-blue); border-color: var(--lumon-blue); }
-.access-button.outie-style:hover { background-color: var(--lumon-blue); color: var(--lumon-offwhite); }
+.access-button.outie-style:hover { background-color: rgba(13, 110, 253, 0.1); color: #6bbdff; border-color: #6bbdff; box-shadow: 0 0 8px rgba(13, 110, 253, 0.5); } /* Subtle hover glow */
+
 
 /* --- PHASE 1: TRANSITION SCREEN --- */
 #transition-screen {
     position: fixed; inset: 0;
     background-color: var(--lumon-white);
     color: var(--lumon-black);
-    display: flex; /* Hidden by default via JS */
+    display: flex;
     justify-content: center;
     align-items: center;
     z-index: 200;
@@ -119,211 +122,371 @@ body {
 
 .transition-content { text-align: center; }
 
+/* Enhanced Spinner */
 .spinner {
-    width: 40px;
-    height: 40px;
-    border: 4px solid var(--lumon-lightgrey);
-    border-top-color: var(--lumon-blue); /* Or green for innie? */
+    width: 50px; /* Larger */
+    height: 50px;
+    border: 5px solid var(--lumon-lightgrey); /* Thicker border */
+    border-top-color: var(--lumon-blue); /* Consistent Blue */
     border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin: 0 auto 20px auto;
+    animation: spin 1.2s linear infinite; /* Slightly slower */
+    margin: 0 auto 25px auto; /* More spacing */
+    position: relative; /* For pseudo-elements */
 }
+/* Add inner spinning element for complexity */
+.spinner::after {
+    content: '';
+    position: absolute;
+    top: 5px; left: 5px; right: 5px; bottom: 5px;
+    border: 3px solid transparent;
+    border-top-color: var(--lumon-green); /* Add green accent */
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite reverse; /* Spin opposite direction */
+}
+
 @keyframes spin { to { transform: rotate(360deg); } }
 
-#transition-text { font-family: var(--font-mono); font-size: 1em; color: var(--lumon-darkgrey); }
+#transition-text {
+    font-family: var(--font-mono);
+    font-size: 1.1em; /* Slightly larger */
+    color: var(--lumon-darkgrey);
+    letter-spacing: 0.5px;
+}
 
 /* --- MAIN INTERFACE CONTAINER --- */
 #interface-container {
-    max-width: 950px; /* Wider for terminal feel */
-    margin: 0 auto; /* Center it */
-    padding-top: 60px; /* Space below fixed header */
-    padding-bottom: 60px; /* Space above fixed footer */
+    max-width: 950px;
+    margin: 0 auto;
+    padding-top: 80px; /* More space for fixed header */
+    padding-bottom: 80px; /* More space for fixed footer */
     opacity: 0;
-    transition: opacity var(--transition-speed) var(--transition-timing);
-    display: none; /* Managed by JS */
-    position: relative; /* Needed if using absolute footers/headers within */
+    transition: opacity var(--transition-speed) var(--transition-timing) 0.1s; /* Add delay */
+    display: none;
+    position: relative;
 }
 #interface-container.visible { display: block; opacity: 1; }
 
 /* --- General View Styles --- */
-.interface-view { display: none; /* Active state managed by JS */ }
-.interface-view.active { display: block; }
+.interface-view { display: none; }
+.interface-view.active { display: block; animation: fadeInView 0.5s var(--transition-timing) forwards; }
 
-.content-area { padding: 20px 30px; }
+@keyframes fadeInView {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 
-/* --- INNIE VIEW STYLING (MDR Extreme) --- */
+.content-area { padding: 25px 40px; /* Increased padding */ }
+
+/* --- INNIE VIEW STYLING (MDR Extreme - Largely unchanged) --- */
 .lumon-header, .lumon-footer {
     position: fixed;
-    left: 0;
-    right: 0;
+    left: 0; right: 0;
     background-color: var(--lumon-offwhite);
     border-color: var(--lumon-midgrey);
     border-style: solid;
     border-width: 1px 0;
-    padding: 8px 20px;
+    padding: 10px 30px; /* Slightly more padding */
     font-family: var(--font-mono);
-    font-size: 0.8em;
+    font-size: 0.85em; /* Slightly larger */
     color: var(--lumon-darkgrey);
     z-index: 100;
     display: flex;
     justify-content: space-between;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.03); /* Subtle shadow */
 }
 .lumon-header { top: 0; border-bottom-width: 1px; }
 .lumon-footer { bottom: 0; border-top-width: 1px; }
 
-#innie-view .content-area { background-color: var(--lumon-white); }
+#innie-view .content-area { background-color: var(--lumon-white); border: 1px solid var(--lumon-lightgrey); box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
 
 .compliance-directive {
     font-family: var(--font-mono);
     font-size: 0.9em;
-    color: var(--lumon-blue); /* Alert color */
-    background-color: var(--lumon-lightgrey);
-    padding: 10px;
-    margin: 0 -30px 30px -30px; /* Span width */
-    border-bottom: 1px solid var(--lumon-midgrey);
+    color: var(--lumon-blue);
+    background-color: #e7f1ff; /* Lighter blue background */
+    padding: 12px;
+    margin: -26px -41px 35px -41px; /* Span width edge-to-edge */
+    border-bottom: 1px solid #cde1ff; /* Matching border */
     text-align: center;
 }
 
 .data-cluster {
-    margin-bottom: 30px;
-    padding-bottom: 20px;
-    border-bottom: 1px dotted var(--lumon-midgrey); /* Subtle separator */
+    margin-bottom: 35px; /* More space */
+    padding-bottom: 25px;
+    border-bottom: 1px dotted var(--lumon-midgrey);
 }
 .data-cluster:last-child { border-bottom: none; }
 
 #innie-view h2 {
     font-family: var(--font-header);
-    font-size: 1.1em;
+    font-size: 1.2em; /* Larger */
     font-weight: 700;
     color: var(--lumon-black);
-    margin-bottom: 15px;
-    padding-bottom: 5px;
-    border-bottom: 1px solid var(--lumon-black);
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--lumon-green); /* Use Green accent */
     display: inline-block;
     letter-spacing: 1px;
     text-transform: uppercase;
 }
 
-.cluster-marker { margin-right: 8px; color: var(--lumon-darkgrey); }
+.cluster-marker { margin-right: 10px; color: var(--lumon-darkgrey); background-color: var(--lumon-lightgrey); padding: 2px 5px; border-radius: 3px;}
 
 .record-block, .assignment-block, .project-block {
     font-family: var(--font-mono);
     font-size: 0.9em;
-    line-height: 1.7;
+    line-height: 1.8; /* More line height */
     border: 1px solid var(--lumon-lightgrey);
-    padding: 15px;
-    margin-bottom: 15px;
-    background-color: var(--lumon-offwhite); /* Slight contrast */
+    padding: 20px; /* More padding */
+    margin-bottom: 18px;
+    background-color: var(--lumon-offwhite);
+    border-radius: 4px; /* Subtle rounding */
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.03);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
-.assignment-block, .project-block { padding: 10px 15px; }
+.assignment-block, .project-block { padding: 15px 20px; }
 
-.field-label { color: var(--lumon-darkgrey); font-weight: 500; margin-right: 5px; }
+.field-label { color: var(--lumon-darkgrey); font-weight: 500; margin-right: 8px; }
 
-.status-active { color: var(--lumon-green); font-weight: 500; }
-.status-pending { color: var(--lumon-blue); font-weight: 500; } /* Example */
+.status-active { color: var(--lumon-green); font-weight: 500; background-color: #e8f9f1; padding: 1px 4px; border-radius: 3px;}
+.status-pending { color: var(--lumon-blue); font-weight: 500; background-color: #e7f1ff; padding: 1px 4px; border-radius: 3px; }
 
 .grid-skills {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
-    gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 15px;
 }
-.grid-skills p { margin-bottom: 0; } /* Remove extra space in grid */
+.grid-skills p { margin-bottom: 0; padding: 5px 0; }
 
 .assignment-header, .project-header {
     font-size: 0.85em;
-    margin-bottom: 8px;
-    padding-bottom: 5px;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
     border-bottom: 1px dotted var(--lumon-midgrey);
     color: var(--lumon-darkgrey);
 }
-.project-objective { font-size: 0.9em; margin-top: 8px; }
+.project-objective { font-size: 0.9em; margin-top: 10px; }
 
-.directive-list { list-style: none; padding-left: 0; margin-top: 5px; }
-.directive-list li { font-size: 0.9em; margin-bottom: 5px; }
-.directive-id { color: var(--lumon-darkgrey); margin-right: 8px; }
+.directive-list { list-style: none; padding-left: 0; margin-top: 8px; }
+.directive-list li { font-size: 0.9em; margin-bottom: 8px; }
+.directive-id { color: var(--lumon-midgrey); font-weight: bold; margin-right: 10px; user-select: none; /* Prevent selection */ }
 
-/* Subtle flicker effect on hover for data blocks */
+/* Enhanced Flicker/Focus effect */
 .record-block:hover, .assignment-block:hover, .project-block:hover {
-    animation: flicker 0.1s infinite alternate;
     border-color: var(--lumon-midgrey);
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.03), 0 0 8px rgba(0,0,0,0.05);
+    /* Remove flicker, use subtle focus */
+    /* animation: flicker 0.1s infinite alternate; */
 }
-@keyframes flicker {
+/* @keyframes flicker {
   0% { opacity: 1; }
   50% { opacity: 0.98; }
   100% { opacity: 1; }
-}
+} */
 
-/* --- OUTIE VIEW STYLING (Surface Contrast) --- */
-.surface-header, .surface-footer {
-    padding: 15px 20px;
+
+/* --- ⭐ OUTIE VIEW STYLING (Surface - VISUALLY APPEALING ENHANCEMENTS) --- */
+.surface-header {
+    padding: 30px 40px; /* More padding */
     text-align: center;
-    background-color: var(--lumon-offwhite); /* Shared offwhite */
+    background: linear-gradient(to bottom, var(--lumon-white), var(--lumon-offwhite)); /* Subtle gradient */
     border-bottom: 1px solid var(--lumon-lightgrey);
+    margin-bottom: 30px; /* Space before content */
 }
-.surface-footer { border-top: 1px solid var(--lumon-lightgrey); border-bottom: none; margin-top: 30px;}
 
 .surface-header h1 {
-    font-family: var(--font-body); /* More personal font */
-    font-size: 1.8em;
-    font-weight: 400; /* Lighter weight */
+    font-family: var(--font-body);
+    font-size: 2.2em; /* Larger */
+    font-weight: 400; /* Softer weight */
     color: var(--lumon-black);
-    margin-bottom: 5px;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
 }
-.surface-header p { color: var(--lumon-darkgrey); font-size: 1em; }
-.surface-header .contact-info { font-size: 0.9em; margin-top: 10px; }
 
-#outie-view .content-area { background-color: var(--lumon-white); }
+.surface-header p {
+    color: var(--lumon-darkgrey);
+    font-size: 1.1em; /* Larger */
+    line-height: 1.4;
+}
+
+.surface-header .contact-info {
+    font-size: 0.95em;
+    margin-top: 15px;
+    color: var(--lumon-blue); /* Use blue for contact */
+    font-family: var(--font-mono); /* Connect back slightly */
+    letter-spacing: 0.5px;
+}
+.surface-header .contact-info a { /* Basic link styling */
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px dotted var(--lumon-blue);
+    transition: border-bottom-style 0.2s ease;
+}
+.surface-header .contact-info a:hover {
+    border-bottom-style: solid;
+}
+
+
+#outie-view .content-area {
+    background-color: var(--lumon-white);
+    padding: 30px 50px; /* Generous padding */
+    border-radius: 5px; /* Slight rounding */
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.07); /* Soft shadow */
+}
 
 .outie-intro-phrase {
     text-align: center;
     font-style: italic;
     color: var(--lumon-darkgrey);
-    margin-bottom: 30px;
-    font-size: 1em;
+    margin-bottom: 40px; /* More space */
+    font-size: 1.1em; /* Slightly larger */
+    border-top: 1px dashed var(--lumon-lightgrey);
+    border-bottom: 1px dashed var(--lumon-lightgrey);
+    padding: 15px 0;
+}
+
+#outie-view section {
+     margin-bottom: 40px; /* More section spacing */
+     padding-bottom: 30px;
+     border-bottom: 1px dashed var(--lumon-lightgrey); /* Dashed separator */
+}
+#outie-view section:last-child {
+    border-bottom: none;
+    margin-bottom: 10px; /* Less margin for the last section */
+    padding-bottom: 10px;
 }
 
 #outie-view h2 {
-    font-family: var(--font-body); /* Body font for headers */
-    font-size: 1.3em;
-    font-weight: 400;
-    color: var(--lumon-blue); /* Outie accent color */
-    margin-bottom: 15px;
-    padding-bottom: 5px;
+    font-family: var(--font-body);
+    font-size: 1.6em; /* Larger, more distinct headings */
+    font-weight: 500; /* Slightly bolder */
+    color: var(--lumon-blue); /* Consistent Blue accent */
+    margin-bottom: 25px; /* More space after heading */
+    padding-bottom: 10px;
     border-bottom: 1px solid var(--lumon-lightgrey); /* Lighter border */
+    position: relative; /* For pseudo-element decoration */
+    letter-spacing: 0.5px;
+}
+
+/* Subtle decorative line under H2 */
+#outie-view h2::after {
+    content: '';
+    position: absolute;
+    bottom: -1px; /* Align with border */
+    left: 0;
+    width: 60px; /* Fixed width line */
+    height: 2px; /* Thicker line */
+    background-color: var(--lumon-blue);
 }
 
 .outie-list {
     list-style: none;
-    padding-left: 0;
+    padding-left: 10px; /* Slight indent */
     margin-bottom: 20px;
 }
+
 .outie-list li {
-    margin-bottom: 10px;
+    margin-bottom: 15px; /* More space between items */
+    font-size: 1em; /* Standard body size */
+    line-height: 1.7; /* Better readability */
+    padding-left: 25px; /* Space for custom marker */
+    position: relative; /* For marker positioning */
+    color: #343a40; /* Slightly softer black */
+}
+
+/* Custom list marker */
+.outie-list li::before {
+    content: '›'; /* Using right single angle quote */
+    position: absolute;
+    left: 0;
+    top: 1px; /* Fine-tune vertical alignment */
+    color: var(--lumon-blue);
+    font-weight: bold;
+    font-size: 1.3em; /* Make marker slightly larger */
+}
+
+/* Emphasis within list items */
+.outie-list li strong,
+.outie-list li b { /* Style bold text */
+    font-weight: 600;
+    color: var(--lumon-black);
+}
+
+.outie-list.project-focus li {
+    margin-bottom: 12px; /* Slightly tighter list for projects */
+    font-size: 0.95em; /* Slightly smaller for density */
+}
+.outie-list.project-focus li::before {
+    content: '✓'; /* Checkmark for completed/focused projects */
+    font-size: 1em;
+    top: 3px;
+}
+
+
+#outie-leadership p {
+    font-size: 1em;
+    line-height: 1.7;
+    color: #343a40;
+}
+
+
+.surface-footer {
+    padding: 25px 40px; /* Match header padding */
+    text-align: center;
+    background-color: var(--lumon-offwhite);
+    border-top: 1px solid var(--lumon-lightgrey);
+    margin-top: 40px; /* Space above footer */
+    font-family: var(--font-body);
     font-size: 0.95em;
-    line-height: 1.6;
+    color: var(--lumon-darkgrey);
 }
-.list-marker { color: var(--lumon-blue); margin-right: 8px; font-weight: bold;}
 
-#outie-view section {
-     margin-bottom: 30px;
-     padding-bottom: 20px;
-     border-bottom: 1px dashed var(--lumon-lightgrey); /* Dashed separator */
+
+/* --- RESPONSIVENESS (Enhancements) --- */
+@media (max-width: 992px) {
+    #interface-container { max-width: 90%; padding-top: 70px; padding-bottom: 70px; }
 }
-#outie-view section:last-child { border-bottom: none; }
 
-.outie-list.project-focus li { margin-bottom: 8px; } /* Tighter list for projects */
-#outie-leadership p { font-size: 0.95em; }
-
-/* --- RESPONSIVENESS (Basic Example) --- */
 @media (max-width: 768px) {
-    .lumon-header, .lumon-footer { font-size: 0.7em; padding: 6px 10px; }
-    #interface-container { padding-top: 50px; padding-bottom: 50px; }
-    .content-area { padding: 15px; }
-    .compliance-directive { margin: 0 -15px 20px -15px; font-size: 0.8em; }
-    #innie-view h2 { font-size: 1em; }
-    .field-label { display: block; margin-bottom: 2px; } /* Stack labels */
-    .grid-skills { grid-template-columns: 1fr; } /* Single column on mobile */
-    .assignment-header, .project-header { font-size: 0.8em; line-height: 1.4; }
-    .directive-list li, #outie-view li { font-size: 0.9em; }
-    .surface-header h1 { font-size: 1.5em; }
+    body { line-height: 1.6; } /* Improve mobile readability */
+    .lumon-header, .lumon-footer { font-size: 0.75em; padding: 8px 15px; }
+    #interface-container { padding-top: 60px; padding-bottom: 60px; }
+
+    .content-area { padding: 20px; }
+    #innie-view .content-area { padding: 20px; } /* Match */
+    #outie-view .content-area { padding: 25px; } /* Keep slightly more */
+
+    .compliance-directive { margin: -21px -21px 25px -21px; font-size: 0.85em; }
+    #innie-view h2 { font-size: 1.1em; margin-bottom: 15px; }
+    .record-block, .assignment-block, .project-block { padding: 15px; line-height: 1.7; }
+    .field-label { display: inline-block; margin-bottom: 0; } /* Revert stack */
+
+    .grid-skills { grid-template-columns: 1fr; gap: 10px; }
+
+    .assignment-header, .project-header { font-size: 0.8em; line-height: 1.5; }
+    .directive-list li, #outie-view li { font-size: 0.95em; line-height: 1.6; }
+    #outie-view li { padding-left: 20px; margin-bottom: 12px;}
+    #outie-view li::before { font-size: 1.2em; }
+
+    .surface-header { padding: 20px; }
+    .surface-header h1 { font-size: 1.8em; }
+    .surface-header p { font-size: 1em; }
+    .surface-header .contact-info { font-size: 0.9em; }
+
+    #outie-view h2 { font-size: 1.4em; margin-bottom: 20px; }
+    #outie-view h2::after { width: 40px; height: 2px; }
+
+    .surface-footer { padding: 20px; font-size: 0.9em; }
+}
+
+@media (max-width: 480px) {
+     .access-content { max-width: 90%; }
+     .lumon-logo-minimal { font-size: 2.5em; }
+     .access-button { font-size: 0.95em; padding: 15px 20px; letter-spacing: 1px;}
+     .lumon-header, .lumon-footer { flex-direction: column; text-align: center; gap: 5px; padding: 10px; font-size: 0.7em;}
+     #interface-container { padding-top: 80px; padding-bottom: 80px; } /* Adjust for taller header/footer */
+     #outie-view .content-area { padding: 20px 15px; }
+     .surface-header h1 { font-size: 1.6em; }
+     #outie-view h2 { font-size: 1.3em; }
+     .outie-list li { font-size: 0.9em; }
 }
