@@ -23,74 +23,74 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Main Transition Logic ---
     function initiateTransition(viewType) {
-    document.addEventListener('DOMContentLoaded', () => {
-        // Elements
-        const accessPoint = document.getElementById('access-point');
-        const innieAccessBtn = document.getElementById('innie-access-btn');
-        const outieAccessBtn = document.getElementById('outie-access-btn');
-        const transitionScreen = document.getElementById('transition-screen');
-        const transitionText = document.getElementById('transition-text');
-        const interfaceContainer = document.getElementById('interface-container');
-        const innieView = document.getElementById('innie-view');
-        const outieView = document.getElementById('outie-view');
-        const currentTimeDisplay = document.getElementById('current-time');
-        const body = document.body;
-    
-        // --- ADD THIS LINE: Get the audio element ---
-        const backgroundMusic = document.getElementById('background-music');
-        let musicStarted = false; // Flag to ensure music only starts once
-    
-        // --- Clock Function (for Innie Header) ---
-        // ... (keep existing clock function) ...
-        function updateTime() {
-            if (!currentTimeDisplay) return;
-            const now = new Date();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const seconds = String(now.getSeconds()).padStart(2, '0');
-            currentTimeDisplay.textContent = `${hours}:${minutes}:${seconds}`;
-        }
-    
-    
-        // --- Main Transition Logic ---
-        function initiateTransition(viewType) {
-                    // --- ADD THIS BLOCK: Attempt to play music ---
-                    if (backgroundMusic && !musicStarted) {
-                        backgroundMusic.play().then(() => {
-                            // Autoplay started!
-                            musicStarted = true;
-                        }).catch(error => {
-                            // Autoplay was prevented. User interaction is required.
-                            // In this case, the click *is* the interaction, so it should work.
-                            // If it still fails, browser settings might be very strict.
-                            console.warn("Background music autoplay prevented:", error);
-                            // We still set musicStarted to true to avoid trying again uselessly
-                            musicStarted = true;
-                        });
+        document.addEventListener('DOMContentLoaded', () => {
+            // Elements
+            const accessPoint = document.getElementById('access-point');
+            const innieAccessBtn = document.getElementById('innie-access-btn');
+            const outieAccessBtn = document.getElementById('outie-access-btn');
+            const transitionScreen = document.getElementById('transition-screen');
+            const transitionText = document.getElementById('transition-text');
+            const interfaceContainer = document.getElementById('interface-container');
+            const innieView = document.getElementById('innie-view');
+            const outieView = document.getElementById('outie-view');
+            const currentTimeDisplay = document.getElementById('current-time');
+            const body = document.body;
+        
+            // --- ADD THIS LINE: Get the audio element ---
+            const backgroundMusic = document.getElementById('background-music');
+            let musicStarted = false; // Flag to ensure music only starts once
+        
+            // --- Clock Function (for Innie Header) ---
+            // ... (keep existing clock function) ...
+            function updateTime() {
+                if (!currentTimeDisplay) return;
+                const now = new Date();
+                const hours = String(now.getHours()).padStart(2, '0');
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                const seconds = String(now.getSeconds()).padStart(2, '0');
+                currentTimeDisplay.textContent = `${hours}:${minutes}:${seconds}`;
+            }
+        
+        
+            // --- Main Transition Logic ---
+            function initiateTransition(viewType) {
+                        // --- ADD THIS BLOCK: Attempt to play music ---
+                        if (backgroundMusic && !musicStarted) {
+                            backgroundMusic.play().then(() => {
+                                // Autoplay started!
+                                musicStarted = true;
+                            }).catch(error => {
+                                // Autoplay was prevented. User interaction is required.
+                                // In this case, the click *is* the interaction, so it should work.
+                                // If it still fails, browser settings might be very strict.
+                                console.warn("Background music autoplay prevented:", error);
+                                // We still set musicStarted to true to avoid trying again uselessly
+                                musicStarted = true;
+                            });
+                        }
+                        // --- END OF ADDED BLOCK ---
+                
+                
+                        // 1. Disable buttons, Fade out Access Point
+                        innieAccessBtn.disabled = true;
+                        outieAccessBtn.disabled = true;
+                        accessPoint.classList.remove('active');
+                        body.setAttribute('aria-busy', 'true');
+                
+                        // ... (rest of the initiateTransition function remains the same) ...
+                
                     }
-                    // --- END OF ADDED BLOCK ---
-            
-            
-                    // 1. Disable buttons, Fade out Access Point
-                    innieAccessBtn.disabled = true;
-                    outieAccessBtn.disabled = true;
-                    accessPoint.classList.remove('active');
-                    body.setAttribute('aria-busy', 'true');
-            
-                    // ... (rest of the initiateTransition function remains the same) ...
-            
-                }
-            
-                // --- Event Listeners ---
-                innieAccessBtn.addEventListener('click', () => {
-                    initiateTransition('innie');
+                
+                    // --- Event Listeners ---
+                    innieAccessBtn.addEventListener('click', () => {
+                        initiateTransition('innie');
+                    });
+                
+                    outieAccessBtn.addEventListener('click', () => {
+                        initiateTransition('outie');
+                    });
+                
                 });
-            
-                outieAccessBtn.addEventListener('click', () => {
-                    initiateTransition('outie');
-                });
-            
-            });
         // Disable buttons, Fade out Access Point
         innieAccessBtn.disabled = true;
         outieAccessBtn.disabled = true;
