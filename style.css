@@ -1,146 +1,75 @@
 /* --- CORE RESETS & VARIABLES --- */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-html {
-    scroll-behavior: smooth;
-    font-size: 16px; /* Base font size */
-}
+html { scroll-behavior: smooth; }
 
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #0a0a0e; /* Start dark (Lumon Black) for access screen */
-    color: #e0e0e0; /* Start with light grey text */
-    line-height: 1.6; /* Improved readability */
+    background-color: #ffffff; /* Start with white, might be covered */
+    color: #1a1a1a;
+    line-height: 1.5;
     overflow: hidden; /* Critical for initial states */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    transition: background-color 0.6s ease-in-out, color 0.6s ease-in-out;
-    position: relative; /* Needed for potential pseudo-elements */
-}
-
-/* Add a subtle noise overlay */
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW17e3t1dXVsbGxwcHB+fn5zd3dxcXFycnJxcXF SAgAAAbJ REFUEI+N0s0RbAAMANF01/8/6f47TA6z7Xw9gAE0AlvQDSAIxAg8hJ+j/h+M247w4KS3q4c56sJg6ct7/y7s/7Y/n4v6/XHfCcz/+M9n78/f0aXSmjX4s+8A0gAE7/8AAAD//wMAGIIP9QAAAAJzS0dQAACg7g/wAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAAd0SU1FB+cGEQMfJ8Wd7AAAAAp6VFh0Q29tbWVudAAAAAAASUVORK5CYII='); /* Tiny transparent noise */
-    opacity: 0.03;
-    pointer-events: none;
-    z-index: -1; /* Behind everything */
-}
-
-/* Styles when the Outie (Light Theme) is active */
-body.outie-active {
-    background-color: #f8f9fa; /* Light background for Outie */
-    color: #212529; /* Darker text for Outie */
 }
 
 :root {
-    /* Lumon Core Palette (Primary for Innie/Access) */
+    /* Lumon Core Palette */
     --lumon-white: #ffffff;
     --lumon-offwhite: #f8f9fa;
-    --lumon-lightgrey: #e0e0e0;
-    --lumon-midgrey: #adb5bd;
-    --lumon-darkgrey: #495057;
-    --lumon-black: #0a0a0e;
-    --lumon-blue-accent: #00b8d4; /* Severance Teal/Cyan */
-    --lumon-blue-accent-glow: rgba(0, 184, 212, 0.5);
-    --lumon-green-accent: #4caf50; /* A compliant green */
-    --lumon-red-alert: #f44336;
-    --lumon-border: #1a2a45;
-    --lumon-card-bg: rgba(10, 25, 47, 0.7); /* Dark translucent card */
-    --lumon-card-bg-hover: rgba(16, 33, 58, 0.85);
-    --lumon-header-bg: rgba(10, 25, 47, 0.85); /* Dark translucent header */
-
-    /* Outie Palette (Light Theme) */
-    --outie-bg: #f8f9fa;
-    --outie-text: #212529;
-    --outie-text-secondary: #495057;
-    --outie-primary: #007bff; /* Standard vibrant blue */
-    --outie-border: #dee2e6;
-    --outie-card-bg: #ffffff;
-    --outie-card-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    --lumon-lightgrey: #e9ecef;
+    --lumon-midgrey: #ced4da;
+    --lumon-darkgrey: #6c757d;
+    --lumon-black: #1a1a1a;
+    --lumon-blue: #0d6efd; /* Primary Accent for Outie */
+    --lumon-green: #198754; /* Primary Accent for Innie */
 
     /* Fonts */
     --font-header: 'Rajdhani', sans-serif;
     --font-body: 'Roboto', sans-serif;
     --font-mono: 'IBM Plex Mono', monospace;
 
-    /* Transitions & Timing */
-    --transition-speed-fast: 0.2s; /* Slightly faster */
-    --transition-speed-med: 0.4s; /* Adjusted */
-    --transition-speed-slow: 0.7s; /* Adjusted */
+    /* Transitions */
+    --transition-speed: 0.6s;
     --transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-timing-smooth: ease-in-out;
-    --ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    --ease-out-cubic: cubic-bezier(0.215, 0.610, 0.355, 1);
-    --ease-in-out-cubic: cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
 /* --- PHASE 0: ACCESS POINT --- */
 #access-point {
-    position: fixed;
-    inset: 0;
+    position: fixed; inset: 0;
     background-color: var(--lumon-black);
-    color: var(--lumon-lightgrey);
+    color: var(--lumon-offwhite);
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     z-index: 300;
     opacity: 1;
-    transition: opacity var(--transition-speed-med) var(--transition-timing-smooth);
-    padding: 20px;
+    transition: opacity calc(var(--transition-speed) / 2) ease-out;
 }
+#access-point:not(.active) { opacity: 0; pointer-events: none; }
 
-#access-point:not(.active) {
-    opacity: 0;
-    pointer-events: none;
-}
+.access-content { max-width: 500px; padding: 20px; }
 
-.access-content {
-    max-width: 600px;
-    width: 90%;
-}
-
-.lumon-main-logo {
+.lumon-logo-minimal {
     font-family: var(--font-header);
-    font-size: clamp(2rem, 6vw, 3.5rem); /* Responsive font size */
+    font-size: 3em;
     font-weight: 700;
-    color: var(--lumon-white);
-    margin-bottom: 40px;
-    line-height: 1.1;
-    letter-spacing: 1.5px; /* Slightly wider */
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.15);
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5)); /* Subtle depth */
-    text-align: left; /* Align left like the image */
-    display: flex; /* Use flex for alignment */
-    align-items: stretch; /* Make bar full height */
-}
-
-.logo-bar {
+    letter-spacing: 5px;
+    color: var(--lumon-offwhite);
+    margin-bottom: 30px; /* Increased margin */
+    border: 2px solid var(--lumon-offwhite);
+    padding: 10px 20px;
     display: inline-block;
-    width: 8px; /* Thickness of the bar */
-    background-color: var(--lumon-white);
-    margin-right: 15px; /* Space between bar and text */
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-}
-
-.logo-text {
-    text-align: left; /* Already default for flex item, but explicit */
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1); /* Subtle glow */
 }
 
 .status-text {
     font-family: var(--font-mono);
-    font-size: 1.2em;
+    font-size: 1.1em;
     color: var(--lumon-midgrey);
-    margin-bottom: 50px;
-    height: 1.5em; /* Prevent layout shift */
-    text-shadow: 0 0 5px rgba(173, 181, 189, 0.3);
+    margin-bottom: 50px; /* Increased margin */
+    height: 1.5em;
 }
 
 .blinking-cursor {
@@ -150,881 +79,414 @@ body.outie-active {
     background-color: var(--lumon-midgrey);
     animation: blink 1s step-end infinite;
     vertical-align: bottom;
-    margin-left: 3px;
-    box-shadow: 0 0 5px rgba(173, 181, 189, 0.5);
+    margin-left: 2px;
 }
 
-@keyframes blink {
-    50% { opacity: 0; }
-}
+@keyframes blink { 50% { opacity: 0; } }
 
-.access-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    margin-bottom: 40px;
-}
+.access-buttons { display: flex; flex-direction: column; gap: 20px; /* Increased gap */ }
 
 .access-button {
-    padding: 16px 25px;
+    padding: 18px 25px; /* Slightly larger buttons */
     font-family: var(--font-header);
-    font-size: 1.1em;
+    font-size: 1.05em; /* Slightly larger font */
     font-weight: 600;
     border: 2px solid;
     background-color: transparent;
     cursor: pointer;
-    transition: all var(--transition-speed-fast) var(--transition-timing-smooth);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    position: relative; /* For potential pseudo-element effects */
-    overflow: hidden;
-    transform: translateZ(0); /* Promote layer */
+    transition: all 0.25s ease-in-out;
+    letter-spacing: 1.5px; /* More spacing */
+    text-transform: uppercase; /* Make it feel official */
 }
+.access-button.innie-style { color: var(--lumon-green); border-color: var(--lumon-green); }
+.access-button.innie-style:hover { background-color: rgba(25, 135, 84, 0.1); color: #63f2b3; border-color: #63f2b3; box-shadow: 0 0 8px rgba(25, 135, 84, 0.5); } /* Subtle hover glow */
 
-/* Add a subtle sheen/scanline effect on hover */
-.access-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%; /* Start off-screen */
-    width: 50%; /* Width of sheen */
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
-    transform: skewX(-25deg); /* Angle the sheen */
-    transition: left var(--transition-speed-med) ease-in-out;
-}
+.access-button.outie-style { color: var(--lumon-blue); border-color: var(--lumon-blue); }
+.access-button.outie-style:hover { background-color: rgba(13, 110, 253, 0.1); color: #6bbdff; border-color: #6bbdff; box-shadow: 0 0 8px rgba(13, 110, 253, 0.5); } /* Subtle hover glow */
 
-.access-button:hover::before {
-    left: 150%; /* Move across and off-screen */
-}
-
-.access-button.innie-style {
-    color: var(--lumon-blue-accent);
-    border-color: var(--lumon-blue-accent);
-}
-.access-button.innie-style:hover {
-    background-color: rgba(0, 184, 212, 0.08); /* Slightly more subtle */
-    color: var(--lumon-white);
-    border-color: var(--lumon-white);
-    box-shadow: 0 0 12px rgba(0, 184, 212, 0.5);
-    transform: scale(1.02); /* Add consistent slight grow */
-}
-
-.access-button.outie-style {
-    color: var(--lumon-green-accent);
-    border-color: var(--lumon-green-accent);
-}
-.access-button.outie-style:hover {
-    background-color: rgba(76, 175, 80, 0.08); /* Slightly more subtle */
-    color: var(--lumon-white); /* Hover color consistent */
-    border-color: var(--lumon-white); /* Hover border consistent */
-    box-shadow: 0 0 12px rgba(76, 175, 80, 0.5);
-    transform: scale(1.02); /* Add consistent slight grow */
-}
-
-.access-footer {
-    font-family: var(--font-mono);
-    font-size: 0.8em;
-    color: var(--lumon-darkgrey);
-    letter-spacing: 1px;
-    margin-top: 30px;
-    opacity: 0.7;
-}
 
 /* --- PHASE 1: TRANSITION SCREEN --- */
 #transition-screen {
-    position: fixed;
-    inset: 0;
-    background-color: var(--lumon-black); /* Keep dark for transition */
-    color: var(--lumon-lightgrey);
-    display: flex; /* Use flex by default, JS toggles opacity/pointer-events */
+    position: fixed; inset: 0;
+    background-color: var(--lumon-white);
+    color: var(--lumon-black);
+    display: flex;
     justify-content: center;
     align-items: center;
     z-index: 200;
     opacity: 0;
     pointer-events: none;
-    transition: opacity var(--transition-speed-fast) var(--transition-timing-smooth);
+    transition: opacity calc(var(--transition-speed) / 2) ease-in-out;
 }
+#transition-screen.active { opacity: 1; pointer-events: auto; display: flex; }
 
-#transition-screen.active {
-    opacity: 1;
-    pointer-events: auto;
-}
+.transition-content { text-align: center; }
 
-.transition-content {
-    text-align: center;
-}
-
+/* Enhanced Spinner */
 .spinner {
-    width: 60px;
-    height: 60px;
-    border: 6px solid rgba(255, 255, 255, 0.1); /* Faint base ring */
-    border-top-color: var(--lumon-blue-accent); /* Default to blue */
+    width: 50px; /* Larger */
+    height: 50px;
+    border: 5px solid var(--lumon-lightgrey); /* Thicker border */
+    border-top-color: var(--lumon-blue); /* Consistent Blue */
     border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin: 0 auto 30px auto;
-    position: relative;
-    box-shadow: 0 0 15px rgba(0, 184, 212, 0.2); /* Default Glow */
+    animation: spin 1.2s linear infinite; /* Slightly slower */
+    margin: 0 auto 25px auto; /* More spacing */
+    position: relative; /* For pseudo-elements */
 }
-/* Removed ::after definition from here */
+/* Add inner spinning element for complexity */
+.spinner::after {
+    content: '';
+    position: absolute;
+    top: 5px; left: 5px; right: 5px; bottom: 5px;
+    border: 3px solid transparent;
+    border-top-color: var(--lumon-green); /* Add green accent */
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite reverse; /* Spin opposite direction */
+}
 
-.spinner.innie {
-    border-top-color: var(--lumon-blue-accent);
-    box-shadow: 0 0 15px rgba(0, 184, 212, 0.2);
-}
-.spinner.outie {
-    border-top-color: var(--lumon-green-accent);
-    box-shadow: 0 0 15px rgba(76, 175, 80, 0.2);
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
+@keyframes spin { to { transform: rotate(360deg); } }
 
 #transition-text {
     font-family: var(--font-mono);
-    font-size: 1.1em;
-    color: var(--lumon-midgrey);
-    letter-spacing: 1px;
-    text-shadow: 0 0 5px rgba(173, 181, 189, 0.3);
+    font-size: 1.1em; /* Slightly larger */
+    color: var(--lumon-darkgrey);
+    letter-spacing: 0.5px;
 }
 
 /* --- MAIN INTERFACE CONTAINER --- */
 #interface-container {
-    max-width: 1100px; /* Wider for MDR */
+    max-width: 950px;
     margin: 0 auto;
-    padding: 80px 20px 100px 20px; /* Space for fixed header/footer - Adjust if header/footer heights change */
+    padding-top: 80px; /* More space for fixed header */
+    padding-bottom: 80px; /* More space for fixed footer */
     opacity: 0;
-    transform: translateY(20px); /* Start slightly down */
-    transition: opacity var(--transition-speed-med) var(--transition-timing), transform var(--transition-speed-med) var(--transition-timing);
-    display: none; /* Managed by JS */
-    position: relative; /* For absolute positioned children like background */
+    transition: opacity var(--transition-speed) var(--transition-timing) 0.1s; /* Add delay */
+    display: none;
+    position: relative;
 }
-
-#interface-container.visible {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
-}
+#interface-container.visible { display: block; opacity: 1; }
 
 /* --- General View Styles --- */
-.interface-view {
-    display: none; /* Controlled by JS adding .active */
-    animation: fadeInView var(--transition-speed-med) var(--transition-timing) forwards;
-}
-.interface-view.active {
-    display: block;
-}
+.interface-view { display: none; }
+.interface-view.active { display: block; animation: fadeInView 0.5s var(--transition-timing) forwards; }
 
 @keyframes fadeInView {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-/* ====================================== */
-/* --- INNIE VIEW STYLING (MDR/Lumon) -- */
-/* ====================================== */
+.content-area { padding: 25px 40px; /* Increased padding */ }
 
-#innie-view {
-    background-color: var(--lumon-black); /* Dark base */
-    border: 1px solid var(--lumon-border);
-    box-shadow: 0 0 25px rgba(0, 184, 212, 0.1), inset 0 0 10px rgba(0,0,0,0.3);
-    position: relative;
-    overflow: hidden; /* Contain the background */
-    border-radius: 4px; /* Slight rounding */
-    min-height: 100vh; /* Ensure it takes full viewport height if needed */
-}
-
-/* Header mimicking MDR screen (Lumon Themed) */
-.mdr-header {
-    background-color: var(--lumon-header-bg);
-    border-bottom: 1px solid var(--lumon-border);
-    padding: 10px 25px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: fixed; /* Make it fixed */
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 150;
-    color: var(--lumon-lightgrey);
-    font-family: var(--font-mono);
-    font-size: 0.9em;
-    backdrop-filter: blur(5px); /* Stronger blur */
-    -webkit-backdrop-filter: blur(5px);
-}
-
-.header-left {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-.file-id {
-    font-weight: 600; /* Slightly bolder */
-    color: var(--lumon-white);
-    letter-spacing: 1px;
-}
-.progress-indicator {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--lumon-midgrey);
-}
-.progress-bar-shell {
-    width: 100px;
-    height: 8px;
-    background-color: rgba(0,0,0,0.4); /* Darker shell */
-    border: 1px solid var(--lumon-border);
-    border-radius: 2px;
-    overflow: hidden;
-}
-.progress-bar-fill {
-    height: 100%;
-    background-color: var(--lumon-blue-accent);
-    box-shadow: 0 0 8px var(--lumon-blue-accent-glow); /* Use glow variable */
-}
-.lumon-corner-logo {
-    height: 25px;
-    width: auto;
-    opacity: 0.9;
-    filter: brightness(1.1); /* Make it pop slightly */
-}
-
-/* Footer mimicking MDR screen (Lumon Themed) */
-.mdr-footer {
-    background-color: var(--lumon-header-bg);
-    border-top: 1px solid var(--lumon-border);
-    padding: 8px 25px;
-    display: flex;
-    justify-content: space-between; /* Space out main sections and clock */
-    align-items: center;
-    position: fixed; /* Make it fixed */
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 150;
-    color: var(--lumon-midgrey);
+/* --- INNIE VIEW STYLING (MDR Extreme - Largely unchanged) --- */
+.lumon-header, .lumon-footer {
+    position: fixed;
+    left: 0; right: 0;
+    background-color: var(--lumon-offwhite);
+    border-color: var(--lumon-midgrey);
+    border-style: solid;
+    border-width: 1px 0;
+    padding: 10px 30px; /* Slightly more padding */
     font-family: var(--font-mono);
     font-size: 0.85em; /* Slightly larger */
-    backdrop-filter: blur(5px); /* Match header blur */
-    -webkit-backdrop-filter: blur(5px);
-}
-.footer-left-sections { /* Wrapper for left aligned sections */
+    color: var(--lumon-darkgrey);
+    z-index: 100;
     display: flex;
-    align-items: center;
-    gap: 15px; /* Space between FILE / COMP */
+    justify-content: space-between;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.03); /* Subtle shadow */
 }
-.footer-section {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-.footer-section span {
-    color: var(--lumon-midgrey); /* Use midgrey for inactive text */
-    font-size: 0.95em;
-}
-.footer-section.active span {
-    color: var(--lumon-white);
-    font-weight: 600;
-}
-.footer-section.active .status-bar div {
-    background-color: var(--lumon-white);
-    box-shadow: 0 0 5px var(--lumon-white);
-}
+.lumon-header { top: 0; border-bottom-width: 1px; }
+.lumon-footer { bottom: 0; border-top-width: 1px; }
 
-.status-bar {
-    width: 60px;
-    height: 5px;
-    background-color: rgba(0,0,0,0.4); /* Darker bar */
-    border: 1px solid var(--lumon-border);
-    border-radius: 1px;
-    overflow: hidden;
-}
-.status-bar div {
-    height: 100%;
-    background-color: var(--lumon-blue-accent);
-}
-.footer-timestamp {
-    font-size: 1.1em;
-    color: var(--lumon-lightgrey);
-    letter-spacing: 1px;
-}
+#innie-view .content-area { background-color: var(--lumon-white); border: 1px solid var(--lumon-lightgrey); box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
 
-/* Number Grid Background (within #innie-view) */
-.number-grid-bg {
-    position: absolute;
-    inset: 0;
-    z-index: 1; /* Behind content */
-    font-family: var(--font-mono);
-    font-weight: 500;
-    font-size: 17px; /* Adjusted size */
-    line-height: 1.45; /* Adjusted spacing */
-    color: rgba(0, 184, 212, 0.15); /* Slightly more visible faint cyan */
-    padding: 20px; /* Internal padding */
-    overflow: hidden;
-    pointer-events: auto; /* Allow hover */
-    user-select: none;
-    cursor: crosshair; /* Indicate interaction */
-    transform-style: preserve-3d; /* Needed for perspective */
-    perspective: 800px; /* Apply perspective here */
-    text-shadow: /* Subtle CRT text shadow */
-        0 0 1px rgba(0, 184, 212, 0.2),
-        1px 1px 1px rgba(0,0,0,0.4);
-    opacity: 0.9; /* Slightly less faded */
-}
-
-/* Scanline Overlay Effect */
-.number-grid-bg::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(rgba(10, 25, 47, 0) 50%, rgba(0, 0, 0, 0.15) 50%);
-    background-size: 100% 4px;
-    animation: scanlines 20s linear infinite;
-    pointer-events: none;
-    opacity: 0.7;
-    z-index: 2; /* Above numbers grid */
-}
-
-@keyframes scanlines {
-    from { background-position: 0 0; }
-    to { background-position: 0 -40px; } /* Adjust speed */
-}
-
-/* Individual Number Styling in Grid */
-.number-grid-bg span {
-    display: inline-block;
-    text-align: center;
-    min-width: 1.1ch; /* Ensure consistent width */
-    transition: transform var(--transition-speed-fast) var(--ease-out-quad),
-                color var(--transition-speed-fast) var(--ease-out-quad),
-                font-weight var(--transition-speed-fast) var(--ease-out-quad),
-                text-shadow var(--transition-speed-fast) var(--ease-out-quad);
-    transform-origin: center center;
-    will-change: transform, color; /* Performance hint */
-    position: relative; /* For z-index stacking */
-    margin: 0 2px; /* Minimal horizontal space */
-}
-
-/* Hover Effects on Numbers */
-.number-grid-bg span.hovered {
-    transform: scale(2.8) translateZ(30px); /* Scale up and bring forward */
-    color: var(--lumon-white);
-    font-weight: 700;
-    z-index: 10; /* Highest */
-    text-shadow: 0 0 10px var(--lumon-blue-accent-glow), 0 0 15px var(--lumon-blue-accent-glow), 0 0 2px #fff;
-    /* white-space: pre; Preserve spacing if needed, might cause overlap issues */
-}
-.number-grid-bg span.neighbor-1 {
-    transform: scale(1.8) translateZ(15px);
-    /* Mix color towards white */
-    color: color-mix(in srgb, var(--lumon-white) 70%, rgba(0, 184, 212, 0.15));
-    z-index: 9;
-    font-weight: 600;
-    text-shadow: 0 0 5px var(--lumon-blue-accent-glow);
-}
-.number-grid-bg span.neighbor-2 {
-    transform: scale(1.3) translateZ(5px);
-    /* Mix color towards white */
-    color: color-mix(in srgb, var(--lumon-white) 40%, rgba(0, 184, 212, 0.15));
-    z-index: 8;
-    font-weight: 500; /* Base weight */
-}
-
-/* Style the actual content area container */
-.mdr-content {
-    position: relative; /* Needs to be above the background/scanlines */
-    z-index: 10;
-    /* Adjust padding based on ACTUAL fixed header/footer height */
-    /* Assuming header ~45px, footer ~41px. Add some buffer. */
-    padding: 65px 40px 60px 40px;
-    color: var(--lumon-lightgrey);
-    /* Calculate height to allow scrolling within this container */
-    height: 100vh; /* Let it fill viewport height */
-    overflow-y: auto; /* Enable scrolling for content */
-}
-
-/* Custom scrollbar for Innie view content */
-.mdr-content::-webkit-scrollbar { width: 8px; }
-.mdr-content::-webkit-scrollbar-track { background: rgba(10, 25, 47, 0.5); border-radius: 4px; }
-.mdr-content::-webkit-scrollbar-thumb { background-color: var(--lumon-blue-accent); border-radius: 4px; border: 1px solid var(--lumon-black); }
-.mdr-content::-webkit-scrollbar-thumb:hover { background-color: #38fcfc; /* Lighter accent */ }
-
-/* Content Styling within mdr-content */
 .compliance-directive {
     font-family: var(--font-mono);
-    font-size: 0.95em; /* Slightly larger */
-    font-weight: 600; /* Bolder */
-    color: var(--lumon-red-alert);
-    background-color: rgba(244, 67, 54, 0.1);
-    padding: 12px 15px;
-    /* Span width using negative margins relative to parent padding */
-    margin: -30px -40px 30px -40px;
-    border-top: 1px solid rgba(244, 67, 54, 0.2);
-    border-bottom: 1px solid rgba(244, 67, 54, 0.2);
+    font-size: 0.9em;
+    color: var(--lumon-blue);
+    background-color: #e7f1ff; /* Lighter blue background */
+    padding: 12px;
+    margin: -26px -41px 35px -41px; /* Span width edge-to-edge */
+    border-bottom: 1px solid #cde1ff; /* Matching border */
     text-align: center;
-    letter-spacing: 0.5px;
-    text-shadow: 0 0 5px rgba(244, 67, 54, 0.4);
 }
 
 .data-cluster {
-    margin-bottom: 30px;
+    margin-bottom: 35px; /* More space */
     padding-bottom: 25px;
-    border-bottom: 1px dashed rgba(0, 184, 212, 0.2); /* Faint dashed separator */
+    border-bottom: 1px dotted var(--lumon-midgrey);
 }
-.data-cluster:last-child {
-    border-bottom: none;
-}
+.data-cluster:last-child { border-bottom: none; }
 
 #innie-view h2 {
     font-family: var(--font-header);
-    font-size: 1.1em;
+    font-size: 1.2em; /* Larger */
     font-weight: 700;
-    color: var(--lumon-white);
-    margin-bottom: 18px;
+    color: var(--lumon-black);
+    margin-bottom: 20px;
     padding-bottom: 8px;
-    border-bottom: 2px solid var(--lumon-blue-accent); /* Underline style */
+    border-bottom: 2px solid var(--lumon-green); /* Use Green accent */
     display: inline-block;
-    letter-spacing: 1.5px;
+    letter-spacing: 1px;
     text-transform: uppercase;
-    text-shadow: 0 0 5px var(--lumon-blue-accent-glow); /* Use glow variable */
 }
 
-.cluster-marker {
-    margin-right: 10px;
-    color: var(--lumon-blue-accent);
-    background-color: rgba(0, 184, 212, 0.1);
-    padding: 3px 6px;
-    border-radius: 3px;
-    border: 1px solid rgba(0, 184, 212, 0.3);
-    font-weight: 500;
-    display: inline-block; /* Ensure proper layout */
-}
+.cluster-marker { margin-right: 10px; color: var(--lumon-darkgrey); background-color: var(--lumon-lightgrey); padding: 2px 5px; border-radius: 3px;}
 
-.record-block,
-.assignment-block,
-.project-block {
+.record-block, .assignment-block, .project-block {
     font-family: var(--font-mono);
     font-size: 0.9em;
-    line-height: 1.7;
-    border: 1px solid rgba(0, 184, 212, 0.2);
-    padding: 15px 20px;
-    margin-bottom: 15px;
-    background-color: var(--lumon-card-bg); /* Use variable */
-    border-radius: 3px;
-    box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
-    transition: border-color var(--transition-speed-fast) ease, background-color var(--transition-speed-fast) ease;
-    backdrop-filter: blur(2px); /* Subtle blur for depth */
+    line-height: 1.8; /* More line height */
+    border: 1px solid var(--lumon-lightgrey);
+    padding: 20px; /* More padding */
+    margin-bottom: 18px;
+    background-color: var(--lumon-offwhite);
+    border-radius: 4px; /* Subtle rounding */
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.03);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
-.record-block:hover,
-.assignment-block:hover,
-.project-block:hover {
-    background-color: var(--lumon-card-bg-hover); /* Use variable */
-    border-color: rgba(0, 184, 212, 0.5);
-}
+.assignment-block, .project-block { padding: 15px 20px; }
 
-.field-label {
-    color: var(--lumon-midgrey);
-    font-weight: 500;
-    margin-right: 8px;
-    user-select: none;
-}
+.field-label { color: var(--lumon-darkgrey); font-weight: 500; margin-right: 8px; }
 
-.status-active {
-    color: var(--lumon-green-accent);
-    font-weight: 500;
-    background-color: rgba(76, 175, 80, 0.15);
-    padding: 2px 5px;
-    border-radius: 3px;
-    border: 1px solid rgba(76, 175, 80, 0.3);
-}
-.status-pending {
-    color: var(--lumon-blue-accent);
-    font-weight: 500;
-    background-color: rgba(0, 184, 212, 0.15);
-    padding: 2px 5px;
-    border-radius: 3px;
-    border: 1px solid rgba(0, 184, 212, 0.3);
-}
+.status-active { color: var(--lumon-green); font-weight: 500; background-color: #e8f9f1; padding: 1px 4px; border-radius: 3px;}
+.status-pending { color: var(--lumon-blue); font-weight: 500; background-color: #e7f1ff; padding: 1px 4px; border-radius: 3px; }
 
 .grid-skills {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 10px 15px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 15px;
 }
-.grid-skills p { /* Adjust paragraph margin within grid */
-    margin-bottom: 0;
-    padding: 3px 0;
-}
+.grid-skills p { margin-bottom: 0; padding: 5px 0; }
 
-.assignment-header,
-.project-header {
+.assignment-header, .project-header {
     font-size: 0.85em;
     margin-bottom: 10px;
     padding-bottom: 8px;
-    border-bottom: 1px dotted rgba(0, 184, 212, 0.2);
-    color: var(--lumon-midgrey);
+    border-bottom: 1px dotted var(--lumon-midgrey);
+    color: var(--lumon-darkgrey);
 }
-.project-objective {
-    font-size: 0.9em;
-    margin-top: 8px;
-    color: var(--lumon-lightgrey);
-}
+.project-objective { font-size: 0.9em; margin-top: 10px; }
 
-.directive-list {
-    list-style: none;
-    padding-left: 0;
-    margin-top: 10px;
-}
-.directive-list li {
-    font-size: 0.9em;
-    margin-bottom: 8px;
-    padding-left: 10px; /* Indentation */
-    border-left: 2px solid rgba(0, 184, 212, 0.2); /* Subtle left border */
-}
-.directive-id {
-    color: var(--lumon-midgrey);
-    font-weight: bold;
-    margin-right: 10px;
-    user-select: none;
-}
+.directive-list { list-style: none; padding-left: 0; margin-top: 8px; }
+.directive-list li { font-size: 0.9em; margin-bottom: 8px; }
+.directive-id { color: var(--lumon-midgrey); font-weight: bold; margin-right: 10px; user-select: none; /* Prevent selection */ }
 
-/* ====================================== */
-/* --- OUTIE VIEW STYLING (Light Theme) --- */
-/* ====================================== */
-
-#outie-view {
-    background-color: transparent; /* Body handles background */
-    /* Padding is handled by #interface-container */
+/* Enhanced Flicker/Focus effect */
+.record-block:hover, .assignment-block:hover, .project-block:hover {
+    border-color: var(--lumon-midgrey);
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.03), 0 0 8px rgba(0,0,0,0.05);
+    /* Remove flicker, use subtle focus */
+    /* animation: flicker 0.1s infinite alternate; */
 }
+/* @keyframes flicker {
+  0% { opacity: 1; }
+  50% { opacity: 0.98; }
+  100% { opacity: 1; }
+} */
 
+
+/* --- ⭐ OUTIE VIEW STYLING (Surface - VISUALLY APPEALING ENHANCEMENTS) --- */
 .surface-header {
-    padding: 40px 30px;
+    padding: 30px 40px; /* More padding */
     text-align: center;
-    /* Subtle gradient from white to main outie bg */
-    background: linear-gradient(to bottom, var(--lumon-white), var(--outie-bg) 80%);
-    border-bottom: 1px solid var(--outie-border);
-    /* Span container padding slightly */
-    margin: 0 -20px 40px -20px;
-    position: relative;
-    z-index: 10; /* Above potential body background effects */
+    background: linear-gradient(to bottom, var(--lumon-white), var(--lumon-offwhite)); /* Subtle gradient */
+    border-bottom: 1px solid var(--lumon-lightgrey);
+    margin-bottom: 30px; /* Space before content */
 }
 
 .surface-header h1 {
-    font-family: var(--font-header); /* Use Rajdhani for impact */
-    font-size: 2.8em;
-    font-weight: 700;
-    color: var(--outie-text);
-    margin-bottom: 5px;
-    letter-spacing: 1px;
+    font-family: var(--font-body);
+    font-size: 2.2em; /* Larger */
+    font-weight: 400; /* Softer weight */
+    color: var(--lumon-black);
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
 }
 
 .surface-header p {
-    color: var(--outie-text-secondary);
-    font-size: 1.1em;
+    color: var(--lumon-darkgrey);
+    font-size: 1.1em; /* Larger */
     line-height: 1.4;
-    margin-bottom: 20px;
-    font-weight: 300; /* Lighter weight for subtitle */
 }
 
-.surface-contact {
-    font-family: var(--font-mono);
+.surface-header .contact-info {
     font-size: 0.95em;
-    color: var(--outie-primary);
-    word-spacing: -1px; /* Tighten mono spacing slightly */
+    margin-top: 15px;
+    color: var(--lumon-blue); /* Use blue for contact */
+    font-family: var(--font-mono); /* Connect back slightly */
+    letter-spacing: 0.5px;
 }
-.surface-contact a {
-    color: inherit; /* Inherit blue from parent */
+.surface-header .contact-info a { /* Basic link styling */
+    color: inherit;
     text-decoration: none;
-    padding: 3px 5px;
-    transition: background-color var(--transition-speed-fast) ease, color var(--transition-speed-fast) ease;
-    border-radius: 3px;
+    border-bottom: 1px dotted var(--lumon-blue);
+    transition: border-bottom-style 0.2s ease;
 }
-.surface-contact a:hover {
-    background-color: rgba(0, 123, 255, 0.1);
-    color: #0056b3; /* Darker blue on hover */
-    text-decoration: underline;
-}
-.contact-sep {
-    color: var(--outie-text-secondary);
-    margin: 0 8px;
-    font-weight: 300;
+.surface-header .contact-info a:hover {
+    border-bottom-style: solid;
 }
 
-/* Main content area for Outie view */
+
 #outie-view .content-area {
-    background-color: var(--outie-card-bg); /* Use white card background */
-    padding: 30px 40px;
-    border-radius: 6px;
-    box-shadow: var(--outie-card-shadow);
-    position: relative; /* Needed for footer positioning */
-    overflow: hidden; /* Contain footer */
+    background-color: var(--lumon-white);
+    padding: 30px 50px; /* Generous padding */
+    border-radius: 5px; /* Slight rounding */
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.07); /* Soft shadow */
 }
 
 .outie-intro-phrase {
     text-align: center;
     font-style: italic;
-    color: var(--outie-text-secondary);
-    margin-bottom: 40px;
-    font-size: 1.15em;
-    border-top: 1px dashed var(--outie-border);
-    border-bottom: 1px dashed var(--outie-border);
-    padding: 18px 0;
+    color: var(--lumon-darkgrey);
+    margin-bottom: 40px; /* More space */
+    font-size: 1.1em; /* Slightly larger */
+    border-top: 1px dashed var(--lumon-lightgrey);
+    border-bottom: 1px dashed var(--lumon-lightgrey);
+    padding: 15px 0;
 }
 
-/* Section styling within Outie content area */
 #outie-view section {
-     margin-bottom: 40px;
+     margin-bottom: 40px; /* More section spacing */
      padding-bottom: 30px;
-     border-bottom: 1px solid var(--outie-border);
+     border-bottom: 1px dashed var(--lumon-lightgrey); /* Dashed separator */
 }
 #outie-view section:last-child {
     border-bottom: none;
-    margin-bottom: 10px; /* Less margin before footer */
+    margin-bottom: 10px; /* Less margin for the last section */
     padding-bottom: 10px;
 }
 
 #outie-view h2 {
-    font-family: var(--font-header); /* Rajdhani for headings */
-    font-size: 1.7em;
-    font-weight: 600;
-    color: var(--outie-primary);
-    margin-bottom: 25px;
+    font-family: var(--font-body);
+    font-size: 1.6em; /* Larger, more distinct headings */
+    font-weight: 500; /* Slightly bolder */
+    color: var(--lumon-blue); /* Consistent Blue accent */
+    margin-bottom: 25px; /* More space after heading */
     padding-bottom: 10px;
-    border-bottom: 1px solid var(--outie-border);
-    position: relative;
+    border-bottom: 1px solid var(--lumon-lightgrey); /* Lighter border */
+    position: relative; /* For pseudo-element decoration */
     letter-spacing: 0.5px;
 }
-#outie-view h2::after { /* Accent line */
+
+/* Subtle decorative line under H2 */
+#outie-view h2::after {
     content: '';
     position: absolute;
-    bottom: -1px; /* Position over the border */
+    bottom: -1px; /* Align with border */
     left: 0;
-    width: 50px;
-    height: 3px;
-    background-color: var(--outie-primary);
-    border-radius: 1px;
+    width: 60px; /* Fixed width line */
+    height: 2px; /* Thicker line */
+    background-color: var(--lumon-blue);
 }
 
-#outie-view h3 { /* Sub-headings */
-    font-family: var(--font-header);
-    font-size: 1.3em;
-    font-weight: 600;
-    color: var(--outie-text); /* Use primary text color */
-    margin-bottom: 15px;
-}
-
-
-#outie-view p {
-    font-size: 1em;
-    line-height: 1.7;
-    color: var(--outie-text);
-    margin-bottom: 15px;
-}
-
-/* General list style for Outie view */
 .outie-list {
     list-style: none;
-    padding-left: 5px; /* Base padding */
+    padding-left: 10px; /* Slight indent */
     margin-bottom: 20px;
 }
+
 .outie-list li {
-    margin-bottom: 15px;
+    margin-bottom: 15px; /* More space between items */
+    font-size: 1em; /* Standard body size */
+    line-height: 1.7; /* Better readability */
+    padding-left: 25px; /* Space for custom marker */
+    position: relative; /* For marker positioning */
+    color: #343a40; /* Slightly softer black */
+}
+
+/* Custom list marker */
+.outie-list li::before {
+    content: '›'; /* Using right single angle quote */
+    position: absolute;
+    left: 0;
+    top: 1px; /* Fine-tune vertical alignment */
+    color: var(--lumon-blue);
+    font-weight: bold;
+    font-size: 1.3em; /* Make marker slightly larger */
+}
+
+/* Emphasis within list items */
+.outie-list li strong,
+.outie-list li b { /* Style bold text */
+    font-weight: 600;
+    color: var(--lumon-black);
+}
+
+.outie-list.project-focus li {
+    margin-bottom: 12px; /* Slightly tighter list for projects */
+    font-size: 0.95em; /* Slightly smaller for density */
+}
+.outie-list.project-focus li::before {
+    content: '✓'; /* Checkmark for completed/focused projects */
+    font-size: 1em;
+    top: 3px;
+}
+
+
+#outie-leadership p {
     font-size: 1em;
     line-height: 1.7;
-    padding-left: 30px; /* Space for custom marker */
-    position: relative;
-    color: var(--outie-text);
-}
-.outie-list li::before {
-    content: '▸'; /* Solid right pointer */
-    position: absolute;
-    left: 5px; /* Position marker */
-    top: 1px; /* Align vertically */
-    color: var(--outie-primary);
-    font-weight: bold;
-    font-size: 1.4em;
-    transition: transform var(--transition-speed-fast) ease;
-}
-.outie-list li:hover::before {
-    transform: translateX(3px); /* Slight nudge on hover */
+    color: #343a40;
 }
 
-/* Specific list styles */
-.experience-list li,
-.education-list li,
-.achievements-list li {
-    margin-bottom: 18px; /* More space for these items */
-}
-.experience-list strong,
-.education-list strong {
-    display: block;
-    font-weight: 500;
-    color: var(--outie-text); /* Primary text for titles */
-    margin-bottom: 3px;
-}
-/* Use <br> in HTML for line breaks, style spacing */
-.experience-list br,
-.education-list br {
-    margin-bottom: 5px;
-    display: block;
-    content: ""; /* Necessary for display: block on br */
-}
-.education-list i { /* For dates/locations */
-    color: var(--outie-text-secondary);
-    font-size: 0.9em;
-    font-style: normal; /* Override italic if not desired */
-}
-
-/* Grid for Projects/Skills */
-.projects-skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-}
-.projects-column h3, /* Use h3 for column titles */
-.skills-column h3 {
-    font-weight: 600; /* Make column titles distinct */
-    margin-bottom: 15px;
-    color: var(--outie-primary); /* Use accent color */
-    font-size: 1.2em; /* Slightly smaller than section h2 */
-    border-bottom: 1px dotted var(--outie-border);
-    padding-bottom: 8px;
-}
-
-/* List styles specific to projects/skills columns */
-.outie-list.project-focus li::before,
-.outie-list.skills-focus li::before {
-    content: '✓'; /* Checkmark for focus lists */
-    font-size: 1em;
-    top: 4px;
-    color: var(--lumon-green-accent); /* Use consistent green */
-}
-.outie-list.project-focus li,
-.outie-list.skills-focus li {
-    margin-bottom: 10px; /* Tighter spacing */
-    font-size: 0.95em; /* Slightly smaller text */
-}
 
 .surface-footer {
-    padding: 30px 40px;
+    padding: 25px 40px; /* Match header padding */
     text-align: center;
-    background-color: var(--outie-bg); /* Match light background */
-    border-top: 1px solid var(--outie-border);
-    /* Position relative to content-area padding */
-    margin: 40px -40px -30px -40px;
+    background-color: var(--lumon-offwhite);
+    border-top: 1px solid var(--lumon-lightgrey);
+    margin-top: 40px; /* Space above footer */
     font-family: var(--font-body);
     font-size: 0.95em;
-    color: var(--outie-text-secondary);
-    /* Match content area rounding */
-    border-bottom-left-radius: 6px;
-    border-bottom-right-radius: 6px;
-}
-
-/* Scroll Reveal Animation */
-.reveal-on-scroll {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity var(--transition-speed-slow) var(--ease-out-cubic), transform var(--transition-speed-slow) var(--ease-out-cubic);
-    will-change: opacity, transform;
-}
-.reveal-on-scroll.is-visible {
-    opacity: 1;
-    transform: translateY(0);
+    color: var(--lumon-darkgrey);
 }
 
 
-/* --- RESPONSIVENESS --- */
+/* --- RESPONSIVENESS (Enhancements) --- */
 @media (max-width: 992px) {
-    #interface-container {
-        max-width: 95%; /* Allow slightly more width */
-        padding: 60px 15px 80px 15px; /* Adjust padding */
-    }
-    .mdr-content {
-        padding: 65px 25px 60px 25px; /* Adjust innie content padding */
-    }
-    #outie-view .content-area {
-        padding: 25px 30px; /* Adjust outie content padding */
-    }
-    .surface-header {
-        padding: 30px 20px; /* Adjust header padding */
-        margin: 0 -15px 30px -15px; /* Match container padding */
-    }
-    .surface-footer {
-         margin: 30px -30px -25px -30px; /* Match container padding */
-    }
+    #interface-container { max-width: 90%; padding-top: 70px; padding-bottom: 70px; }
 }
 
 @media (max-width: 768px) {
-    html { font-size: 15px; } /* Slightly smaller base font */
+    body { line-height: 1.6; } /* Improve mobile readability */
+    .lumon-header, .lumon-footer { font-size: 0.75em; padding: 8px 15px; }
+    #interface-container { padding-top: 60px; padding-bottom: 60px; }
 
-    /* Innie Adjustments */
-    .mdr-header { padding: 8px 15px; font-size: 0.85em; }
-    .header-left { gap: 10px; }
-    .progress-bar-shell { width: 70px; }
-    .lumon-corner-logo { height: 22px; } /* Slightly smaller logo */
-    .mdr-footer { padding: 6px 15px; font-size: 0.8em; flex-wrap: wrap; justify-content: center; gap: 5px 15px; }
-    .footer-left-sections { width: 100%; justify-content: center; margin-bottom: 5px; } /* Center top row */
-    .status-bar { width: 50px; }
-    .footer-timestamp { font-size: 1em; width: 100%; text-align: center; margin-top: 5px;} /* Center clock */
+    .content-area { padding: 20px; }
+    #innie-view .content-area { padding: 20px; } /* Match */
+    #outie-view .content-area { padding: 25px; } /* Keep slightly more */
 
-    /* Adjust content padding for potentially taller wrapped footer */
-    .mdr-content { padding: 60px 20px 80px 20px; }
+    .compliance-directive { margin: -21px -21px 25px -21px; font-size: 0.85em; }
+    #innie-view h2 { font-size: 1.1em; margin-bottom: 15px; }
+    .record-block, .assignment-block, .project-block { padding: 15px; line-height: 1.7; }
+    .field-label { display: inline-block; margin-bottom: 0; } /* Revert stack */
 
-    .number-grid-bg { font-size: 16px; line-height: 1.4; gap: 0 5px; }
-    #innie-view h2 { font-size: 1em; }
-    .record-block, .assignment-block, .project-block { padding: 12px 15px; font-size: 0.85em; }
+    .grid-skills { grid-template-columns: 1fr; gap: 10px; }
 
-    /* Outie Adjustments */
-    .surface-header h1 { font-size: 2.2em; }
+    .assignment-header, .project-header { font-size: 0.8em; line-height: 1.5; }
+    .directive-list li, #outie-view li { font-size: 0.95em; line-height: 1.6; }
+    #outie-view li { padding-left: 20px; margin-bottom: 12px;}
+    #outie-view li::before { font-size: 1.2em; }
+
+    .surface-header { padding: 20px; }
+    .surface-header h1 { font-size: 1.8em; }
     .surface-header p { font-size: 1em; }
-    .surface-contact { font-size: 0.9em; display: flex; flex-direction: column; gap: 5px; align-items: center; }
-    .contact-sep { display: none; } /* Hide separators in column layout */
-    #outie-view .content-area { padding: 20px 25px; }
-    #outie-view h2 { font-size: 1.5em; }
-    .projects-skills-grid { grid-template-columns: 1fr; } /* Stack columns */
-    .surface-footer {
-        padding: 25px 20px;
-        font-size: 0.9em;
-        margin: 30px -25px -20px -25px; /* Match container padding */
-    }
+    .surface-header .contact-info { font-size: 0.9em; }
+
+    #outie-view h2 { font-size: 1.4em; margin-bottom: 20px; }
+    #outie-view h2::after { width: 40px; height: 2px; }
+
+    .surface-footer { padding: 20px; font-size: 0.9em; }
 }
 
 @media (max-width: 480px) {
-    html { font-size: 14px; } /* Even smaller base font */
-
-    /* Access Adjustments */
-    .access-content { max-width: 100%; width: 95%; }
-    .lumon-main-logo { font-size: clamp(1.8rem, 5vw, 2.5rem); }
-    .logo-bar { width: 6px; margin-right: 10px; }
-    .status-text { font-size: 1em; }
-    .access-button { font-size: 1em; padding: 14px 20px; letter-spacing: 1.5px;}
-
-    /* Innie Adjustments */
-    .mdr-header { flex-direction: column; gap: 5px; text-align: center; padding: 10px; }
-    .header-right { margin-top: 5px;} /* Space below left content */
-    .mdr-footer { padding: 10px 10px; gap: 5px 10px;} /* Less padding */
-    .footer-section { gap: 5px; }
-    .status-bar { width: 40px;}
-
-    /* Adjust content padding significantly for tall header/footer */
-    .mdr-content { padding: 85px 15px 90px 15px; }
-
-    .number-grid-bg { font-size: 14px; line-height: 1.3; padding: 10px; gap: 0 3px;}
-    #innie-view h2 { font-size: 0.9em; }
-    .record-block, .assignment-block, .project-block { font-size: 0.8em; padding: 10px 12px; }
-
-    /* Outie Adjustments */
-    .surface-header h1 { font-size: 1.8em; }
-    .surface-header p { font-size: 0.9em; }
-    #outie-view .content-area { padding: 20px 15px; }
-    #outie-view h2 { font-size: 1.3em; }
-    #outie-view li { font-size: 0.9em; padding-left: 25px;}
-    #outie-view li::before { left: 2px; } /* Adjust marker pos */
-    .surface-footer {
-        padding: 20px 15px;
-        font-size: 0.85em;
-        margin: 25px -15px -20px -15px; /* Match container padding */
-    }
+     .access-content { max-width: 90%; }
+     .lumon-logo-minimal { font-size: 2.5em; }
+     .access-button { font-size: 0.95em; padding: 15px 20px; letter-spacing: 1px;}
+     .lumon-header, .lumon-footer { flex-direction: column; text-align: center; gap: 5px; padding: 10px; font-size: 0.7em;}
+     #interface-container { padding-top: 80px; padding-bottom: 80px; } /* Adjust for taller header/footer */
+     #outie-view .content-area { padding: 20px 15px; }
+     .surface-header h1 { font-size: 1.6em; }
+     #outie-view h2 { font-size: 1.3em; }
+     .outie-list li { font-size: 0.9em; }
 }
