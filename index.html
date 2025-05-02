@@ -3,116 +3,313 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee File - Dhruvil Raval</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;700&display=swap');
-        
-        body {
-            font-family: 'Work Sans', sans-serif;
-            background-color: #fff;
-            color: #000;
-            text-align: left;
-            margin: 0;
-            padding: 0;
-        }
-        .elevator {
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            background: #000;
-            color: #fff;
-        }
-        .elevator button {
-            background: #fff;
-            color: #000;
-            border: 2px solid black;
-            padding: 10px 20px;
-            margin: 10px;
-            cursor: pointer;
-            font-size: 16px;
-            border-radius: 5px;
-            transition: 0.3s;
-        }
-        .elevator button:hover {
-            background: #000;
-            color: #fff;
-        }
-        .container {
-            display: none;
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
-            background: #f8f8f8;
-            border-radius: 10px;
-            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
-            border: 2px solid black;
-        }
-    </style>
-    <script>
-        function goToFloor(floor) {
-            document.querySelector('.elevator').style.display = 'none';
-            document.querySelector('.container').style.display = 'block';
-            document.querySelector('h1').innerText = 'Welcome to ' + floor + " Floor";
-            document.getElementById("floor-content").innerHTML = document.getElementById(floor.toLowerCase()).innerHTML;
-        }
-    </script>
+    <title>Dhruvil Raval - Personnel File Access</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="elevator">
-        <h1>Select Your Floor</h1>
-        <button onclick="goToFloor('Recruiter')">Recruiter Floor</button>
-        <button onclick="goToFloor('Founder')">Founder Floor</button>
-        <button onclick="goToFloor('Stalker')">Stalker Floor</button>
+
+    <!-- Phase 1: The Elevator Entrance -->
+    <div id="elevator-screen" class="active">
+        <div class="elevator-content">
+            <!-- You could add a subtle Lumon logo SVG here -->
+            <h1>LUMON INDUSTRIES</h1>
+            <p class="subtitle">Accessing Personnel File: D. Raval</p>
+            <div class="elevator-buttons">
+                <button id="recruiter-btn" class="elevator-button recruiter">
+                    [ RECRUITER ACCESS ]
+                </button>
+                <button id="visitor-btn" class="elevator-button visitor">
+                    [ VISITOR PASS ]
+                </button>
+            </div>
+        </div>
     </div>
-    
-    <div class="container">
-        <header>
-            <h1>Welcome, Employee #DR001</h1>
-            <p>You are not authorized to remember your previous life.</p>
-        </header>
-        <section id="floor-content"></section>
-    </div>
-    
-    <div id="recruiter" style="display: none;">
-        <h2>Recruiter Floor</h2>
-        <p><strong>Work Experience</strong></p>
-        <p>NatWest Bank - Associate Product Management Intern</p>
-        <p>Sweetmans and Partners - UX Research Intern</p>
-        <p>Cardiff University - Product Design Intern</p>
-        <p>Shoreditch Repairs - Product Strategy Intern</p>
-        <p>Castle Coch - Product Engineering Intern</p>
-        <p>Share Oxford - Technical Business Analyst Intern</p>
-        <p>Cardiff Business School - Quantitative Research Assistant</p>
-        <p>Google - Associate Product Manager (Final Round)</p>
-        <p>Skills: Jira, Figma, Python, SQL, Java</p>
-    </div>
-    
-    <div id="founder" style="display: none;">
-        <h2>Founder Floor</h2>
-        <p><strong>Entrepreneurial & Leadership</strong></p>
-        <p>YouTube Channel Manager - 75M Views</p>
-        <p>Business Awards - 1st at Transport for Wales Product Speedathon</p>
-        <p>Technology Awards - 1st Airbus CTF, 2nd Huawei Arena</p>
-        <p>Advisory Roles - swsh (Peter Thiel Fellowship Fund), Vance (YC W22)</p>
-        <p>Portfolio Management - Conducting strategic investments</p>
-        <p>Project Leadership - Ecofriendly Pet App, Night Time Economy App</p>
-    </div>
-    
-    <div id="stalker" style="display: none;">
-        <h2>Stalker Floor</h2>
-        <p><strong>Certifications & More</strong></p>
-        <p>JPMorgan Chase Venture Capital, AWS Solution Architecture</p>
-        <p>BCG Strategy Consulting, Technical Product Planning</p>
-        <p>Filmmaking - Best Short Film Award</p>
-        <p>Dancing - Choreographed an original musical</p>
-        <p>Quantum Computing Research - Error Reduction using Logic Gates</p>
-        <p><strong>Hobbies & Interests</strong></p>
-        <p>"Auty Likes To": Filmmaking, Dancing, Choreography, Market Research</p>
-        <p>Teaching - CS Tutoring, Physics Teacher, Language Mentor</p>
-        <p>Business Awards & Competitions - Hackathons, Startup Pitches</p>
-    </div>
+
+    <!-- Main Portfolio Container (Initially Hidden) -->
+    <div id="portfolio-container">
+
+        <!-- Phase 2: The "Innie" View (Recruiter Access) -->
+        <div id="innie-view" class="portfolio-view">
+            <header class="innie-header">
+                <h1>Subject File: RAVAL, D. - Performance Record</h1>
+                <p>Contact: +44 7990480660 | csdhruvil@gmail.com | linkedin.com/in/dhruvilraval/</p>
+            </header>
+
+            <section id="innie-orientation">
+                <h2>I. Foundational Processing (Education)</h2>
+                <div class="record-item">
+                    <h3>Cardiff University | United Kingdom</h3>
+                    <p><strong>Program:</strong> Bachelor of Science – Computer Science (with Honours)</p>
+                    <p><strong>Status:</strong> Active Processing | <strong>Est. Completion:</strong> June 2025</p>
+                    <p><strong>Performance Projection:</strong> First Class (Scholarship Confirmed)</p>
+                    <p><strong>Core Modules Processed:</strong> Human Computer Interaction, Object Oriented Programming, Data Processing and Visualisation, Discrete Maths, Informatics, Cybersecurity, Database Management, User Experience Design, Political Economics, Networks.</p>
+                </div>
+            </section>
+
+            <section id="innie-toolkit">
+                <h2>II. Refinement Toolkit (Skills)</h2>
+                 <div class="skill-category">
+                    <strong>Tools:</strong> Jira, Tableau, Figma
+                </div>
+                 <div class="skill-category">
+                    <strong>Languages:</strong> Python, SQL, Java, JScript
+                </div>
+                 <div class="skill-category">
+                    <strong>Libraries:</strong> Pandas, NumPy, Matplotlib, TensorFlow
+                </div>
+                 <div class="skill-category">
+                    <strong>Lumon Accreditations (Certifications):</strong> Data Structures and Algorithms, Unconscious Bias, Business Intelligence, Advanced Google Analytics, JPMorgan Chase Venture Capital, AWS Solution Architecture, BCG Strategy Consulting, Technical Product Planning
+                </div>
+            </section>
+
+            <section id="innie-assignments">
+                <h2>III. Assignment Log (Experience)</h2>
+                <!-- Repeat this .assignment-item structure for EACH job -->
+                <div class="assignment-item">
+                    <h3>NatWest Bank | Associate Product Management Intern (Payments)</h3>
+                    <p class="date-range">June 2024 - August 2024</p>
+                    <ul>
+                        <li>Collaborated with interdisciplinary team for product improvement, onboarding external clients, and A/B testing.</li>
+                        <li>Visualised, presented, and explained quantum computing research to over 25 teams across the organisation.</li>
+                    </ul>
+                </div>
+                <div class="assignment-item">
+                    <h3>Sweetmans and Partners | UX Research Intern (Management Consulting)</h3>
+                    <p class="date-range">March 2024 - June 2024</p>
+                    <ul>
+                        <li>Conducted user-centric research, with quantitative and qualitative analysis, to better data interpretation by 25%.</li>
+                        <li>Crafted user surveys, interviews, and usability tests to gain 100% actionable insight by asking the right questions.</li>
+                    </ul>
+                </div>
+                 <div class="assignment-item">
+                    <h3>Cardiff University| Product Design Intern (Search Tools)</h3>
+                    <p class="date-range">October 2023 - June 2024</p>
+                    <ul>
+                        <li>Created user interface prototypes and wireframes for 50% faster user testing; collected data from focus groups.</li>
+                    </ul>
+                </div>
+                <div class="assignment-item">
+                    <h3>Cardiff University School of Computer Science and Mathematics | Teaching Assistant</h3>
+                     <p class="date-range">October 2023 - June 2024</p>
+                    <ul>
+                        <li>Assisted in teaching classes for students in computer science topics like AI, operating systems, and computation.</li>
+                    </ul>
+                </div>
+                 <div class="assignment-item">
+                    <h3>Shoreditch Repairs | Strategy Intern (E-commerce)</h3>
+                    <p class="date-range">October 2022 - June 2024</p>
+                    <ul>
+                        <li>Led statistical analysis and applied strategic insights to optimise pricing model, increasing profitability by 15%.</li>
+                         <li>Managed a team of engineers, researched the market, and improved marketing and CRM efficiency by 20%.</li>
+                    </ul>
+                </div>
+                 <div class="assignment-item">
+                    <h3>Castle Coch | Engineering Intern (Game Development)</h3>
+                    <p class="date-range">July 2023 - September 2023</p>
+                    <ul>
+                        <li>Led cross-functional teams, product roadmapping, OKRs, execution, client requirements, and launch from 0 to 1.</li>
+                        <li>Mentored game development beginners to aid in learning new technologies, completing project 2 weeks earlier.</li>
+                    </ul>
+                </div>
+                <div class="assignment-item">
+                    <h3>Share Oxford | Technical Business Analyst Intern (Data Platform)</h3>
+                    <p class="date-range">June 2023 - August 2023</p>
+                    <ul>
+                        <li>Developed an entrepreneurial investigation into trends using analytics to uncover 50% more actionable insights.</li>
+                    </ul>
+                </div>
+                <div class="assignment-item">
+                    <h3>Cardiff Business School | Quantitative Research Assistant (Market Sentiment Analysis)</h3>
+                    <p class="date-range">May 2023 - July 2023</p>
+                    <ul>
+                        <li>Quantified qualitative data using artificial intelligence and NLP techniques, then accelerating research by over 33%.</li>
+                        <li>Applied statistical methods and stochastic processes to analyse and enhance market models, reducing bias by 50%.</li>
+                    </ul>
+                </div>
+                 <div class="assignment-item">
+                    <h3>Spartificial | Machine Learning Intern (Space Exploration)</h3>
+                    <p class="date-range">August 2022 - September 2022</p>
+                    <ul>
+                        <li>Modelled planetary data, optimised machine learning, and communicated feature engineering experimental design.</li>
+                         <li>Leveraged deep learning architectures and unsupervised learning, sped traditional exploratory data analysis by 30%.</li>
+                    </ul>
+                </div>
+                 <div class="assignment-item">
+                    <h3>Cutshort | Product Management Intern (Enterprise AI)</h3>
+                     <p class="date-range">May 2022 - July 2022</p>
+                    <ul>
+                        <li>Communicated user needs to marketing, design, engineering, and legal teams, contributing to 50% of new PRDs.</li>
+                        <li>Initiated and followed through a strategic partnership with a 1000x larger community, forming a lasting impact.</li>
+                    </ul>
+                </div>
+                 <div class="assignment-item">
+                    <h3>Chezuba | User Interface Design and Software Engineering Intern (Blockchain, Sustainability)</h3>
+                     <p class="date-range">March 2022 – May 2022</p>
+                    <ul>
+                        <li>Programmed using Agile UCD methods to gain insight into user-obsessed thinking at diverse international NGOs.</li>
+                    </ul>
+                </div>
+                <!-- ... Add ALL other experiences here in the same format ... -->
+            </section>
+
+            <section id="innie-projects">
+                <h2>IV. Special Projects Division</h2>
+                <!-- Repeat this .project-item structure for EACH project -->
+                <div class="project-item">
+                    <h3>Quantum Computing Error Reduction Using Logic Gate Simulations | Thesis</h3>
+                    <p class="date-range">September 2024 – May 2025</p>
+                    <ul>
+                        <li>Training models using reinforcement learning to understand noise patterns and apply dynamic error-mitigation.</li>
+                    </ul>
+                </div>
+                 <div class="project-item">
+                    <h3>Blockchain Healthcare for Early Dementia Detection | Data Lead</h3>
+                    <p class="date-range">April 2025</p>
+                    <ul>
+                        <li>Utilised smart contracts for sensitive data security, machine learning for predictive analytics and personalisation.</li>
+                    </ul>
+                </div>
+                 <div class="project-item">
+                    <h3>Generative AI for Maps | Personal Project</h3>
+                     <p class="date-range">September 2024 – January 2025</p>
+                    <ul>
+                        <li>Implemented feedback loops with probabilistic models to analyse user behaviour patterns and optimise design.</li>
+                    </ul>
+                </div>
+                 <div class="project-item">
+                    <h3>User Experience Study | Design Lead</h3>
+                     <p class="date-range">September 2024 – January 2025</p>
+                    <ul>
+                        <li>Enhanced features and products based on engagement, defined metrics, holistically evaluated “aha!" moments.</li>
+                    </ul>
+                </div>
+                 <div class="project-item">
+                    <h3>Ecofriendly Pet Products Marketplace | Go-To-Market Lead</h3>
+                    <p class="date-range">September 2024 - January 2025</p>
+                    <ul>
+                        <li>Strategised with internal, business, and user goals, increasing alignment by 50%, softening risks and tradeoffs.</li>
+                    </ul>
+                </div>
+                <div class="project-item">
+                     <h3>Human Computer Interaction Paper | Research Lead</h3>
+                     <p class="date-range">February 2024 – May 2024</p>
+                    <ul>
+                        <li>Defined roles for team, allocated KPIs that aligned with project roadmap, and reduced estimated time by 40%.</li>
+                    </ul>
+                </div>
+                <div class="project-item">
+                    <h3>Night Time Economy App | Product Management Lead</h3>
+                    <p class="date-range">September 2023 – May 2024</p>
+                    <ul>
+                         <li>Directed design, engineering, and user research, reducing interteam friction by 30%, and authored 100% of PRD.</li>
+                    </ul>
+                </div>
+                 <div class="project-item">
+                    <h3>Internet of Things Device | Engineering Lead</h3>
+                     <p class="date-range">February 2023 – May 2023</p>
+                    <ul>
+                        <li>Managed a team of engineers and delivered project within a 3-month timeline, reducing technical errors by 35%.</li>
+                    </ul>
+                </div>
+                <div class="project-item">
+                    <h3>Boss Battle Game | Product Engineer</h3>
+                    <p class="date-range">September 2022 – January 2023</p>
+                    <ul>
+                         <li>Developed Python scripts to optimise lag by 20% and collaborated with designers, users, and other engineers.</li>
+                    </ul>
+                </div>
+                <!-- ... Add ALL other projects here ... -->
+            </section>
+
+             <section id="innie-recognition">
+                <h2>V. Performance & Compliance Recognition</h2>
+                 <div class="recognition-category">
+                    <strong>Technology Track Achievements:</strong> 1st Airbus CTF, 2nd Huawei Arena, 3rd BAE Systems Hackathon, 3rd Nationwide, DTII 9th in UK.
+                </div>
+                 <div class="recognition-category">
+                    <strong>Business Acumen Commendations:</strong> 1st at the TfW Product Speedathon, £1000 raised for start-up idea, CBP Finalist, fintech speaker.
+                </div>
+            </section>
+        </div>
+
+        <!-- Phase 3: The "Outie" View (Visitor Pass) -->
+        <div id="outie-view" class="portfolio-view">
+             <header class="outie-header">
+                 <h1>Hello, I'm Dhruvil Raval</h1>
+                 <p>Welcome! Here's a bit more about me outside the usual metrics.</p>
+                 <p>Contact: +44 7990480660 | csdhruvil@gmail.com | linkedin.com/in/dhruvilraval/</p>
+            </header>
+
+            <section id="outie-passions">
+                <h2>Passions & Pursuits</h2>
+                <div class="passion-item">
+                    <strong>Data-Driven Trading:</strong> Exploring markets through strategic analysis and data insights.
+                </div>
+                <div class="passion-item">
+                    <strong>Filmmaking:</strong> Bringing stories to life - proud creator of award-winning short films.
+                </div>
+                 <div class="passion-item">
+                    <strong>Dancing:</strong> Expressing creativity through movement, including choreography and musical theatre involvement.
+                </div>
+            </section>
+
+            <section id="outie-community">
+                <h2>Community & Connection</h2>
+                 <div class="community-item">
+                    <strong>Mentorship:</strong> Passionate about sharing knowledge. Tutored Physics (covering ML, probability), mentored Language learners, and guided beginner Game Developers (Castle Coch). Focused on helping others reach their goals.
+                 </div>
+                <div class="community-item">
+                    <strong>STEM Education:</strong> Designed and delivered hands-on STEM workshops (software engineering, robotics) for schools with Reaching Wider Community Outreach.
+                </div>
+                <div class="community-item">
+                     <strong>Media Entrepreneurship (YouTube Channel):</strong> Built and managed a channel using data-driven strategies to achieve 75 million views and a 1000x revenue increase. Streamlined production workflow for over 900 hours of content (Oct 2016 - Mar 2022).
+                 </div>
+                 <div class="community-item">
+                     <strong>Founder Advising:</strong> Enjoy supporting innovation. Advised for swsh (Peter Thiel Fellowship Funded), Vance (Y Combinator W22), and participated in Founders in Residence.
+                 </div>
+                 <div class="community-item">
+                     <strong>Teaching Assistance (Cardiff Uni):</strong> Assisted teaching university-level Computer Science courses (AI, OS, Computation).
+                 </div>
+            </section>
+
+            <section id="outie-journey">
+                 <h2>Foundations & Early Steps</h2>
+                 <div class="journey-item">
+                     <strong>Cardiff University (BSc Computer Science):</strong> Building a strong technical foundation (Predicted First Class, Scholarship). Explored diverse topics from HCI and AI to Cybersecurity and Database Management. (Graduating June 2025).
+                 </div>
+                 <div class="journey-item">
+                     <strong>Early Experiences & Skill Building:</strong> Gained valuable experience through internships focusing on Strategy & E-commerce (Shoreditch Repairs), Machine Learning in Space Exploration (Spartificial), Enterprise AI Product Management (Cutshort), and UI/Software Engineering with a global perspective (Chezuba).
+                 </div>
+            </section>
+
+             <section id="outie-explorations">
+                <h2>Creative & Technical Explorations (Projects)</h2>
+                 <p>I love tackling interesting problems. Some projects I've worked on:</p>
+                 <ul>
+                    <li><strong>Quantum Computing Error Reduction (Thesis):</strong> Using RL to tackle quantum noise.</li>
+                    <li><strong>Blockchain for Dementia Detection:</strong> Exploring secure, ML-driven healthcare solutions.</li>
+                    <li><strong>Generative AI for Maps:</strong> Building intelligent map features based on user behaviour.</li>
+                    <li><strong>User Experience Deep Dive:</strong> Focusing on user engagement and defining key "aha!" moments.</li>
+                    <li><strong>Eco-friendly Pet Products Marketplace (Go-To-Market):</strong> Balancing business, user needs, and internal goals.</li>
+                    <li><strong>Human Computer Interaction Research:</strong> Streamlining teamwork and project planning.</li>
+                    <li><strong>Night Time Economy App (PM Lead):</strong> Leading product development from concept through research and design.</li>
+                    <li><strong>Internet of Things Device (Eng Lead):</strong> Managing engineering delivery and reducing technical errors.</li>
+                    <li><strong>Boss Battle Game (Product Engineer):</strong> Optimizing game performance and collaborating across disciplines.</li>
+                 </ul>
+            </section>
+
+            <section id="outie-leadership">
+                 <h2>Leadership & Recognition Highlights</h2>
+                 <p>Proud of achievements in technical competitions (Airbus CTF, Huawei Arena, BAE Systems Hackathon) and business challenges (TfW Product Speedathon Winner, CBP Finalist).</p>
+            </section>
+
+        </div> <!-- /outie-view -->
+
+    </div> <!-- /portfolio-container -->
+
+    <script src="script.js"></script>
 </body>
 </html>
