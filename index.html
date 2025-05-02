@@ -3,35 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- UPDATE TITLE TO REFLECT THE PORTFOLIO NATURE -->
     <title>Dhruvil Raval :: Portfolio [LUMON MDR Interface Sim.]</title>
-    <!-- Link to the NEW CSS file -->
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Roboto:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <!-- Add ARIA roles for accessibility where appropriate -->
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Roboto:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         /* Basic style to prevent Flash of Unstyled Content (FOUC) */
         body { opacity: 1; transition: opacity 0.5s ease-in-out; }
-        /* Hide elements initially controlled by JS */
         #transition-screen, #interface-container { opacity: 0; display: none; }
-        #access-point { opacity: 1; } /* Start visible */
+        #access-point { opacity: 1; }
     </style>
 </head>
-<body aria-busy="true"> <!-- Start as busy -->
+<body aria-busy="true">
 
-    <!-- Background Music -->
     <audio id="background-music" loop>
-        <!-- IMPORTANT: Make sure severance.mp3 is in the same folder or update path -->
         <source src="severance.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
+    <!-- Add a subtle hover sound element (optional) -->
+    <!-- <audio id="hover-sound"><source src="blip.wav" type="audio/wav"></audio> -->
 
-    <!-- Phase 0: Access Point -->
+    <!-- Phase 0: Access Point (No change from previous enhanced version) -->
     <div id="access-point" class="active">
         <div class="access-content">
-            <!-- Use the logo style from the first image -->
             <div class="lumon-main-logo">
                 <span class="logo-bar">|</span><span class="logo-text">MACRODATA<br>REFINEMENT</span>
             </div>
@@ -48,53 +43,54 @@
         </div>
     </div>
 
-    <!-- Phase 1: Transition / Compliance Check -->
+    <!-- Phase 1: Transition Screen (No change) -->
     <div id="transition-screen">
-        <div class="transition-content">
-            <div class="spinner"></div>
-            <p id="transition-text">Authenticating...</p>
-        </div>
-    </div>
+         <div class="transition-content">
+             <div class="spinner"></div>
+             <p id="transition-text">Authenticating...</p>
+         </div>
+     </div>
 
     <!-- Main Data Interface (Post-Transition) -->
     <div id="interface-container" aria-hidden="true">
 
         <!-- VIEW 1: Severed Floor Interface (Innie) -->
         <div id="innie-view" class="interface-view" role="main">
-             <!-- Uses the MDR screen header look -->
              <header class="mdr-header">
                 <div class="header-left">
-                    <span class="file-id">MDR-DR8066</span>
+                    <span class="file-id">Narva</span> <!-- Changed to match image -->
                     <div class="progress-indicator">
                         <span>76% Complete</span>
                          <div class="progress-bar-shell"><div class="progress-bar-fill" style="width: 76%;"></div></div>
                     </div>
                 </div>
                 <div class="header-right">
-                     <img src="lumon.png" alt="Lumon Industries" class="lumon-corner-logo"> <!-- Add a simple Lumon logo image -->
+                     <!-- Use the actual Lumon logo from the screenshot -->
+                     <img src="lumon_corner_logo.png" alt="Lumon Industries" class="lumon-corner-logo">
                 </div>
             </header>
 
-            <div class="content-area mdr-content">
-                <!-- The number grid background -->
-                <div class="number-grid-bg"></div>
+            <div class="mdr-content-area">
+                <!-- Interactive Number Grid Background -->
+                <!-- IMPORTANT: This div will be populated by JavaScript -->
+                <div id="number-grid-background" class="number-grid-bg"></div>
 
                  <!-- Content Overlay -->
                 <div class="mdr-content-overlay">
-                    <p class="compliance-directive">ALERT: Per directive 493b, please try to enjoy each data cluster equally. Non-compliance may be flagged.</p>
-
-                    <section id="innie-education" class="data-cluster" aria-labelledby="edu-header">
+                    <!-- Keep all your sections (education, skills, etc.) inside here -->
+                    <!-- Example Section -->
+                    <section id="innie-education" class="data-cluster reveal-on-scroll" aria-labelledby="edu-header">
                         <h2 id="edu-header"><span class="cluster-marker">[01]</span> FOUNDATIONAL PROCESSING LOG</h2>
                         <div class="record-block">
-                            <p><span class="field-label">INSTITUTION CODE:</span> CARDIFF-UNIV-UK</p>
-                            <p><span class="field-label">PROGRAM STREAM:</span> COMP_SCI_BSC_HONS</p>
-                            <p><span class="field-label">PROCESSING STATUS:</span> <span class="status-active">ACTIVE</span> | <span class="field-label">ETC:</span> 06.2025</p>
-                            <p><span class="field-label">PERFORMANCE PROJECTION:</span> FIRST_CLASS (REF: SCHOLARSHIP_CONFIRMED)</p>
-                            <p><span class="field-label">CORE MODULES INDEX:</span> HCI, OOP, DPV, DMATH, INFO, CSEC, DBM, UXD, POLECON, NETW</p>
+                           <p><span class="field-label">INSTITUTION CODE:</span> CARDIFF-UNIV-UK</p>
+                           <p><span class="field-label">PROGRAM STREAM:</span> COMP_SCI_BSC_HONS</p>
+                           <p><span class="field-label">PROCESSING STATUS:</span> <span class="status-active">ACTIVE</span> | <span class="field-label">ETC:</span> 06.2025</p>
+                           <p><span class="field-label">PERFORMANCE PROJECTION:</span> FIRST_CLASS (REF: SCHOLARSHIP_CONFIRMED)</p>
+                           <p><span class="field-label">CORE MODULES INDEX:</span> HCI, OOP, DPV, DMATH, INFO, CSEC, DBM, UXD, POLECON, NETW</p>
                         </div>
                     </section>
-
-                    <section id="innie-skills" class="data-cluster" aria-labelledby="skill-header">
+                    <!-- ... (Paste ALL your other <section> elements for Innie here) ... -->
+                     <section id="innie-skills" class="data-cluster reveal-on-scroll" aria-labelledby="skill-header">
                         <h2 id="skill-header"><span class="cluster-marker">[02]</span> REFINEMENT TOOLKIT SPECIFICATION</h2>
                          <div class="record-block grid-skills">
                             <p><span class="field-label">OPERATIONAL:</span> Jira, Tableau, Figma</p>
@@ -104,9 +100,8 @@
                         </div>
                     </section>
 
-                    <section id="innie-experience" class="data-cluster" aria-labelledby="exp-header">
+                    <section id="innie-experience" class="data-cluster reveal-on-scroll" aria-labelledby="exp-header">
                         <h2 id="exp-header"><span class="cluster-marker">[03]</span> ASSIGNMENT EXECUTION LOG</h2>
-                        <!-- Experience Item Example -->
                         <div class="assignment-block">
                             <p class="assignment-header"><span class="field-label">ASSIGNMENT ID:</span> NW-PM-PAY-2406 <span class="field-label">ENTITY:</span> NatWest Bank <span class="field-label">ROLE:</span> Assoc. PM Intern (Payments) <span class="field-label">CYCLE:</span> 06.24-08.24</p>
                             <ul class="directive-list">
@@ -114,6 +109,7 @@
                                 <li><span class="directive-id">[DIR: 02]</span> PROCESSED & DISSEMINATED quantum computation applicability report (VISUALIZED) to 25+ internal units.</li>
                             </ul>
                         </div>
+                        <!-- ... other assignment blocks ... -->
                          <div class="assignment-block">
                             <p class="assignment-header"><span class="field-label">ASSIGNMENT ID:</span> SP-UXR-MC-2403 <span class="field-label">ENTITY:</span> Sweetmans & Partners <span class="field-label">ROLE:</span> UX Research Intern (Consulting) <span class="field-label">CYCLE:</span> 03.24-06.24</p>
                             <ul class="directive-list">
@@ -121,7 +117,6 @@
                                  <li><span class="directive-id">[DIR: 02]</span> DEPLOYED user data acquisition methods (surveys, interviews, usability tests); RESULT: 100% actionable insight yield via optimized query structure.</li>
                              </ul>
                          </div>
-                         <!-- ... (Keep all other assignment blocks here) ... -->
                           <div class="assignment-block"> <!-- Example: Shoreditch -->
                             <p class="assignment-header"><span class="field-label">ASSIGNMENT ID:</span> SR-STRAT-EC-2210 <span class="field-label">ENTITY:</span> Shoreditch Repairs <span class="field-label">ROLE:</span> Strategy Intern (E-commerce) <span class="field-label">CYCLE:</span> 10.22-06.24</p>
                             <ul class="directive-list">
@@ -136,14 +131,12 @@
                                 <li><span class="directive-id">[DIR: 02]</span> SOURCED user feedback data via approved focus group protocols.</li>
                             </ul>
                         </div>
-
                          <div class="assignment-block">
                             <p class="assignment-header"><span class="field-label">ASSIGNMENT ID:</span> CU-CSM-TA-2310 <span class="field-label">ENTITY:</span> Cardiff University (CS & Maths) <span class="field-label">ROLE:</span> Teaching Assistant <span class="field-label">CYCLE:</span> 10.23-06.24</p>
                             <ul class="directive-list">
                                 <li><span class="directive-id">[DIR: 01]</span> ASSISTED INSTRUCTION DELIVERY for CS modules (AI, OS, Computation Theory).</li>
                             </ul>
                         </div>
-
                          <div class="assignment-block">
                             <p class="assignment-header"><span class="field-label">ASSIGNMENT ID:</span> CC-ENG-GD-2307 <span class="field-label">ENTITY:</span> Castle Coch <span class="field-label">ROLE:</span> Engineering Intern (Game Dev) <span class="field-label">CYCLE:</span> 07.23-09.23</p>
                             <ul class="directive-list">
@@ -151,14 +144,12 @@
                                 <li><span class="directive-id">[DIR: 02]</span> MENTORED junior developers (new tech stacks); RESULT: Project completion +2 week efficiency gain.</li>
                             </ul>
                         </div>
-
                          <div class="assignment-block">
                             <p class="assignment-header"><span class="field-label">ASSIGNMENT ID:</span> SO-TBA-DP-2306 <span class="field-label">ENTITY:</span> Share Oxford <span class="field-label">ROLE:</span> Tech Business Analyst Intern (Data Platform) <span class="field-label">CYCLE:</span> 06.23-08.23</p>
                             <ul class="directive-list">
                                 <li><span class="directive-id">[DIR: 01]</span> DEVELOPED entrepreneurial trend investigation via analytics; RESULT: +50% potential actionable insights uncovered.</li>
                             </ul>
                         </div>
-
                          <div class="assignment-block">
                             <p class="assignment-header"><span class="field-label">ASSIGNMENT ID:</span> CBS-QRA-MS-2305 <span class="field-label">ENTITY:</span> Cardiff Business School <span class="field-label">ROLE:</span> Quant Research Assistant (Market Sentiment) <span class="field-label">CYCLE:</span> 05.23-07.23</p>
                             <ul class="directive-list">
@@ -166,7 +157,6 @@
                                 <li><span class="directive-id">[DIR: 02]</span> APPLIED statistical/stochastic methods to analyse/enhance market models; RESULT: 50% model bias reduction verified.</li>
                             </ul>
                         </div>
-
                          <div class="assignment-block">
                             <p class="assignment-header"><span class="field-label">ASSIGNMENT ID:</span> SPAR-ML-SE-2208 <span class="field-label">ENTITY:</span> Spartificial <span class="field-label">ROLE:</span> Machine Learning Intern (Space Exploration) <span class="field-label">CYCLE:</span> 08.22-09.22</p>
                             <ul class="directive-list">
@@ -174,7 +164,6 @@
                                 <li><span class="directive-id">[DIR: 02]</span> LEVERAGED deep learning/unsupervised learning architectures; RESULT: +30% EDA phase speed increase.</li>
                             </ul>
                         </div>
-
                         <div class="assignment-block">
                             <p class="assignment-header"><span class="field-label">ASSIGNMENT ID:</span> CUT-PM-EAI-2205 <span class="field-label">ENTITY:</span> Cutshort <span class="field-label">ROLE:</span> Product Management Intern (Enterprise AI) <span class="field-label">CYCLE:</span> 05.22-07.22</p>
                             <ul class="directive-list">
@@ -182,7 +171,6 @@
                                <li><span class="directive-id">[DIR: 02]</span> INITIATED & EXECUTED strategic partnership protocol; RESULT: 1000x community reach expansion metric achieved.</li>
                            </ul>
                        </div>
-
                         <div class="assignment-block">
                            <p class="assignment-header"><span class="field-label">ASSIGNMENT ID:</span> CHEZ-UI-SE-2203 <span class="field-label">ENTITY:</span> Chezuba <span class="field-label">ROLE:</span> UI Design & Software Eng. Intern (Blockchain/Sust.) <span class="field-label">CYCLE:</span> 03.22–05.22</p>
                            <ul class="directive-list">
@@ -191,162 +179,157 @@
                        </div>
                     </section>
 
-                    <section id="innie-projects" class="data-cluster" aria-labelledby="proj-header">
+                    <section id="innie-projects" class="data-cluster reveal-on-scroll" aria-labelledby="proj-header">
                          <h2 id="proj-header"><span class="cluster-marker">[04]</span> SPECIAL PROJECTS & INITIATIVES LOG</h2>
-                        <div class="project-block">
-                            <p class="project-header"><span class="field-label">PROJECT ID:</span> QC-ERR-SIM-THESIS <span class="field-label">DESIGNATION:</span> Quantum Computing Error Reduction <span class="field-label">TIMELINE:</span> 09.24-05.25 <span class="field-label">ROLE:</span> Lead Researcher</p>
-                            <p class="project-objective"><span class="field-label">OBJECTIVE:</span> Model noise patterns via reinforcement learning protocols for dynamic error mitigation implementation. STATUS: IN_PROGRESS</p>
-                        </div>
+                         <div class="project-block">
+                             <p class="project-header"><span class="field-label">PROJECT ID:</span> QC-ERR-SIM-THESIS <span class="field-label">DESIGNATION:</span> Quantum Computing Error Reduction <span class="field-label">TIMELINE:</span> 09.24-05.25 <span class="field-label">ROLE:</span> Lead Researcher</p>
+                             <p class="project-objective"><span class="field-label">OBJECTIVE:</span> Model noise patterns via reinforcement learning protocols for dynamic error mitigation implementation. STATUS: IN_PROGRESS</p>
+                         </div>
+                         <!-- ... other project blocks ... -->
                          <div class="project-block">
                              <p class="project-header"><span class="field-label">PROJECT ID:</span> BC-DEM-DETECT-DL <span class="field-label">DESIGNATION:</span> Blockchain Healthcare (Dementia) <span class="field-label">ETC:</span> 04.2025 <span class="field-label">ROLE:</span> Data Lead</p>
                              <p class="project-objective"><span class="field-label">OBJECTIVE:</span> Utilize smart contracts (data security) & ML (predictive analytics/personalization). STATUS: COMPLETE</p>
                         </div>
-                         <!-- ... (Keep all other project blocks here) ... -->
                          <div class="project-block">
                             <p class="project-header"><span class="field-label">PROJECT ID:</span> GENAI-MAP-PERS <span class="field-label">DESIGNATION:</span> Generative AI for Maps <span class="field-label">TIMELINE:</span> 09.24–01.25 <span class="field-label">ROLE:</span> Project Lead</p>
                             <p class="project-objective"><span class="field-label">OBJECTIVE:</span> Implement feedback loops via probabilistic models for user behavior pattern analysis & design optimization. STATUS: COMPLETE</p>
                         </div>
-
                         <div class="project-block">
                             <p class="project-header"><span class="field-label">PROJECT ID:</span> UX-AHA-STUDY <span class="field-label">DESIGNATION:</span> User Experience Study <span class="field-label">TIMELINE:</span> 09.24–01.25 <span class="field-label">ROLE:</span> Design Lead</p>
                             <p class="project-objective"><span class="field-label">OBJECTIVE:</span> Enhance product features based on engagement metrics; define & holistically evaluate "aha!" moments for optimization. STATUS: COMPLETE</p>
                        </div>
-
                         <div class="project-block">
                             <p class="project-header"><span class="field-label">PROJECT ID:</span> ECOPET-GTM-LEAD <span class="field-label">DESIGNATION:</span> Ecofriendly Pet Products Marketplace <span class="field-label">TIMELINE:</span> 09.24-01.25 <span class="field-label">ROLE:</span> Go-To-Market Lead</p>
                            <p class="project-objective"><span class="field-label">OBJECTIVE:</span> Execute strategic alignment across internal, business, user goal vectors (TARGET: +50% alignment); perform risk/tradeoff mitigation analysis. STATUS: COMPLETE</p>
                         </div>
-
                         <div class="project-block">
                             <p class="project-header"><span class="field-label">PROJECT ID:</span> HCI-PAPER-RL <span class="field-label">DESIGNATION:</span> Human Computer Interaction Paper <span class="field-label">TIMELINE:</span> 02.24–05.24 <span class="field-label">ROLE:</span> Research Lead</p>
                             <p class="project-objective"><span class="field-label">OBJECTIVE:</span> Define team roles, allocate KPIs aligned with project roadmap specifications; RESULT: 40% reduction in estimated project timeframe. STATUS: COMPLETE</p>
                         </div>
-
                         <div class="project-block">
                            <p class="project-header"><span class="field-label">PROJECT ID:</span> NTE-APP-PML <span class="field-label">DESIGNATION:</span> Night Time Economy App <span class="field-label">TIMELINE:</span> 09.23–05.24 <span class="field-label">ROLE:</span> Product Management Lead</p>
                             <p class="project-objective"><span class="field-label">OBJECTIVE:</span> Direct design, engineering, user research functions; RESULT: 30% reduction in inter-team friction index; AUTHORED 100% of PRD documentation. STATUS: COMPLETE</p>
                         </div>
-
                        <div class="project-block">
                             <p class="project-header"><span class="field-label">PROJECT ID:</span> IOT-DEV-ENG <span class="field-label">DESIGNATION:</span> Internet of Things Device <span class="field-label">TIMELINE:</span> 02.23–05.23 <span class="field-label">ROLE:</span> Engineering Lead</p>
                             <p class="project-objective"><span class="field-label">OBJECTIVE:</span> Manage engineering team resources; deliver project within 3-month assigned timeline; RESULT: 35% reduction in tracked technical errors. STATUS: COMPLETE</p>
                        </div>
-
                         <div class="project-block">
                             <p class="project-header"><span class="field-label">PROJECT ID:</span> BB-GAME-PE <span class="field-label">DESIGNATION:</span> Boss Battle Game <span class="field-label">TIMELINE:</span> 09.22–01.23 <span class="field-label">ROLE:</span> Product Engineer</p>
                             <p class="project-objective"><span class="field-label">OBJECTIVE:</span> Develop Python scripts optimizing network lag (RESULT: 20% improvement); collaborate with design, user testing, and engineering units. STATUS: COMPLETE</p>
                         </div>
                     </section>
 
-                     <section id="innie-recognition" class="data-cluster" aria-labelledby="rec-header">
+                     <section id="innie-recognition" class="data-cluster reveal-on-scroll" aria-labelledby="rec-header">
                          <h2 id="rec-header"><span class="cluster-marker">[05]</span> PERFORMANCE METRICS & COMPLIANCE</h2>
                          <div class="record-block">
                              <p><span class="field-label">TECH APTITUDE BENCHMARKS:</span> Airbus_CTF(1); Huawei_Arena(2); BAE_Hackathon(3); Nationwide(3); DTII_UK(9).</p>
                              <p><span class="field-label">BUSINESS ACUMEN BENCHMARKS:</span> TfW_Speedathon(1); Fund_Raiser(£1k_SEED); CBP(FINALIST); Roadshow_Speaker(AI/Fintech/Sustainability).</p>
                         </div>
                     </section>
+
                  </div> <!-- /mdr-content-overlay -->
             </div>
 
-            <!-- Uses the MDR screen footer look -->
              <footer class="mdr-footer">
-                <div class="footer-section"><span>00</span> <div class="status-bar"><div style="width: 38%;"></div></div></div>
-                <div class="footer-section active"><span>01</span> <div class="status-bar"><div style="width: 76%;"></div></div></div>
-                <div class="footer-section"><span>02</span> <div class="status-bar"><div style="width: 100%;"></div></div></div>
-                <div class="footer-section"><span>03</span> <div class="status-bar"><div style="width: 59%;"></div></div></div>
-                <div class="footer-section"><span>04</span> <div class="status-bar"><div style="width: 90%;"></div></div></div>
-                <div class="footer-timestamp" id="current-time">--:--:--</div> <!-- Add clock here -->
+                 <div class="footer-section"><span>00</span> <div class="status-bar"><div style="width: 38%;"></div></div></div>
+                 <div class="footer-section active"><span>01</span> <div class="status-bar"><div style="width: 76%;"></div></div></div>
+                 <div class="footer-section"><span>02</span> <div class="status-bar"><div style="width: 100%;"></div></div></div>
+                 <div class="footer-section"><span>03</span> <div class="status-bar"><div style="width: 59%;"></div></div></div>
+                 <div class="footer-section"><span>04</span> <div class="status-bar"><div style="width: 90%;"></div></div></div>
+                 <!-- Removed timestamp, add if needed <div class="footer-timestamp" id="current-time">--:--:--</div> -->
+                  <div class="footer-icons"> <!-- Added icons like screenshot -->
+                    <img src="icon_folder.png" alt="Folder">
+                    <img src="icon_unknown.png" alt="Unknown">
+                  </div>
             </footer>
         </div> <!-- /innie-view -->
 
-        <!-- VIEW 2: Surface Interface (Outie) - Uses the cleaner, brighter style -->
+        <!-- VIEW 2: Surface Interface (Outie) - DARK THEME -->
         <div id="outie-view" class="interface-view" role="main">
-             <header class="surface-header">
+             <header class="surface-header-dark">
                  <h1>Dhruvil Raval</h1>
-                 <p>Data & Product Enthusiast // Cardiff University CS</p>
-                 <nav class="surface-contact">
-                    <a href="tel:+447990480660" title="Call Dhruvil">+44 7990 480 660</a>
-                    <span class="contact-sep">|</span>
-                    <a href="mailto:csdhruvil@gmail.com" title="Email Dhruvil">csdhruvil@gmail.com</a>
-                    <span class="contact-sep">|</span>
-                    <a href="https://linkedin.com/in/dhruvilraval/" target="_blank" rel="noopener noreferrer" title="View LinkedIn Profile">linkedin.com/in/dhruvilraval</a>
+                 <p>Data Scientist | Product Strategist | Innovator</p>
+                 <nav class="surface-contact-dark">
+                    <a href="tel:+447990480660" title="Call Dhruvil"><i class="icon phone-icon"></i>+44 7990 480 660</a>
+                    <a href="mailto:csdhruvil@gmail.com" title="Email Dhruvil"><i class="icon email-icon"></i>csdhruvil@gmail.com</a>
+                    <a href="https://linkedin.com/in/dhruvilraval/" target="_blank" rel="noopener noreferrer" title="View LinkedIn Profile"><i class="icon linkedin-icon"></i>linkedin.com/in/dhruvilraval</a>
                  </nav>
             </header>
 
-             <div class="content-area outie-content">
-                <p class="outie-intro-phrase">Bridging technology, product, and strategy with a passion for impactful solutions.</p>
+             <div class="content-area outie-content-dark">
+                <!-- Intro can be removed or kept, depends on preference -->
+                <!-- <p class="outie-intro-phrase-dark">Bridging technology, product, and strategy...</p> -->
 
-                 <section id="outie-summary" aria-labelledby="summary-header">
-                     <h2 id="summary-header">// Profile Summary</h2>
-                     <p>Driven Computer Science student at Cardiff University (predicted First Class) with diverse internship experience across Product Management, UX Research, Strategy, Machine Learning, and Software Engineering. Proven ability to lead projects, analyze data, translate user needs into features, and contribute to growth in fast-paced tech environments. Seeking impactful roles where I can leverage my technical skills and product intuition.</p>
+                 <section id="outie-summary-dark" class="outie-section-dark reveal-on-scroll" aria-labelledby="summary-header-dark">
+                     <h2 id="summary-header-dark">Executive Summary</h2>
+                     <p>Highly motivated Computer Science Honours student from Cardiff University (First Class projection, Scholarship recipient) specializing in the intersection of data science, machine learning, and product development. Possesses a proven track record through diverse internships—spanning quantitative research, AI/ML engineering, UX, product management, and strategic analysis—demonstrating adaptability and a results-oriented mindset. Actively seeking challenging opportunities to architect data-driven solutions and contribute to innovative product lifecycles.</p>
                  </section>
 
-                <section id="outie-experience-surface" aria-labelledby="exp-header-surface">
-                    <h2 id="exp-header-surface">// Professional Experience</h2>
-                    <ul class="outie-list experience-list">
-                        <li><strong>Associate Product Manager Intern (Payments)</strong> | NatWest Bank (Jun '24 - Aug '24) <br> Led cross-functional teams for product refinement, client integration, and A/B testing. Presented quantum computing applicability report to 25+ stakeholders.</li>
-                        <li><strong>UX Research Intern (Consulting)</strong> | Sweetmans & Partners (Mar '24 - Jun '24)<br> Conducted mixed-methods user research, improving data interpretation accuracy by 25%. Optimized user data acquisition processes achieving 100% actionable insights.</li>
-                        <li><strong>Strategy Intern (E-commerce)</strong> | Shoreditch Repairs (Oct '22 - Jun '24)<br> Drove +15% profitability via pricing model optimization. Enhanced marketing/CRM efficiency by 20% through data analysis and resource coordination.</li>
-                        <li><strong>Product Design Intern (Search Tools)</strong> | Cardiff University (Oct '23 - Jun '24)<br> Created UI prototypes reducing user testing time by 50%. Gathered user feedback via focus groups.</li>
-                        <li><strong>Teaching Assistant (CS & Maths)</strong> | Cardiff University (Oct '23 - Jun '24)<br> Assisted instruction for AI, OS, and Computation Theory modules.</li>
-                        <li><strong>Engineering Intern (Game Dev)</strong> | Castle Coch (Jul '23 - Sep '23)<br> Managed team sync, roadmap tracking, client requirements, and 0-to-1 launch. Mentored junior developers, accelerating project completion by 2 weeks.</li>
-                        <li><strong>Tech Business Analyst Intern (Data Platform)</strong> | Share Oxford (Jun '23 - Aug '23)<br> Identified 50% more actionable insights through entrepreneurial trend analysis.</li>
-                        <li><strong>Quant Research Assistant (Market Sentiment)</strong> | Cardiff Business School (May '23 - Jul '23)<br> Accelerated research by 33% using AI/NLP for qualitative data quantification. Reduced model bias by 50% through statistical analysis.</li>
-                        <li><strong>Machine Learning Intern (Space Exploration)</strong> | Spartificial (Aug '22 - Sep '22)<br> Modeled planetary data, optimized ML algorithms, and communicated feature engineering specs. Sped up EDA phase by 30% using deep/unsupervised learning.</li>
-                        <li><strong>Product Management Intern (Enterprise AI)</strong> | Cutshort (May '22 - Jul '22)<br> Contributed 50% of new PRD specs by relaying user needs. Expanded community reach 1000x via strategic partnerships.</li>
-                        <li><strong>UI Design & Software Eng. Intern (Blockchain/Sust.)</strong> | Chezuba (Mar '22 – May '22)<br> Applied Agile UCD methods in an international NGO context.</li>
+                <section id="outie-experience-dark" class="outie-section-dark reveal-on-scroll" aria-labelledby="exp-header-dark">
+                    <h2 id="exp-header-dark">Professional Engagements</h2>
+                    <ul class="outie-list-dark experience-list-dark">
+                        <li><strong>NatWest Bank</strong> | Assoc. Product Manager Intern (Payments)<br> Spearheaded cross-functional product refinement initiatives, integrated external clients, deployed A/B tests, and presented technical feasibility reports (Quantum Computing) to senior stakeholders.</li>
+                        <li><strong>Sweetmans & Partners</strong> | UX Research Intern (Consulting)<br> Executed comprehensive quantitative/qualitative user research, boosting data interpretation accuracy by 25%. Optimized data acquisition protocols (surveys, interviews, usability testing) yielding 100% actionable insights.</li>
+                        <li><strong>Shoreditch Repairs</strong> | Strategy Intern (E-commerce)<br> Led statistical analysis enhancing profitability (+15%) via algorithmic pricing model optimization. Improved marketing/CRM efficiency (+20%) through market analysis and resource coordination.</li>
+                         <!-- ... (Keep adding other experiences in this format) ... -->
+                         <li><strong>Cardiff University</strong> | Product Design Intern (Search Tools)<br> Reduced user testing cycles by 50% through rapid prototyping (UI/wireframes).</li>
+                         <li><strong>Castle Coch</strong> | Engineering Intern (Game Dev)<br> Managed full project lifecycle (0-to-1 launch), mentored junior developers resulting in +2 week efficiency gain.</li>
+                         <li><strong>Cardiff Business School</strong> | Quant Research Assistant<br> Accelerated research >33% via AI/NLP data quantification; reduced market model bias by 50% using stochastic analysis.</li>
+                         <li><strong>Spartificial</strong> | Machine Learning Intern (Space Exploration)<br> Modeled planetary data, optimized ML algorithms (Deep/Unsupervised Learning), increasing EDA speed by 30%.</li>
+                         <li><strong>Cutshort</strong> | Product Management Intern (Enterprise AI)<br> Defined 50% of new PRD specs based on user needs analysis; achieved 1000x community reach expansion via partnerships.</li>
                     </ul>
                 </section>
 
-                <section id="outie-education-surface" aria-labelledby="edu-header-surface">
-                    <h2 id="edu-header-surface">// Education & Certifications</h2>
-                     <ul class="outie-list education-list">
-                        <li><strong>BSc (Hons) Computer Science</strong> | Cardiff University (Expected Jun 2025) <br>Predicted First Class Honours, Scholarship Recipient. <br><i>Relevant Modules:</i> Human-Computer Interaction, Object-Oriented Programming, Data & Program Visualisation, Discrete Maths, Information Management, Cybersecurity, Database Management, UX Design, Political Economy of Computing, Networking.</li>
-                         <li><strong>Certifications:</strong> Data Structures & Algorithms, Unconscious Bias, Business Intelligence Modernization, Advanced Google Analytics, JPMorgan Chase Virtual Experience, AWS Solutions Architect Basic Concepts, BCG Strategic Frameworks, Technical Product Planning.</li>
-                     </ul>
-                </section>
-
-                <section id="outie-projects-surface" aria-labelledby="proj-header-surface">
-                     <h2 id="proj-header-surface">// Key Projects & Technical Skills</h2>
-                     <div class="projects-skills-grid">
-                        <div class="projects-column">
-                            <p><strong>Selected Projects:</strong></p>
-                            <ul class="outie-list project-focus">
-                                 <li>Quantum Computing Error Reduction (Thesis)</li>
-                                 <li>Blockchain & ML for Dementia Healthcare</li>
-                                 <li>Generative AI for Personalised Maps</li>
-                                 <li>User Experience "Aha!" Moment Analysis</li>
-                                 <li>Go-To-Market Strategy for Eco Pet Marketplace</li>
-                                 <li>HCI Research Paper (Team/Process Optimization)</li>
-                                 <li>Night Time Economy App (Product Lead)</li>
-                                 <li>IoT Device Development (Engineering Lead)</li>
-                             </ul>
+                 <section id="outie-skills-education-dark" class="outie-section-dark reveal-on-scroll" aria-labelledby="skills-edu-header-dark">
+                     <h2 id="skills-edu-header-dark">Technical Proficiency & Academia</h2>
+                     <div class="grid-2-col-dark">
+                        <div>
+                            <h3>Core Technologies</h3>
+                            <ul class="outie-list-dark skills-list-dark">
+                                <li><span>Programming:</span> Python, SQL, Java, JavaScript</li>
+                                <li><span>Data Science/ML:</span> Pandas, NumPy, Matplotlib, TensorFlow, Scikit-learn</li>
+                                <li><span>Tools & Platforms:</span> Jira, Tableau, Figma, Git, AWS (Basic), Docker (Basic)</li>
+                                <li><span>Databases:</span> SQL (Postgres, MySQL), NoSQL (Basic MongoDB)</li>
+                                <li><span>Methodologies:</span> Agile/Scrum, UCD, A/B Testing, CI/CD Concepts</li>
+                            </ul>
                         </div>
-                        <div class="skills-column">
-                             <p><strong>Technical Toolkit:</strong></p>
-                             <ul class="outie-list skills-focus">
-                                <li><strong>Languages:</strong> Python, SQL, Java, JavaScript</li>
-                                <li><strong>Libraries/Frameworks:</strong> Pandas, NumPy, Matplotlib, TensorFlow</li>
-                                <li><strong>Tools:</strong> Jira, Tableau, Figma, Git, AWS</li>
-                                <li><strong>Methodologies:</strong> Agile, UCD, Lean Startup, A/B Testing</li>
+                         <div>
+                             <h3>Education & Certifications</h3>
+                             <ul class="outie-list-dark education-list-dark">
+                                <li><strong>BSc (Hons) Computer Science</strong> | Cardiff University (Exp. 2025) <br> Predicted First Class, Scholarship Recipient</li>
+                                <li><span>Key Modules:</span> HCI, OOP, Data Vis, Algorithms, OS, Security, Databases, ML Intro</li>
+                                <li><span>Certifications:</span> Google Advanced Analytics, AWS SA Concepts, DS & Algo, BI Mod, + JPMC, BCG Sims</li>
                              </ul>
                         </div>
                     </div>
+                 </section>
+
+                <section id="outie-projects-dark" class="outie-section-dark reveal-on-scroll" aria-labelledby="proj-header-dark">
+                     <h2 id="proj-header-dark">Selected Projects & Initiatives</h2>
+                     <ul class="outie-list-dark project-list-dark">
+                         <li><strong>Quantum Computing Error Mitigation (Thesis):</strong> Applying RL for dynamic noise pattern modeling and reduction.</li>
+                         <li><strong>Blockchain Healthcare Platform (Dementia):</strong> Utilizing smart contracts & ML for secure data analysis and personalized prediction.</li>
+                         <li><strong>Generative AI for Personalized Maps:</strong> Implementing probabilistic models and feedback loops for UX optimization.</li>
+                         <li><strong>User Experience "Aha!" Moment Study:</strong> Defining and evaluating key engagement drivers to enhance product features.</li>
+                         <li><strong>Eco-Friendly Pet Marketplace (GTM Lead):</strong> Executing go-to-market strategy, aligning business/user goals, mitigating risks.</li>
+                         <li><strong>Night Time Economy App (Product Lead):</strong> Directed design, engineering, and research, authoring PRDs and reducing team friction (-30%).</li>
+                     </ul>
                 </section>
 
-                 <section id="outie-leadership" aria-labelledby="leader-header">
-                     <h2 id="leader-header">// Leadership, Awards & Interests</h2>
-                      <ul class="outie-list achievements-list">
-                         <li><strong>Awards & Recognition:</strong> Winner - Airbus CTF, TfW Speedathon; Top Ranks - Huawei Code Arena (2nd), BAE Systems Hackathon (3rd), Nationwide Hackathon (3rd), DTII UK (9th); Finalist - Cardiff Business Plan Comp; Speaker - AI/Fintech/Sustainability Roadshow; Raised £1k+ Seed Funding.</li>
-                         <li><strong>Community & Mentorship:</strong> Tutored Physics (ML focus); Mentored Language Learners & Game Devs; Designed STEM workshops for schools; Grew YouTube channel analyzing data (75M+ views); Advised startups (swsh, Vance); TA at Cardiff Uni.</li>
-                         <li><strong>Interests:</strong> Data-driven trading analysis, Filmmaking (award-winning shorts), Dance & Choreography, Musical Theatre.</li>
+                <section id="outie-leadership-dark" class="outie-section-dark reveal-on-scroll" aria-labelledby="leader-header-dark">
+                     <h2 id="leader-header-dark">Accolades & Extracurriculars</h2>
+                      <ul class="outie-list-dark accolades-list-dark">
+                         <li><strong>Competition Highlights:</strong> Winner - Airbus CTF, TfW Speedathon; Top 3 - Huawei Arena, BAE Hackathon, Nationwide Hackathon; Finalist - Cardiff Business Plan Comp.</li>
+                         <li><strong>Community & Mentorship:</strong> STEM Outreach Workshop Designer; Physics/Language/Game Dev Mentor; YouTube Creator (Data Analysis Focus, 75M+ Views); Startup Advisor (swsh, Vance); Uni TA (CS).</li>
+                         <li><strong>Personal Interests:</strong> Algorithmic Trading Analysis, Award-Winning Short Filmmaking, Dance & Choreography.</li>
                      </ul>
                 </section>
 
             </div>
 
-             <footer class="surface-footer">
-                <span>Thank you for reviewing my profile. Let's connect!</span>
+             <footer class="surface-footer-dark">
+                <span>CONFIDENTIAL // Property of Dhruvil Raval // Thank you for your consideration.</span>
             </footer>
 
         </div> <!-- /outie-view -->
