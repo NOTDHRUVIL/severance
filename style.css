@@ -1,0 +1,260 @@
+/* Basic Reset & Severance Font */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f2f5; /* Light grey background */
+    color: #333;
+    line-height: 1.6;
+    /* Prevent scrollbars initially */
+    overflow: hidden;
+}
+
+/* Severance Color Palette */
+:root {
+    --lumon-blue: #0077c8;
+    --lumon-green: #00a98f;
+    --lumon-white: #ffffff;
+    --lumon-offwhite: #f8f9fa;
+    --lumon-grey: #d1d5db;
+    --lumon-dark-grey: #6b7280;
+    --text-color: #212529;
+    --header-color: #1a3b5d; /* A slightly corporate dark blue */
+    --outie-bg: #fdfdfd; /* Slightly warmer for outie */
+}
+
+/* Phase 1: Elevator Screen */
+#elevator-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--lumon-white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 100;
+    opacity: 1;
+    transition: opacity 0.8s ease-out;
+    /* visibility: visible;
+    transition: opacity 0.8s ease-out, visibility 0s linear 0s; */
+}
+
+#elevator-screen:not(.active) {
+    opacity: 0;
+    pointer-events: none; /* Allow clicking through when faded */
+     /* visibility: hidden;
+    transition: opacity 0.8s ease-out, visibility 0s linear 0.8s; */
+}
+
+
+.elevator-content h1 {
+    color: var(--header-color);
+    margin-bottom: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.elevator-content .subtitle {
+    color: var(--lumon-dark-grey);
+    margin-bottom: 40px;
+    font-size: 1.1em;
+}
+
+.elevator-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+.elevator-button {
+    padding: 15px 30px;
+    font-size: 1em;
+    font-weight: 700;
+    border: 2px solid;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 250px;
+}
+
+.elevator-button.recruiter {
+    border-color: var(--lumon-green);
+    color: var(--lumon-green);
+}
+
+.elevator-button.recruiter:hover {
+    background-color: var(--lumon-green);
+    color: var(--lumon-white);
+    box-shadow: 0 0 10px var(--lumon-green);
+}
+
+.elevator-button.visitor {
+    border-color: var(--lumon-blue);
+    color: var(--lumon-blue);
+}
+
+.elevator-button.visitor:hover {
+    background-color: var(--lumon-blue);
+    color: var(--lumon-white);
+    box-shadow: 0 0 10px var(--lumon-blue);
+}
+
+/* Main Portfolio Container */
+#portfolio-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: var(--lumon-offwhite);
+    border: 1px solid var(--lumon-grey);
+    opacity: 0; /* Hidden initially */
+    transition: opacity 0.8s ease-in;
+    display: none; /* Use JS to change to block/flex */
+}
+
+#portfolio-container.visible {
+    display: block; /* Or flex, grid etc. */
+    opacity: 1;
+}
+
+/* General Portfolio View Styling */
+.portfolio-view {
+    display: none; /* Hidden by default, shown by JS */
+}
+
+.portfolio-view.active {
+    display: block;
+}
+
+section {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed var(--lumon-grey);
+}
+
+section:last-child {
+    border-bottom: none;
+}
+
+h2 {
+    color: var(--header-color);
+    margin-bottom: 15px;
+    font-weight: 700;
+    border-bottom: 2px solid var(--lumon-blue);
+    padding-bottom: 5px;
+    display: inline-block;
+}
+
+h3 {
+    color: var(--lumon-dark-grey);
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+p, li {
+    margin-bottom: 8px;
+    color: var(--text-color);
+}
+
+ul {
+    list-style-position: inside;
+    padding-left: 10px; /* Adjust as needed */
+}
+
+strong {
+    font-weight: 700;
+}
+
+/* Innie Specific Styles */
+#innie-view {
+    /* Add any specific innie styles if needed */
+}
+
+.innie-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--lumon-grey);
+}
+.innie-header h1 {
+    color: var(--header-color);
+    font-size: 1.8em;
+    margin-bottom: 5px;
+}
+.innie-header p {
+    font-size: 0.9em;
+    color: var(--lumon-dark-grey);
+}
+
+
+.record-item,
+.assignment-item,
+.project-item,
+.recognition-category,
+.skill-category {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-left: 4px solid var(--lumon-green); /* Accent color */
+    background-color: var(--lumon-white);
+     box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+}
+.skill-category{
+     border-left: 4px solid var(--lumon-blue);
+}
+
+.date-range {
+    font-style: italic;
+    font-size: 0.9em;
+    color: var(--lumon-dark-grey);
+    margin-bottom: 10px;
+}
+
+/* Outie Specific Styles */
+#outie-view {
+    background-color: var(--outie-bg); /* Slightly different background */
+}
+
+.outie-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: var(--lumon-blue); /* Use a warmer accent */
+    color: var(--lumon-white);
+    border-radius: 5px;
+}
+.outie-header h1 {
+    margin-bottom: 10px;
+}
+.outie-header p {
+    color: var(--lumon-offwhite);
+}
+
+
+#outie-view h2 {
+     border-bottom: 2px solid var(--lumon-green); /* Different accent for outie */
+}
+
+.passion-item,
+.community-item,
+.journey-item {
+     margin-bottom: 15px;
+     padding: 10px;
+     border-bottom: 1px solid var(--lumon-grey);
+}
+.passion-item:last-child,
+.community-item:last-child,
+.journey-item:last-child {
+    border-bottom: none;
+}
+
+#outie-explorations ul {
+    list-style-type: disc; /* More conventional list */
+    padding-left: 25px;
+}
