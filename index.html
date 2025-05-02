@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LUMON ACCESS TERMINAL :: FILE MDR-DR8066</title>
-    <audio autoplay src="severance.mp3"></audio>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,7 +11,9 @@
     <!-- Add ARIA roles for accessibility where appropriate -->
 </head>
 <body aria-busy="true">
-
+    <audio id="background-music" loop>
+        <source src="severance.mp3" type="audio/mpeg">
+    </audio>
     <!-- Phase 0: Access Point -->
     <div id="access-point" class="active">
         <div class="access-content">
