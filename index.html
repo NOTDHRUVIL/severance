@@ -3,332 +3,201 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lumon Industries - Personnel File MDR-DR8066</title> {/* MDR File ID */}
+    <title>LUMON ACCESS TERMINAL :: FILE MDR-DR8066</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    {/* Rajdhani for Headers/MDR feel, Roboto for readability */}
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Roboto:wght@300;400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Add ARIA roles for accessibility where appropriate -->
 </head>
-<body>
+<body aria-busy="true">
 
-    <!-- Phase 1: The Elevator Entrance -->
-    <div id="elevator-screen" class="active">
-        <div class="elevator-content">
-            {/* Optional: Simple Lumon/MDR style logo */}
-            <div class="mdr-logo">
-                <span class="logo-bar">|</span>
-                <span class="logo-text">LUMON ACCESS PORTAL</span>
-            </div>
-            <p class="subtitle">Authenticating Access: File MDR-DR8066 (Raval, D.)</p>
-            <div class="elevator-buttons">
-                <button id="recruiter-btn" class="elevator-button recruiter">
-                    [ SECURED FLOOR ACCESS ]
+    <!-- Phase 0: Access Point -->
+    <div id="access-point" class="active">
+        <div class="access-content">
+            <div class="lumon-logo-minimal">LUMON</div>
+            <p class="status-text">Awaiting Credentials<span class="blinking-cursor">_</span></p>
+            <div class="access-buttons">
+                <button id="innie-access-btn" class="access-button innie-style">
+                    [ INITIATE SEVERANCE PROTOCOL ]
                 </button>
-                <button id="visitor-btn" class="elevator-button visitor">
-                    [ SURFACE PERMIT ]
+                <button id="outie-access-btn" class="access-button outie-style">
+                    [ REQUEST VISITOR PERMIT (SURFACE) ]
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- Main Portfolio Container (Initially Hidden) -->
-    <div id="portfolio-container">
+    <!-- Phase 1: Transition / Compliance Check -->
+    <div id="transition-screen">
+        <div class="transition-content">
+            <div class="spinner"></div>
+            <p id="transition-text">Authenticating...</p>
+        </div>
+    </div>
 
-        <!-- Phase 2: The "Innie" View (Recruiter Access / Severed Floor) -->
-        <div id="innie-view" class="portfolio-view">
-            <header class="innie-header">
-                <h1>MACRODATA REFINEMENT // SUBJECT FILE: RAVAL, D.</h1>
-                <p class="file-id">FILE ID: MDR-DR8066</p>
-                <p class="compliance-note">Compliance Use Only | Contact Ref: +44 7990480660 | Digital Comms: csdhruvil@gmail.com | External Profile: linkedin.com/in/dhruvilraval/</p>
+    <!-- Main Data Interface (Post-Transition) -->
+    <div id="interface-container" aria-hidden="true">
+
+        <!-- VIEW 1: Severed Floor Interface (Innie) -->
+        <div id="innie-view" class="interface-view" role="main">
+            <header class="lumon-header">
+                <span>LUMON OS v3.1</span>
+                <span>FILE: MDR-DR8066 :: RAVAL, D.</span>
+                <span id="current-time">--:--:--</span>
             </header>
 
-            <p class="intro-phrase">Please try to enjoy each data cluster equally.</p>
+            <div class="content-area">
+                <p class="compliance-directive">ALERT: Per directive 493b, attempt to enjoy each data cluster equally. Non-compliance may be flagged.</p>
 
-            <section id="innie-orientation">
-                <h2><span class="section-bar">|</span> FOUNDATIONAL PROCESSING (EDUCATION)</h2>
-                <div class="record-item">
-                    <h3>Institution: Cardiff University | UK Sector</h3>
-                    <p><strong>Program Stream:</strong> Computer Science (BSc Hons)</p>
-                    <p><strong>Processing Status:</strong> Active | <strong>Est. Cycle Completion:</strong> 06.2025</p>
-                    <p><strong>Performance Projection:</strong> First Class (Verified: Scholarship Allocation)</p>
-                    <p><strong>Core Modules Processed:</strong> Human Computer Interaction, Object Oriented Programming, Data Processing & Visualisation, Discrete Maths, Informatics, Cybersecurity, Database Management, User Experience Design, Political Economics, Network Protocols.</p>
-                </div>
-            </section>
+                <section id="innie-education" class="data-cluster" aria-labelledby="edu-header">
+                    <h2 id="edu-header"><span class="cluster-marker">[01]</span> FOUNDATIONAL PROCESSING LOG</h2>
+                    <div class="record-block">
+                        <p><span class="field-label">INSTITUTION CODE:</span> CARDIFF-UNIV-UK</p>
+                        <p><span class="field-label">PROGRAM STREAM:</span> COMP_SCI_BSC_HONS</p>
+                        <p><span class="field-label">PROCESSING STATUS:</span> <span class="status-active">ACTIVE</span> | <span class="field-label">ETC:</span> 06.2025</p>
+                        <p><span class="field-label">PERFORMANCE PROJECTION:</span> FIRST_CLASS (REF: SCHOLARSHIP_CONFIRMED)</p>
+                        <p><span class="field-label">CORE MODULES INDEX:</span> HCI, OOP, DPV, DMATH, INFO, CSEC, DBM, UXD, POLECON, NETW</p>
+                    </div>
+                </section>
 
-            <section id="innie-toolkit">
-                <h2><span class="section-bar">|</span> REFINEMENT TOOLKIT (SKILLS)</h2>
-                 <div class="skill-category">
-                    <strong>Operational Tools:</strong> Jira, Tableau, Figma
-                </div>
-                 <div class="skill-category">
-                    <strong>Processing Languages:</strong> Python, SQL, Java, JScript
-                </div>
-                 <div class="skill-category">
-                    <strong>Analytical Libraries:</strong> Pandas, NumPy, Matplotlib, TensorFlow
-                </div>
-                 <div class="skill-category">
-                    <strong>Lumon Endorsements (Certifications):</strong> Data Structures & Algorithms, Unconscious Bias Training, Business Intelligence Module, Advanced Google Analytics, JPMC Venture Capital Sim, AWS Solution Architecture Basics, BCG Strategy Consulting Frameworks, Technical Product Planning Protocol.
-                </div>
-            </section>
+                <section id="innie-skills" class="data-cluster" aria-labelledby="skill-header">
+                    <h2 id="skill-header"><span class="cluster-marker">[02]</span> REFINEMENT TOOLKIT SPECIFICATION</h2>
+                     <div class="record-block grid-skills">
+                        <p><span class="field-label">OPERATIONAL:</span> Jira, Tableau, Figma</p>
+                        <p><span class="field-label">PROCESSING:</span> Python, SQL, Java, JScript</p>
+                        <p><span class="field-label">ANALYTICAL LIBS:</span> Pandas, NumPy, Matplotlib, TensorFlow</p>
+                        <p><span class="field-label">CERTIFICATIONS (LUMON ENDORSED):</span> DS_ALGO, UNCONSCIOUS_BIAS, BI_MOD, ADV_G_ANALYTICS, JPMC_VC_SIM, AWS_SA_BASIC, BCG_STRAT_FW, TECH_PROD_PLAN_PROTO</p>
+                    </div>
+                </section>
 
-            <section id="innie-assignments">
-                <h2><span class="section-bar">|</span> DATA REFINEMENT ASSIGNMENTS (EXPERIENCE)</h2>
-                {/* Repeat this .assignment-item structure for EACH job */}
-                <div class="assignment-item">
-                    <h3>NatWest Bank | Associate Product Management Intern (Payments Workflow)</h3>
-                    <p class="date-range">Cycle: 06.2024 - 08.2024</p>
-                    <ul class="directives">
-                        <li><span class="directive-marker">></span> Executed cross-functional synergy for product refinement, external client integration, A/B testing protocols.</li>
-                        <li><span class="directive-marker">></span> Visualized, synthesized, and presented quantum computation applicability report to 25+ internal teams.</li>
-                    </ul>
-                </div>
-                 <div class="assignment-item">
-                    <h3>Sweetmans & Partners | UX Research Intern (Consulting Data Input)</h3>
-                    <p class="date-range">Cycle: 03.2024 - 06.2024</p>
-                     <ul class="directives">
-                         <li><span class="directive-marker">></span> Conducted user-centric analysis (quantitative/qualitative mix); achieved 25% improvement in data interpretation accuracy.</li>
-                         <li><span class="directive-marker">></span> Deployed surveys, interviews, usability tests; achieved 100% actionable insight generation via optimized query structuring.</li>
-                    </ul>
-                </div>
-                 <div class="assignment-item">
-                    <h3>Cardiff University | Product Design Intern (Internal Search Tools)</h3>
-                     <p class="date-range">Cycle: 10.2023 - 06.2024</p>
-                     <ul class="directives">
-                        <li><span class="directive-marker">></span> Generated UI prototypes/wireframes facilitating 50% reduction in user testing cycle time; sourced data via focus group protocols.</li>
-                    </ul>
-                </div>
-                 <div class="assignment-item">
-                    <h3>Cardiff University CS & Maths | Teaching Assistant (Knowledge Transfer)</h3>
-                     <p class="date-range">Cycle: 10.2023 - 06.2024</p>
-                     <ul class="directives">
-                        <li><span class="directive-marker">></span> Assisted instruction delivery for CS modules (AI, OS, Computation Theory).</li>
-                    </ul>
-                </div>
-                 <div class="assignment-item">
-                     <h3>Shoreditch Repairs | Strategy Intern (E-commerce Optimisation)</h3>
-                    <p class="date-range">Cycle: 10.2022 - 06.2024</p>
-                     <ul class="directives">
-                        <li><span class="directive-marker">></span> Led statistical analysis & applied strategic insights; optimized pricing model yielding 15% profitability increase.</li>
-                        <li><span class="directive-marker">></span> Coordinated engineering team resources, performed market analysis, improved marketing/CRM efficiency by 20%.</li>
-                    </ul>
-                </div>
-                 <div class="assignment-item">
-                     <h3>Castle Coch | Engineering Intern (Game Dev Pipeline)</h3>
-                     <p class="date-range">Cycle: 07.2023 - 09.2023</p>
-                     <ul class="directives">
-                        <li><span class="directive-marker">></span> Managed cross-functional team coordination, product roadmap definition, OKR tracking, client reqs fulfillment, 0-to-1 launch execution.</li>
-                        <li><span class="directive-marker">></span> Mentored junior developers on new tech stacks; project completed with 2-week time efficiency gain.</li>
-                    </ul>
-                </div>
-                 <div class="assignment-item">
-                     <h3>Share Oxford | Technical Business Analyst Intern (Data Platform Analysis)</h3>
-                     <p class="date-range">Cycle: 06.2023 - 08.2023</p>
-                     <ul class="directives">
-                        <li><span class="directive-marker">></span> Developed entrepreneurial trend investigation using analytics; uncovered 50% increase in actionable insight potential.</li>
-                    </ul>
-                </div>
-                 <div class="assignment-item">
-                     <h3>Cardiff Business School | Quant Research Assistant (Market Sentiment)</h3>
-                     <p class="date-range">Cycle: 05.2023 - 07.2023</p>
-                     <ul class="directives">
-                        <li><span class="directive-marker">></span> Quantified qualitative data via AI/NLP techniques; accelerated research output by >33%.</li>
-                         <li><span class="directive-marker">></span> Applied statistical/stochastic methods to analyze/enhance market models; reduced model bias by 50%.</li>
-                    </ul>
-                </div>
-                 <div class="assignment-item">
-                     <h3>Spartificial | Machine Learning Intern (Space Exploration Data)</h3>
-                     <p class="date-range">Cycle: 08.2022 - 09.2022</p>
-                     <ul class="directives">
-                        <li><span class="directive-marker">></span> Modeled planetary data sets, optimized ML algorithms, communicated feature engineering design specs.</li>
-                        <li><span class="directive-marker">></span> Leveraged deep learning/unsupervised learning architectures; achieved 30% speed increase in exploratory data analysis phase.</li>
-                    </ul>
-                </div>
-                <div class="assignment-item">
-                    <h3>Cutshort | Product Management Intern (Enterprise AI)</h3>
-                    <p class="date-range">Cycle: 05.2022 - 07.2022</p>
-                    <ul class="directives">
-                       <li><span class="directive-marker">></span> Relayed user needs to marketing, design, engineering, legal; contributed to 50% of new PRD specifications.</li>
-                       <li><span class="directive-marker">></span> Initiated and executed strategic partnership protocol; resulted in 1000x community reach expansion.</li>
-                   </ul>
-               </div>
-                <div class="assignment-item">
-                   <h3>Chezuba | UI Design & Software Eng. Intern (Blockchain/Sustainability App)</h3>
-                   <p class="date-range">Cycle: 03.2022 – 05.2022</p>
-                   <ul class="directives">
-                       <li><span class="directive-marker">></span> Implemented Agile UCD methods for programming tasks; gained insight into user-centric design within diverse international NGO context.</li>
-                   </ul>
-               </div>
-                <!-- Ensure ALL experiences are listed -->
-            </section>
+                <section id="innie-experience" class="data-cluster" aria-labelledby="exp-header">
+                    <h2 id="exp-header"><span class="cluster-marker">[03]</span> ASSIGNMENT EXECUTION LOG</h2>
+                    <!-- Experience Item Example -->
+                    <div class="assignment-block">
+                        <p class="assignment-header"><span class="field-label">ASSIGNMENT ID:</span> NW-PM-PAY-2406 <span class="field-label">ENTITY:</span> NatWest Bank <span class="field-label">ROLE:</span> Assoc. PM Intern (Payments) <span class="field-label">CYCLE:</span> 06.24-08.24</p>
+                        <ul class="directive-list">
+                            <li><span class="directive-id">[DIR: 01]</span> EXECUTED cross-functional synergy protocols: product refinement, external client integration, A/B test deployment.</li>
+                            <li><span class="directive-id">[DIR: 02]</span> PROCESSED & DISSEMINATED quantum computation applicability report (VISUALIZED) to 25+ internal units. STATUS: COMPLETE</li>
+                        </ul>
+                    </div>
+                     {/* <!-- Add ALL OTHER experience items using this EXACT structure --> */}
+                     <div class="assignment-block">
+                        <p class="assignment-header"><span class="field-label">ASSIGNMENT ID:</span> SP-UXR-MC-2403 <span class="field-label">ENTITY:</span> Sweetmans & Partners <span class="field-label">ROLE:</span> UX Research Intern (Consulting) <span class="field-label">CYCLE:</span> 03.24-06.24</p>
+                        <ul class="directive-list">
+                             <li><span class="directive-id">[DIR: 01]</span> CONDUCTED user-centric analysis (quant/qual mix); RESULT: +25% data interpretation accuracy.</li>
+                             <li><span class="directive-id">[DIR: 02]</span> DEPLOYED user data acquisition methods (surveys, interviews, usability tests); RESULT: 100% actionable insight yield via optimized query structure.</li>
+                         </ul>
+                     </div>
+                     {/* Add all other experiences using the assignment-block structure */}
+                      <div class="assignment-block"> <!-- Example: Shoreditch -->
+                        <p class="assignment-header"><span class="field-label">ASSIGNMENT ID:</span> SR-STRAT-EC-2210 <span class="field-label">ENTITY:</span> Shoreditch Repairs <span class="field-label">ROLE:</span> Strategy Intern (E-commerce) <span class="field-label">CYCLE:</span> 10.22-06.24</p>
+                        <ul class="directive-list">
+                            <li><span class="directive-id">[DIR: 01]</span> LED statistical analysis & strategic insight application; RESULT: +15% profitability metric via pricing model optimization (ALG_V2).</li>
+                            <li><span class="directive-id">[DIR: 02]</span> COORDINATED ENG resources, performed market analysis; RESULT: +20% marketing/CRM efficiency index.</li>
+                        </ul>
+                     </div>
+                </section>
 
-            <section id="innie-projects">
-                 <h2><span class="section-bar">|</span> NON-ROUTINE DATA PROCESSING (PROJECTS)</h2>
-                 {/* Repeat structure for projects */}
-                 <div class="project-item">
-                    <h3>Project QC-ERR-SIM | Quantum Computing Error Reduction</h3>
-                    <p class="date-range">Timeline: 09.2024 – 05.2025 | Role: Lead Researcher (Thesis)</p>
-                    <ul class="directives">
-                        <li><span class="directive-marker">></span> Objective: Model noise patterns via reinforcement learning for dynamic error mitigation.</li>
-                    </ul>
-                </div>
-                 <div class="project-item">
-                    <h3>Project BC-DEM-DETECT | Blockchain Healthcare (Dementia)</h3>
-                    <p class="date-range">Est. Completion: 04.2025 | Role: Data Lead</p>
-                    <ul class="directives">
-                        <li><span class="directive-marker">></span> Objective: Utilize smart contracts for data security & ML for predictive analytics/personalization.</li>
-                    </ul>
-                 </div>
-                 <div class="project-item">
-                    <h3>Project GENAI-MAP | Generative AI for Maps</h3>
-                    <p class="date-range">Timeline: 09.2024 – 01.2025 | Role: Personal Project Lead</p>
-                    <ul class="directives">
-                         <li><span class="directive-marker">></span> Objective: Implement feedback loops with probabilistic models for user behavior analysis and design optimization.</li>
-                     </ul>
-                 </div>
-                <div class="project-item">
-                    <h3>Project UX-AHA | User Experience Study</h3>
-                     <p class="date-range">Timeline: 09.2024 – 01.2025 | Role: Design Lead</p>
-                     <ul class="directives">
-                         <li><span class="directive-marker">></span> Objective: Enhance product features based on engagement metrics; define & evaluate "aha!" moments.</li>
-                    </ul>
-                </div>
-                 <div class="project-item">
-                    <h3>Project ECOPET-GTM | Ecofriendly Pet Products Marketplace</h3>
-                     <p class="date-range">Timeline: 09.2024 - 01.2025 | Role: Go-To-Market Lead</p>
-                    <ul class="directives">
-                        <li><span class="directive-marker">></span> Objective: Strategize alignment across internal, business, user goals (50% improvement targeted); mitigate risks/tradeoffs.</li>
-                    </ul>
-                 </div>
-                 <div class="project-item">
-                     <h3>Project HCI-PAPER | Human Computer Interaction Research</h3>
-                     <p class="date-range">Timeline: 02.2024 – 05.2024 | Role: Research Lead</p>
-                     <ul class="directives">
-                         <li><span class="directive-marker">></span> Objective: Define team roles, allocate KPIs aligned with roadmap, reduce estimated project time by 40%.</li>
-                     </ul>
-                 </div>
-                 <div class="project-item">
-                    <h3>Project NTE-APP | Night Time Economy App</h3>
-                     <p class="date-range">Timeline: 09.2023 – 05.2024 | Role: Product Management Lead</p>
-                     <ul class="directives">
-                        <li><span class="directive-marker">></span> Objective: Direct design, engineering, user research; reduce inter-team friction by 30%; authored 100% of PRD.</li>
-                    </ul>
-                 </div>
-                <div class="project-item">
-                     <h3>Project IOT-DEV | Internet of Things Device</h3>
-                     <p class="date-range">Timeline: 02.2023 – 05.2023 | Role: Engineering Lead</p>
-                     <ul class="directives">
-                        <li><span class="directive-marker">></span> Objective: Manage engineering team; deliver project within 3-month timeline; reduce technical errors by 35%.</li>
-                    </ul>
-                 </div>
-                 <div class="project-item">
-                     <h3>Project BB-GAME | Boss Battle Game</h3>
-                     <p class="date-range">Timeline: 09.2022 – 01.2023 | Role: Product Engineer</p>
-                     <ul class="directives">
-                         <li><span class="directive-marker">></span> Objective: Develop Python scripts optimizing lag by 20%; collaborate with design, user testing, engineering teams.</li>
-                     </ul>
-                 </div>
-                 {/* Add ALL other projects */}
-            </section>
+                <section id="innie-projects" class="data-cluster" aria-labelledby="proj-header">
+                     <h2 id="proj-header"><span class="cluster-marker">[04]</span> SPECIAL PROJECTS & INITIATIVES LOG</h2>
+                     {/* Project Item Example */}
+                    <div class="project-block">
+                        <p class="project-header"><span class="field-label">PROJECT ID:</span> QC-ERR-SIM-THESIS <span class="field-label">DESIGNATION:</span> Quantum Computing Error Reduction <span class="field-label">TIMELINE:</span> 09.24-05.25 <span class="field-label">ROLE:</span> Lead Researcher</p>
+                        <p class="project-objective"><span class="field-label">OBJECTIVE:</span> Model noise patterns via reinforcement learning protocols for dynamic error mitigation implementation.</p>
+                    </div>
+                     {/* <!-- Add ALL OTHER project items using this EXACT structure --> */}
+                     <div class="project-block">
+                         <p class="project-header"><span class="field-label">PROJECT ID:</span> BC-DEM-DETECT-DL <span class="field-label">DESIGNATION:</span> Blockchain Healthcare (Dementia) <span class="field-label">ETC:</span> 04.2025 <span class="field-label">ROLE:</span> Data Lead</p>
+                         <p class="project-objective"><span class="field-label">OBJECTIVE:</span> Utilize smart contracts (data security) & ML (predictive analytics/personalization). STATUS: IN_PROGRESS</p>
+                    </div>
+                    {/* Add all other projects */}
+                </section>
 
-             <section id="innie-recognition">
-                <h2><span class="section-bar">|</span> PERFORMANCE & COMPLIANCE RECOGNITION</h2>
-                 <div class="recognition-category">
-                    <strong>Tech Aptitude Metrics:</strong> 1st: Airbus CTF; 2nd: Huawei Arena; 3rd: BAE Systems Hackathon; 3rd: Nationwide Comp; 9th (UK): DTII Challenge.
-                </div>
-                 <div class="recognition-category">
-                    <strong>Business Acumen Metrics:</strong> 1st: TfW Product Speedathon (£1k Seed Funding Secured); Finalist: CBP; Engagement: Fintech Speaker Slot.
-                </div>
-            </section>
+                 <section id="innie-recognition" class="data-cluster" aria-labelledby="rec-header">
+                     <h2 id="rec-header"><span class="cluster-marker">[05]</span> PERFORMANCE METRICS & COMPLIANCE</h2>
+                     <div class="record-block">
+                         <p><span class="field-label">TECH APTITUDE BENCHMARKS:</span> Airbus_CTF(1); Huawei_Arena(2); BAE_Hackathon(3); Nationwide(3); DTII_UK(9).</p>
+                         <p><span class="field-label">BUSINESS ACUMEN BENCHMARKS:</span> TfW_Speedathon(1, £1k_SEED); CBP(FINALIST); Fintech_Speaker(ENGAGED).</p>
+                    </div>
+                </section>
 
-            <footer class="innie-footer">
-                <p>Data Sort Complete. Property of Lumon Industries.</p>
+            </div>
+
+            <footer class="lumon-footer">
+                <span>SESSION ACTIVE | MONITORING ENABLED | PROPERTY OF LUMON INDUSTRIES</span>
             </footer>
-
         </div> <!-- /innie-view -->
 
-        <!-- Phase 3: The "Outie" View (Visitor Pass / Surface Permit) -->
-        <div id="outie-view" class="portfolio-view">
-             <header class="outie-header">
+        <!-- VIEW 2: Surface Interface (Outie) -->
+        <div id="outie-view" class="interface-view" role="main">
+             <header class="surface-header">
                  <h1>Dhruvil Raval</h1>
-                 <p>Beyond the badge. Welcome!</p>
-                 <p>Contact: +44 7990480660 | csdhruvil@gmail.com | linkedin.com/in/dhruvilraval/</p>
+                 <p>Beyond the Severed Floor // Welcome</p>
+                 <p class="contact-info">Contact: +44 7990480660 | csdhruvil@gmail.com | linkedin.com/in/dhruvilraval/</p>
             </header>
 
-             <p class="intro-phrase">Please try to enjoy each part of my life equally.</p>
+             <div class="content-area outie-content">
+                <p class="outie-intro-phrase">Thank you for visiting. Please feel free to explore these aspects of my life.</p> {/* Slightly adjusted phrase */}
 
-            <section id="outie-passions">
-                {/* Renamed Header */}
-                <h2>My Outie Likes To... (Hobbies)</h2>
-                <div class="passion-item">
-                    <strong>Engage Markets:</strong> Data-driven strategic trading explorations.
-                </div>
-                <div class="passion-item">
-                    <strong>Tell Stories Visually:</strong> Filmmaking (including award-winning short films).
-                </div>
-                 <div class="passion-item">
-                    <strong>Move & Create:</strong> Dancing (choreography and musical theatre participation).
-                </div>
-            </section>
+                <section id="outie-passions" aria-labelledby="passion-header">
+                    <h2 id="passion-header">// My Outie Likes To...</h2>
+                    <ul class="outie-list">
+                        <li><span class="list-marker">›</span> Engage with market dynamics through data-driven strategic trading analysis.</li>
+                        <li><span class="list-marker">›</span> Explore visual storytelling via filmmaking (including award-winning shorts).</li>
+                        <li><span class="list-marker">›</span> Express creativity through dance, choreography, and musical theatre involvement.</li>
+                    </ul>
+                </section>
 
-            <section id="outie-community">
-                <h2>Sharing Knowledge & Building Ideas</h2>
-                 <div class="community-item">
-                    <strong>Mentorship Roles:</strong> Physics Tutor (ML, probability focus), Language Mentor (personalized plans), Game Development Mentor (Castle Coch). Goal: Empowering learners.
-                 </div>
-                <div class="community-item">
-                    <strong>STEM Outreach:</strong> STEM Educator (Reaching Wider) - Designing hands-on software engineering & robotics workshops for schools.
-                </div>
-                <div class="community-item">
-                     <strong>Media Creation (YouTube):</strong> Built a channel using data insights (75M views, 1000x revenue growth), managed 900+ hrs production (Oct '16 - Mar '22).
-                 </div>
-                 <div class="community-item">
-                     <strong>Founder Advising:</strong> Supporting ventures like swsh (Peter Thiel Funded), Vance (YC W22), and through Founders in Residence.
-                 </div>
-                 <div class="community-item">
-                     <strong>University Teaching Support:</strong> Assisted in teaching Computer Science courses at Cardiff University.
-                 </div>
-            </section>
+                <section id="outie-community" aria-labelledby="comm-header">
+                    <h2 id="comm-header">// Sharing Knowledge & Building Connections</h2>
+                     <ul class="outie-list">
+                        <li><span class="list-marker">›</span> **Mentorship:** Enjoy guiding others – Tutored Physics (focusing on ML/probability), mentored Language learners, assisted beginner Game Developers (Castle Coch).</li>
+                        <li><span class="list-marker">›</span> **STEM Outreach:** Designed hands-on STEM workshops (software eng, robotics) for schools via Reaching Wider Community Outreach.</li>
+                        <li><span class="list-marker">›</span> **Media Creation (YouTube):** Independently built and scaled a channel using data analysis (75M+ views, 1000x revenue growth), managing production (Oct '16 - Mar '22).</li>
+                        <li><span class="list-marker">›</span> **Founder Advising:** Contributing insights to ventures like swsh (Thiel Funded) & Vance (YC W22); participated in Founders in Residence.</li>
+                         <li><span class="list-marker">›</span> **Teaching Assistance:** Supported Computer Science education at Cardiff University.</li>
+                    </ul>
+                </section>
 
-            <section id="outie-journey">
-                 <h2>Foundations & Early Steps</h2>
-                 <div class="journey-item">
-                     <strong>Academic Foundation:</strong> BSc Computer Science at Cardiff University (Predicted First Class, Scholarship Recipient). Exploring the breadth of tech from HCI to AI and beyond. (Expected Graduation: June 2025).
-                 </div>
-                 <div class="journey-item">
-                     <strong>Early Career Exploration:</strong> Built skills through diverse internships in Strategy/E-commerce (Shoreditch Repairs), Space/ML (Spartificial), Enterprise AI/Product (Cutshort), and global UI/Software Engineering (Chezuba).
-                 </div>
-            </section>
+                <section id="outie-journey" aria-labelledby="journey-header">
+                    <h2 id="journey-header">// Foundations & Professional Path</h2>
+                     <ul class="outie-list">
+                        <li><span class="list-marker">›</span> **Cardiff University:** Pursuing BSc in Computer Science (Hons), Predicted First Class (Scholarship). Broadening technical horizons (Expected Grad: June 2025).</li>
+                        <li><span class="list-marker">›</span> **Early Experiences:** Gained diverse skills through internships spanning Strategy (Shoreditch Repairs), ML/Space (Spartificial), AI/Product (Cutshort), and global UI/Software Eng (Chezuba).</li>
+                    </ul>
+                </section>
 
-             <section id="outie-explorations">
-                <h2>Creative & Technical Explorations (Projects)</h2>
-                 <p>Driven by curiosity and problem-solving:</p>
-                 <ul class="project-list-outie">
-                    <li>Tackling quantum noise with Reinforcement Learning (Thesis).</li>
-                    <li>Exploring secure, ML-driven healthcare via Blockchain.</li>
-                    <li>Innovating map experiences with Generative AI and user behavior analysis.</li>
-                    <li>Deep-diving into User Experience to find those key "aha!" moments.</li>
-                    <li>Balancing business, user needs, and strategy for an Eco-friendly Marketplace.</li>
-                    <li>Researching Human-Computer Interaction to improve teamwork.</li>
-                    <li>Leading app development for the Night Time Economy.</li>
-                    <li>Managing engineering for an Internet of Things device.</li>
-                    <li>Optimizing game performance and collaborating on a Boss Battle Game.</li>
-                    {/* Ensure list is comprehensive */}
-                 </ul>
-            </section>
+                 <section id="outie-explorations" aria-labelledby="explore-header">
+                    <h2 id="explore-header">// Creative & Technical Projects</h2>
+                     <p>A drive to innovate and solve interesting problems led to projects like:</p>
+                     <ul class="outie-list project-focus">
+                         <li>Applying RL to mitigate errors in Quantum Computing (Thesis).</li>
+                         <li>Designing secure, ML-powered healthcare solutions with Blockchain.</li>
+                         <li>Developing user-centric Generative AI for mapping applications.</li>
+                         <li>Leading research into key User Experience "aha!" moments.</li>
+                         <li>Crafting Go-To-Market strategy for an Eco-friendly Marketplace.</li>
+                         <li>Improving team dynamics through Human-Computer Interaction research.</li>
+                         <li>Spearheading Product Management for a Night Time Economy app.</li>
+                         <li>Managing engineering delivery for an IoT device.</li>
+                         <li>Optimizing performance in a game development environment (Boss Battle Game).</li>
+                     </ul>
+                </section>
 
-            <section id="outie-leadership">
-                 <h2>Leadership & Recognition Highlights</h2>
-                 <p>Achievements in technical challenges (Airbus CTF, Huawei Arena, etc.) and business competitions (TfW Speedathon Winner).</p>
-            </section>
+                <section id="outie-leadership" aria-labelledby="leader-header">
+                     <h2 id="leader-header">// Recognition & Leadership</h2>
+                     <p>Proud of achievements in technical competitions (Airbus CTF Winner, etc.) and business challenges (TfW Speedathon Winner).</p>
+                </section>
 
-            <footer class="outie-footer">
-                <p>Thanks for visiting!</p>
+            </div>
+
+             <footer class="surface-footer">
+                <span>Thank you for your time.</span>
             </footer>
 
         </div> <!-- /outie-view -->
 
-    </div> <!-- /portfolio-container -->
+    </div> <!-- /interface-container -->
 
     <script src="script.js"></script>
 </body>
